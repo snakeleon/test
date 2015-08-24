@@ -1,4 +1,4 @@
-@echo on
+@echo off
 cd ..\..
 if exist .git goto update
 git clone https://github.com/snakeleon/test.git tmp
