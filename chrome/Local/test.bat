@@ -5,11 +5,10 @@ if exist .git goto update
 git clone https://github.com/snakeleon/test.git tmp
 xcopy /e /y tmp\. .
 rd /s /q tmp
-@echo å®Œæ•´æ›´æ–°å®Œæˆï¼ŒæŒ‰ä»»æ„é”®é€€å‡º
+@echo ÍêÕû¸üÐÂÍê³É£¬°´ÈÎÒâ¼üÍË³ö
 pause >> nul && exit
 :update
-git submodule update --init --recursive
 git pull
 git submodule update --init --recursive
-@echo åŒæ­¥æ›´æ–°å®Œæˆï¼ŒæŒ‰ä»»æ„é”®é€€å‡º
+@echo Í¬²½¸üÐÂÍê³É£¬°´ÈÎÒâ¼üÍË³ö
 pause >> nul && exit
