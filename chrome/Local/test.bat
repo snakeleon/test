@@ -8,8 +8,6 @@ rd /s /q tmp
 @echo 完整更新完成，按任意键退出
 pause >> nul && exit
 :update
-git reset --hard origin/HEAD
-git fetch
 git submodule update --init --recursive
 git pull
 git submodule update --init --recursive
