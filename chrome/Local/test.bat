@@ -1,10 +1,11 @@
 @echo off
+taskkill /im firefox.exe
 cd ..\..
 if exist .git goto update
 git clone https://github.com/snakeleon/test.git tmp
 xcopy /e /y tmp\. .
 rd /s /q tmp
-@echo ÍêÕû¸üÐÂÍê³É£¬°´ÈÎÒâ¼üÍË³ö
+@echo å®Œæ•´æ›´æ–°å®Œæˆï¼ŒæŒ‰ä»»æ„é”®é€€å‡º
 pause >> nul && exit
 :update
 git reset --hard origin/HEAD
@@ -12,5 +13,5 @@ git fetch
 git submodule update --init --recursive
 git pull
 git submodule update --init --recursive
-@echo Í¬²½¸üÐÂÍê³É£¬°´ÈÎÒâ¼üÍË³ö
+@echo åŒæ­¥æ›´æ–°å®Œæˆï¼ŒæŒ‰ä»»æ„é”®é€€å‡º
 pause >> nul && exit
