@@ -12,28 +12,28 @@
 
 void DrawHand(int hour, int minute, int second)
 {
-    double a_hour, a_min, a_sec;// Ê±¡¢·Ö¡¢ÃëÕëµÄ»¡¶ÈÖµ
-    int x_hour, y_hour, x_min, y_min, x_sec, y_sec;// Ê±¡¢·Ö¡¢ÃëÕëµÄÄ©¶ËÎ»ÖÃ
-    // ¼ÆËãÊ±¡¢·Ö¡¢ÃëÕëµÄ»¡¶ÈÖµ
+    double a_hour, a_min, a_sec;// æ—¶ã€åˆ†ã€ç§’é’ˆçš„å¼§åº¦å€¼
+    int x_hour, y_hour, x_min, y_min, x_sec, y_sec;// æ—¶ã€åˆ†ã€ç§’é’ˆçš„æœ«ç«¯ä½ç½®
+    // è®¡ç®—æ—¶ã€åˆ†ã€ç§’é’ˆçš„å¼§åº¦å€¼
     a_sec = second * 2 * PI / 60;
     a_min = minute * 2 * PI / 60 + a_sec / 60;
     a_hour= hour * 2 * PI / 12 + a_min / 12;
-    // ¼ÆËãÊ±¡¢·Ö¡¢ÃëÕëµÄÄ©¶ËÎ»ÖÃ
+    // è®¡ç®—æ—¶ã€åˆ†ã€ç§’é’ˆçš„æœ«ç«¯ä½ç½®
     x_sec = 320 + (int)(155 * sin(a_sec));
     y_sec = 240 - (int)(155 * cos(a_sec));
     x_min = 320 + (int)(130 * sin(a_min));
     y_min = 240 - (int)(130 * cos(a_min));
     x_hour= 320 + (int)(100 * sin(a_hour));
     y_hour= 240 - (int)(100 * cos(a_hour));
-    // »­Ê±Õë
+    // ç”»æ—¶é’ˆ
     setlinestyle(PS_SOLID, 1, 5);
     setcolor(GREEN);
     line(320, 240, x_hour, y_hour);
-    // »­·ÖÕë
+    // ç”»åˆ†é’ˆ
     setlinestyle(PS_SOLID, 1, 3);
     setcolor(YELLOW);
     line(320, 240, x_min, y_min);
-    // »­ÃëÕë
+    // ç”»ç§’é’ˆ
     setlinestyle(PS_SOLID, 1, 1);
     setcolor(RED);
     line(320, 240, x_sec, y_sec);
@@ -137,7 +137,7 @@ void CleanDay(int n_week, int n_day)
 
 void DrawPlate()
 {
-    // »æÖÆÒ»¸ö¼òµ¥µÄ±íÅÌ
+    // ç»˜åˆ¶ä¸€ä¸ªç®€å•çš„è¡¨ç›˜
     int i,l,x1,x2,y1,y2;
     setcolor(RED);
     circle(320, 240, 5);
@@ -163,7 +163,7 @@ void DrawPlate()
     setcolor(BROWN);
     outtextxy(640/2-strlen("HAMILTON")/2*12, 135, "HAMILTONG");
 
-    //»®ÖÓµãÉÏµÄ¶ÌÏß
+    //åˆ’é’Ÿç‚¹ä¸Šçš„çŸ­çº¿
     for(i=0; i<60; i++)
     {
         if(i%5==0)
@@ -184,14 +184,14 @@ void DrawPlate()
         y2=(160-l)*cos(i*6*PI/180)+240;
         line(x1,y1,x2,y2);
     }
-    //Êı×ÖÊ±ÖÓÍâ¿ò
+    //æ•°å­—æ—¶é’Ÿå¤–æ¡†
     setlinestyle(SOLID_LINE, 0, 1);
     setcolor(LIGHTGREEN);
     line(296,300,350,300);
     lineto(350,314);
     lineto(296,314);
     lineto(296,300);
-    //ÈÕÆÚĞÇÆÚÍâ¿ò
+    //æ—¥æœŸæ˜ŸæœŸå¤–æ¡†
     setcolor(3);
     line(395,232,448,232);
     lineto(448,246);
@@ -204,9 +204,9 @@ int main()
 {
     int driver=WIN32 , gmode=7,errorcode;
     char *path=0;
-    SYSTEMTIME ti;// ¶¨Òå±äÁ¿±£´æµ±Ç°Ê±¼ä
+    SYSTEMTIME ti;// å®šä¹‰å˜é‡ä¿å­˜å½“å‰æ—¶é—´
     set_BGI_mode_whc(&driver, &gmode, 640, 480, 16);
-    initgraph(&driver,&gmode,path);// ³õÊ¼»¯»æÍ¼´°¿Ú
+    initgraph(&driver,&gmode,path);// åˆå§‹åŒ–ç»˜å›¾çª—å£
     errorcode=graphresult();
     if(errorcode != grOk)
     {
@@ -215,28 +215,28 @@ int main()
         exit (1);
     }
 
-    setwritemode(XOR_PUT);// ÉèÖÃ XOR »æÍ¼Ä£Ê½
-    DrawPlate();//»­±íÅÌ
+    setwritemode(XOR_PUT);// è®¾ç½® XOR ç»˜å›¾æ¨¡å¼
+    DrawPlate();//ç”»è¡¨ç›˜
 
     void *buffer=malloc(imagesize(320-163,240-163,320+163,240+163));
-    getimage(320-163,240-163,320+163,240+163,buffer); //½«±íÅÌ±£´æÎªÍ¼Ïñ
+    getimage(320-163,240-163,320+163,240+163,buffer); //å°†è¡¨ç›˜ä¿å­˜ä¸ºå›¾åƒ
 
-    // »æÖÆ±íÕë
-    while(!kbhit()) // °´ÈÎÒâ¼üÍË³öÖÓ±í³ÌĞò
+    // ç»˜åˆ¶è¡¨é’ˆ
+    while(!kbhit()) // æŒ‰ä»»æ„é”®é€€å‡ºé’Ÿè¡¨ç¨‹åº
     {
-        GetLocalTime(&ti);//»ñÈ¡µ±Ê±Ê±¼ä
+        GetLocalTime(&ti);//è·å–å½“æ—¶æ—¶é—´
 
-        // »­±íÕë
+        // ç”»è¡¨é’ˆ
         Day(ti.wDayOfWeek, ti.wDay);
         NumClock(ti.wHour,ti.wMinute,ti.wSecond);
         DrawHand(ti.wHour, ti.wMinute, ti.wSecond);
 
-        Sleep(1000);// ÑÓÊ± 1 Ãë
-        putimage(320-163,240-163,buffer,COPY_PUT); //Ìù³ö±£´æµÄ±íÅÌÍ¼Ïñ¸²¸Çµ±Ç°»­»­
+        Sleep(1000);// å»¶æ—¶ 1 ç§’
+        putimage(320-163,240-163,buffer,COPY_PUT); //è´´å‡ºä¿å­˜çš„è¡¨ç›˜å›¾åƒè¦†ç›–å½“å‰ç”»ç”»
 
-        /* 		// ²Á±íÕë
-         * 		CleanDay(ti.wDayOfWeek, ti.wDay); //×Ö·ûÒòÎªÊÇµãÕó×ÖÌåÔÚÍ¼ĞÎÄ£Ê½ÏÂ²»ÄÜÊ¹ÓÃÒì»ò²Ù×÷
-         * 		CleanNumClock(ti.wHour,ti.wMinute,ti.wSecond); //¶øÊ¹ÓÃ±³¾°É«¸²¸Ç
+        /* 		// æ“¦è¡¨é’ˆ
+         * 		CleanDay(ti.wDayOfWeek, ti.wDay); //å­—ç¬¦å› ä¸ºæ˜¯ç‚¹é˜µå­—ä½“åœ¨å›¾å½¢æ¨¡å¼ä¸‹ä¸èƒ½ä½¿ç”¨å¼‚æˆ–æ“ä½œ
+         * 		CleanNumClock(ti.wHour,ti.wMinute,ti.wSecond); //è€Œä½¿ç”¨èƒŒæ™¯è‰²è¦†ç›–
          * 		DrawHand(ti.wHour, ti.wMinute, ti.wSecond);
          */
 
@@ -244,3 +244,5 @@ int main()
     closegraph();
     return 0;
 }
+
+//vim
