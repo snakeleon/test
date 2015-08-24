@@ -244,5 +244,3 @@ int main()
     closegraph();
     return 0;
 }
-
-//vim
