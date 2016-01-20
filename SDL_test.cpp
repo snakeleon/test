@@ -1,10 +1,9 @@
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <SDL2/SDL_ttf.h>
-#include <iostream>
 #include <windows.h>
-#include <stdio.h>
-#include <string.h>
+#include <string>
 
 #define WIDTH   400
 #define HEIGHT  400
@@ -13,33 +12,30 @@
 
 void DrawHand(SDL_Renderer *renderer, int hour, int minute, int second)
 {
-    double a_hour, a_min, a_sec, a_sec1;
-    int x_hour, y_hour,
-        x_min,  y_min,
-        x_sec,  y_sec,
-        x1_sec, y1_sec;
-    a_sec = second  * 2 * M_PI / 60;
+    double a_hour, a_min,
+           a_sec,  a_sec1;
+    int    x_hour, y_hour,
+           x_min,  y_min,
+           x_sec,  y_sec,
+           x1_sec, y1_sec;
+    a_sec  = second  * 2 * M_PI / 60;
     a_sec1 = (second > 30 ? second-30 : second+30) * 2 * M_PI / 60;
-    a_min = minute  * 2 * M_PI / 60 + a_sec / 60;
-    a_hour= hour    * 2 * M_PI / 12 + a_min / 12;
+    a_min  = minute  * 2 * M_PI / 60 + a_sec / 60;
+    a_hour = hour    * 2 * M_PI / 12 + a_min / 12;
 
-    x_sec = WIDTH/2  + (int)(HEIGHT/2 * 0.95 * sin(a_sec));
-    y_sec = HEIGHT/2 - (int)(HEIGHT/2 * 0.95 * cos(a_sec));
+    x_sec  = WIDTH/2  + (int)(HEIGHT/2 * 0.95 * sin(a_sec));
+    y_sec  = HEIGHT/2 - (int)(HEIGHT/2 * 0.95 * cos(a_sec));
     x1_sec = WIDTH/2  + (int)(HEIGHT/2 * 0.20 * sin(a_sec1));
     y1_sec = HEIGHT/2 - (int)(HEIGHT/2 * 0.20 * cos(a_sec1));
-    x_min = WIDTH/2  + (int)(HEIGHT/2 * 0.85 * sin(a_min));
-    y_min = HEIGHT/2 - (int)(HEIGHT/2 * 0.85 * cos(a_min));
-    x_hour= WIDTH/2  + (int)(HEIGHT/2 * 0.65 * sin(a_hour));
-    y_hour= HEIGHT/2 - (int)(HEIGHT/2 * 0.65 * cos(a_hour));
+    x_min  = WIDTH/2  + (int)(HEIGHT/2 * 0.85 * sin(a_min));
+    y_min  = HEIGHT/2 - (int)(HEIGHT/2 * 0.85 * cos(a_min));
+    x_hour = WIDTH/2  + (int)(HEIGHT/2 * 0.65 * sin(a_hour));
+    y_hour = HEIGHT/2 - (int)(HEIGHT/2 * 0.65 * cos(a_hour));
 
-    thickLineRGBA(renderer, WIDTH/2, HEIGHT/2, x_hour, y_hour, I_ZOOM*5,
-                  0, 0, 255, 255);
-    thickLineRGBA(renderer, WIDTH/2, HEIGHT/2, x_min, y_min, I_ZOOM*4,
-                  0, 255, 0, 255);
-    thickLineRGBA(renderer, x1_sec, y1_sec, x_sec, y_sec, I_ZOOM*1,
-                  255, 0, 0, 255);
-
-    filledCircleRGBA(renderer, WIDTH/2, HEIGHT/2, I_ZOOM*8, 255, 160, 255, 240);
+    thickLineRGBA(renderer,    WIDTH/2, HEIGHT/2, x_hour,   y_hour, I_ZOOM*5, 0,   0,   255, 255);
+    thickLineRGBA(renderer,    WIDTH/2, HEIGHT/2, x_min,    y_min,  I_ZOOM*4, 0,   255, 0,   255);
+    thickLineRGBA(renderer,    x1_sec,  y1_sec,   x_sec,    y_sec,  I_ZOOM*1, 255, 0,   0,   255);
+    filledCircleRGBA(renderer, WIDTH/2, HEIGHT/2, I_ZOOM*8, 255,    160,      255, 240);
 }
 
 void DrawPlate(SDL_Renderer *renderer)
@@ -59,10 +55,10 @@ void DrawPlate(SDL_Renderer *renderer)
             w=2*I_ZOOM;
             l=10*I_ZOOM;
         }
-        x1=HEIGHT/2*sin(i*6*M_PI/180)+WIDTH/2;
-        y1=HEIGHT/2*cos(i*6*M_PI/180)+HEIGHT/2;
-        x2=(HEIGHT/2-l)*sin(i*6*M_PI/180)+WIDTH/2;
-        y2=(HEIGHT/2-l)*cos(i*6*M_PI/180)+HEIGHT/2;
+        x1 = HEIGHT/2*sin(i*6*M_PI/180)+WIDTH/2;
+        y1 = HEIGHT/2*cos(i*6*M_PI/180)+HEIGHT/2;
+        x2 =(HEIGHT/2-l)*sin(i*6*M_PI/180)+WIDTH/2;
+        y2 =(HEIGHT/2-l)*cos(i*6*M_PI/180)+HEIGHT/2;
         thickLineRGBA(renderer, x1, y1, x2, y2, w, 111, 123, 75, 255);
     }
 }
@@ -73,31 +69,31 @@ char *Week(int n_week)
     switch(n_week)
     {
         case 0:
-            strcpy(c_week, "SUN");
+            strcpy(c_week,"SUN");
             break;
         case 1:
-            strcpy(c_week, "MON");
+            strcpy(c_week,"MON");
             break;
         case 2:
-            strcpy(c_week, "TUE");
+            strcpy(c_week,"TUE");
             break;
         case 3:
-            strcpy(c_week, "WED");
+            strcpy(c_week,"WED");
             break;
         case 4:
-            strcpy(c_week, "THU");
+            strcpy(c_week,"THU");
             break;
         case 5:
-            strcpy(c_week, "FRI");
+            strcpy(c_week,"FRI");
             break;
         case 6:
-            strcpy(c_week, "SAT");
+            strcpy(c_week,"SAT");
             break;
     }
     return c_week;
 }
 
-int main ( int argc, char *argv[] )
+int main(int argc, char *argv[])
 {
     if ( SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -112,27 +108,20 @@ int main ( int argc, char *argv[] )
     }
 
     SDL_Window *window = SDL_CreateWindow("SDL_TEST", 80, 80, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-    if (window == NULL)
+    if (window == nullptr)
     {
         std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
         return 3;
     }
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if(renderer == NULL)
+    if(renderer == nullptr)
     {
-        std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+        std::string e4 = "SDL_CreateRenderer Error: ";
+        std::cout << e4 << SDL_GetError() << std::endl;
         return 4;
     }
     SDL_RenderClear(renderer);
-
-    SDL_Color LogoColor = { 255, 0, 0, 255 };
-    SDL_Rect LogoXY = { WIDTH/2-80, 70, 160, 40 };
-    TTF_Font *LogoFont = TTF_OpenFont("C:/Windows/Fonts/KhmerUIb.ttf", 30);
-    SDL_Surface *SurfaceLogo = TTF_RenderUTF8_Blended(LogoFont, "HAMILTON", LogoColor);
-    SDL_Texture *TextureLogo = SDL_CreateTextureFromSurface(renderer, SurfaceLogo);
-    SDL_FreeSurface(SurfaceLogo);
-    TTF_CloseFont(LogoFont);
 
     SDL_Surface *ClockPlate = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0, 0, 0, 0);
     SDL_Renderer *PlateRender = SDL_CreateSoftwareRenderer(ClockPlate);
@@ -144,16 +133,24 @@ int main ( int argc, char *argv[] )
     SDL_Color DayColor = { 255, 0, 255, 255 };
     SDL_Rect DayXY = { WIDTH/2+75, HEIGHT/2-18, 80, 36 };
     TTF_Font *DayFont = TTF_OpenFont("C:/Windows/Fonts/DIGITAL-Regular.ttf", 60);
-    SDL_Surface *SurfaceDay = NULL;
-    SDL_Texture *TextureDay = NULL;
+    SDL_Surface *SurfaceDay = nullptr;
+    SDL_Texture *TextureDay = nullptr;
     char Day[6];
 
     SDL_Color NumColor = { 0, 255, 255, 255 };
     SDL_Rect NumXY = { WIDTH/2-50, 280, 100, 40 };
     TTF_Font *NumFont = TTF_OpenFont("C:/Windows/Fonts/DIGITAL-Regular.ttf", 30);
-    SDL_Surface *NumClock = NULL;
-    SDL_Texture *TextureNum = NULL;
+    SDL_Surface *NumClock = nullptr;
+    SDL_Texture *TextureNum = nullptr;
     char Num[8];
+
+    SDL_Color LogoColor = { 255, 0, 0, 255 };
+    SDL_Rect LogoXY = { WIDTH/2-80, 70, 160, 40 };
+    TTF_Font *LogoFont = TTF_OpenFont("C:/Windows/Fonts/KhmerUIb.ttf", 30);
+    SDL_Surface *SurfaceLogo = TTF_RenderUTF8_Blended(LogoFont, "HAMILTON", LogoColor);
+    SDL_Texture *TextureLogo = SDL_CreateTextureFromSurface(renderer, SurfaceLogo);
+    SDL_FreeSurface(SurfaceLogo);
+    TTF_CloseFont(LogoFont);
 
     SYSTEMTIME t;
 
@@ -175,25 +172,23 @@ int main ( int argc, char *argv[] )
                     break;
             }
         GetLocalTime(&t);
-        SDL_RenderCopy(renderer, TexturePlate, NULL, NULL);
-        SDL_RenderCopy(renderer, TextureLogo, NULL, &LogoXY);
+        SDL_RenderCopy(renderer, TexturePlate, nullptr, nullptr);
+        SDL_RenderCopy(renderer, TextureLogo, nullptr, &LogoXY);
 
         sprintf(Day, "%.2d  %s", t.wDay, Week(t.wDayOfWeek));
         SurfaceDay = TTF_RenderUTF8_Blended(DayFont, Day, DayColor);
         TextureDay = SDL_CreateTextureFromSurface(renderer, SurfaceDay);
         SDL_FreeSurface(SurfaceDay);
-        SDL_RenderCopy(renderer, TextureDay, NULL, &DayXY);
+        SDL_RenderCopy(renderer, TextureDay, nullptr, &DayXY);
         SDL_DestroyTexture(TextureDay);
-
         sprintf(Num, "%.2d:%.2d:%.2d", t.wHour, t.wMinute, t.wSecond);
         NumClock = TTF_RenderUTF8_Blended(NumFont, Num, NumColor);
         TextureNum = SDL_CreateTextureFromSurface(renderer, NumClock);
         SDL_FreeSurface(NumClock);
-        SDL_RenderCopy(renderer, TextureNum, NULL, &NumXY);
+        SDL_RenderCopy(renderer, TextureNum, nullptr, &NumXY);
         SDL_DestroyTexture(TextureNum);
 
         DrawHand(renderer, t.wHour, t.wMinute, t.wSecond);
-
         SDL_RenderPresent(renderer);
     }
     SDL_DestroyTexture(TextureLogo);
