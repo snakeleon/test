@@ -2,5 +2,5 @@
 *.exe
 *.obj
 *.[oa]
-./SDL_Clock/SDL_test
-./Ncurses/main
+SDL_Clock/build
+Ncurses/build

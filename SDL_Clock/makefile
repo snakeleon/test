@@ -6,14 +6,14 @@
 CPP       = g++
 CC        = gcc
 WINDRES   = windres
-OBJ       = SDL_test.o
-LINKOBJ   = SDL_test.o
+OBJ       = build/SDL_test.o
+LINKOBJ   = build/SDL_test.o
 SOURSE    = SDL_test.cpp
 DEPENDENT = SDL2_gfx SDL2_ttf sdl2
 LIBS      = -L"D:/MSYS32/MinGW32/lib" `pkg-config --libs $(DEPENDENT)`
 INCS      = -I"D:/MSYS32/MinGW32/include"
 CXXINCS   = -I"D:/MSYS32/MinGW32/include"
-BIN       = SDL_test
+BIN       = build/SDL_test
 DEFINES   =
 CXXFLAGS  = $(CXXINCS) $(DEFINES) -O2 -Wall -Wextra -std=c++11
 CFLAGS    = $(INCS) $(DEFINES)	-O2 -Wall -Wextra

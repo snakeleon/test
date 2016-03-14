@@ -6,14 +6,14 @@
 CPP       = g++
 CC        = gcc
 WINDRES   = windres
-OBJ       = main.o
-LINKOBJ   = main.o
+OBJ       = build/main.o
+LINKOBJ   = build/main.o
 SOURSE    = main.cpp
 DEPENDENT = ncursesw
 LIBS      = -L"D:/MSYS32/MinGW32/lib" `pkg-config --libs $(DEPENDENT)`
 INCS      = -I"D:/MSYS32/MinGW32/include"
 CXXINCS   = -I"D:/MSYS32/MinGW32/include"
-BIN       = main
+BIN       = build/main
 DEFINES   =
 CXXFLAGS  = $(CXXINCS) $(DEFINES) -O3 -g3 -Wall -Wextra -std=c++11
 CFLAGS    = $(INCS) $(DEFINES)	-O3 -g3 -Wall -Wextra
