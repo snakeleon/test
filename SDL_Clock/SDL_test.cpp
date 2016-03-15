@@ -268,5 +268,6 @@ int main ( int argc, char *argv[] )
         TTF_CloseFont(NumFont);
 
     }
+
     return 0;
 }
