@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <SDL2/SDL_ttf.h>
-#ifdef  __WINDOWS_
+#ifdef  __MSVCRT__
 #include <windows.h>
 #elif defined __linux
 #include <time.h>
@@ -132,7 +132,7 @@ int main ( int argc, char *argv[] )
     SDL_RenderClear(renderer);
 
 
-#ifdef __WINDOWS_
+#ifdef __MSVCRT__
     SYSTEMTIME t;
 #elif defined __linux
     time_t now;
@@ -166,7 +166,7 @@ int main ( int argc, char *argv[] )
         SDL_Color DayColor = { 255, 0, 255, 255 };
         SDL_Rect DayXY = { WIDTH/2+75, HEIGHT/2-18, 80, 36 };
 
-#ifdef __WINDOWS_
+#ifdef __MSVCRT__
         TTF_Font *DayFont = TTF_OpenFont("C:/Windows/Fonts/DIGITAL-Regular.ttf", 60);
 #elif defined __linux
         TTF_Font *DayFont = TTF_OpenFont("/home/snakeleon/.local/share/fonts/DIGITAL-Regular.ttf", 60);
@@ -185,7 +185,7 @@ int main ( int argc, char *argv[] )
         SDL_Color NumColor = { 0, 255, 255, 255 };
         SDL_Rect NumXY = { WIDTH/2-50, 280, 100, 40 };
 
-#ifdef __WINDOWS_
+#ifdef __MSVCRT__
         TTF_Font *NumFont = TTF_OpenFont("C:/Windows/Fonts/DIGITAL-Regular.ttf", 30);
 #elif defined __linux
         TTF_Font *NumFont = TTF_OpenFont("/home/snakeleon/.local/share/fonts/DIGITAL-Regular.ttf", 30);
@@ -203,7 +203,7 @@ int main ( int argc, char *argv[] )
 
         SDL_Color LogoColor = { 255, 0, 0, 255 };
         SDL_Rect LogoXY = { WIDTH/2-80, 70, 160, 40 };
-#ifdef __WINDOWS_
+#ifdef __WIN64
         TTF_Font *LogoFont = TTF_OpenFont("C:/Windows/Fonts/KhmerUIb.ttf", 30);
 #elif defined __linux
         TTF_Font *LogoFont = TTF_OpenFont("/home/snakeleon/.local/share/fonts/Hack-Regular.ttf", 30);
@@ -220,7 +220,7 @@ int main ( int argc, char *argv[] )
         SDL_FreeSurface(SurfaceLogo);
         TTF_CloseFont(LogoFont);
 
-#ifdef __WINDOWS_
+#ifdef __MSVCRT__
         GetLocalTime(&t);
 #elif defined __linux
         time(&now);
@@ -230,7 +230,7 @@ int main ( int argc, char *argv[] )
         SDL_RenderCopy(renderer, TexturePlate, NULL, NULL);
         SDL_RenderCopy(renderer, TextureLogo, NULL, &LogoXY);
 
-#ifdef __WINDOWS_
+#ifdef __MSVCRT__
         sprintf(Day, "%.2d  %s", t.wDay, Week(t.wDayOfWeek));
 #elif defined __linux
         sprintf(Day, "%.2d  %s", t->tm_mday, Week(t->tm_wday));
@@ -242,7 +242,7 @@ int main ( int argc, char *argv[] )
         SDL_RenderCopy(renderer, TextureDay, NULL, &DayXY);
         SDL_DestroyTexture(TextureDay);
 
-#ifdef __WINDOWS_
+#ifdef __MSVCRT__
         sprintf(Num, "%.2d:%.2d:%.2d", t.wHour, t.wMinute, t.wSecond);
 #elif defined __linux
         sprintf(Num, "%.2d:%.2d:%.2d", t->tm_hour, t->tm_min, t->tm_sec);
@@ -254,7 +254,7 @@ int main ( int argc, char *argv[] )
         SDL_RenderCopy(renderer, TextureNum, NULL, &NumXY);
         SDL_DestroyTexture(TextureNum);
 
-#ifdef __WINDOWS_
+#ifdef __MSVCRT__
         DrawHand(renderer, t.wHour, t.wMinute, t.wSecond);
 #elif defined __linux
         DrawHand(renderer, t->tm_hour, t->tm_min, t->tm_sec);
