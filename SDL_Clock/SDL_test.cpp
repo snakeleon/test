@@ -203,7 +203,8 @@ int main ( int argc, char *argv[] )
 
         SDL_Color LogoColor = { 255, 0, 0, 255 };
         SDL_Rect LogoXY = { WIDTH/2-80, 70, 160, 40 };
-#ifdef __WIN64
+
+#ifdef __MSVCRT__
         TTF_Font *LogoFont = TTF_OpenFont("C:/Windows/Fonts/KhmerUIb.ttf", 30);
 #elif defined __linux
         TTF_Font *LogoFont = TTF_OpenFont("/home/snakeleon/.local/share/fonts/Hack-Regular.ttf", 30);
