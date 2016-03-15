@@ -2,6 +2,12 @@
 *.exe
 *.obj
 *.[oa]
+*.jpg
+*.bmp
 SDL_Clock/build
 Ncurses/build
 gvimfullscreen/
+Tetris/
+MapleGame/
+ege_test/
+Calendar_NC/
