@@ -13,7 +13,7 @@ DEPENDENT = SDL2_gfx SDL2_ttf sdl2
 LIBS      = -L"D:/MSYS32/MinGW32/lib" `pkg-config --libs $(DEPENDENT)`
 INCS      = -I"D:/MSYS32/MinGW32/include"
 CXXINCS   = -I"D:/MSYS32/MinGW32/include"
-BIN       = build/SDL_test
+BIN       = build/SDL_test.exe
 DEFINES   =
 CXXFLAGS  = $(CXXINCS) $(DEFINES) -O2 -Wall -Wextra -std=c++11
 CFLAGS    = $(INCS) $(DEFINES)	-O2 -Wall -Wextra
