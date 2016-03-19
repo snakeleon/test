@@ -5,55 +5,55 @@
 #include <conio.h>
 #include <windows.h>
 
-#ifdef _MSC_VER  // M$µÄ±àÒëÆ÷Òª¸øÓèÌØÊâÕÕ¹Ë
-    #if _MSC_VER <= 1200  // VC6¼°ÒÔÏÂ°æ±¾
-        #error ÄãÊÇ²»ÊÇ»¹ÔÚÓÃVC6£¿£¡
-    #else  // VC6ÒÔÉÏ°æ±¾
-        #if _MSC_VER >= 1600  // ¾İËµVC10¼°ÒÔÉÏ°æ±¾ÓĞstdint.hÁË
+#ifdef _MSC_VER  // M$çš„ç¼–è¯‘å™¨è¦ç»™äºˆç‰¹æ®Šç…§é¡¾
+    #if _MSC_VER <= 1200  // VC6åŠä»¥ä¸‹ç‰ˆæœ¬
+        #error ä½ æ˜¯ä¸æ˜¯è¿˜åœ¨ç”¨VC6ï¼Ÿï¼
+    #else  // VC6ä»¥ä¸Šç‰ˆæœ¬
+        #if _MSC_VER >= 1600  // æ®è¯´VC10åŠä»¥ä¸Šç‰ˆæœ¬æœ‰stdint.häº†
             #include <stdint.h>
-        #else  // VC10ÒÔÏÂ°æ±¾£¬×Ô¼º¶¨Òåint8_tºÍuint16_t
+        #else  // VC10ä»¥ä¸‹ç‰ˆæœ¬ï¼Œè‡ªå·±å®šä¹‰int8_tå’Œuint16_t
             typedef signed char int8_t;
             typedef unsigned short uint16_t;
         #endif
-        #ifndef __cplusplus  // ¾İËµVC¶¼Ã»ÓĞstdbool.h£¬²»ÓÃC++±àÒë£¬×Ô¼º¶¨Òåbool
+        #ifndef __cplusplus  // æ®è¯´VCéƒ½æ²¡æœ‰stdbool.hï¼Œä¸ç”¨C++ç¼–è¯‘ï¼Œè‡ªå·±å®šä¹‰bool
             typedef int bool;
             #define true 1
             #define false 0
         #endif
     #endif
-#else  // ÆäËûµÄ±àÒëÆ÷¶¼ºÃËµ
+#else  // å…¶ä»–çš„ç¼–è¯‘å™¨éƒ½å¥½è¯´
     #include <stdint.h>
-    #ifndef __cplusplus  // ²»ÓÃC++±àÒë£¬ĞèÒªstdbool.hÀïµÄbool
+    #ifndef __cplusplus  // ä¸ç”¨C++ç¼–è¯‘ï¼Œéœ€è¦stdbool.hé‡Œçš„bool
         #include <stdbool.h>
     #endif
 #endif
 
-// ·½¿éĞÎ×´
+// æ–¹å—å½¢çŠ¶
 enum { TETRIS_I = 0, TETRIS_T, TETRIS_L, TETRIS_J, TETRIS_Z, TETRIS_S, TETRIS_O };
 
 // =============================================================================
-// 7ÖÖ·½¿éµÄ4Ğı×ª×´Ì¬£¨4Î»ÎªÒ»ĞĞ£©
+// 7ç§æ–¹å—çš„4æ—‹è½¬çŠ¶æ€ï¼ˆ4ä½ä¸ºä¸€è¡Œï¼‰
 static const uint16_t gs_uTetrisTable[7][4] =
 {
-    { 0x00F0U, 0x2222U, 0x00F0U, 0x2222U },  // IĞÍ
-    { 0x0072U, 0x0262U, 0x0270U, 0x0232U },  // TĞÍ
-    { 0x0223U, 0x0074U, 0x0622U, 0x0170U },  // LĞÍ
-    { 0x0226U, 0x0470U, 0x0322U, 0x0071U },  // JĞÍ
-    { 0x0063U, 0x0264U, 0x0063U, 0x0264U },  // ZĞÍ
-    { 0x006CU, 0x0462U, 0x006CU, 0x0462U },  // SĞÍ
-    { 0x0660U, 0x0660U, 0x0660U, 0x0660U }   // OĞÍ
+    { 0x00F0U, 0x2222U, 0x00F0U, 0x2222U },  // Iå‹
+    { 0x0072U, 0x0262U, 0x0270U, 0x0232U },  // Tå‹
+    { 0x0223U, 0x0074U, 0x0622U, 0x0170U },  // Lå‹
+    { 0x0226U, 0x0470U, 0x0322U, 0x0071U },  // Jå‹
+    { 0x0063U, 0x0264U, 0x0063U, 0x0264U },  // Zå‹
+    { 0x006CU, 0x0462U, 0x006CU, 0x0462U },  // Så‹
+    { 0x0660U, 0x0660U, 0x0660U, 0x0660U }   // Oå‹
 };
 
 // =============================================================================
-// ³õÊ¼×´Ì¬µÄÓÎÏ·³Ø
-// Ã¿¸öÔªËØ±íÊ¾ÓÎÏ·³ØµÄÒ»ĞĞ£¬ÏÂ±ê´óµÄÊÇÓÎÏ·³Øµ×²¿
-// Á½¶Ë¸÷ÖÃ2¸ö1£¬µ×²¿2È«ÖÃÎª1£¬±ãÓÚ½øĞĞÅö×²¼ì²â
-// ÓÉÓÚ×ó¶ËÖ»ÓĞ2¸ö1£¬Òª±£Ö¤ËùÓĞ·½¿éµÄx×ø±ê´óÓÚ0£¬·ñÔòÎ»²Ù×÷Ê±»á³öBUG
-// ÕâÑùÒ»À´ÓÎÏ·³ØµÄ¿í¶ÈÎª12ÁĞ
-// Èç¹ûÏëÒª´«Í³µÄ10ÁĞ£¬Ö»Ğè¶àÌîÁ½¸ö1¼´¿É£¨0xE007£©£¬µ±È»ÏÔÊ¾Ïà¹Ø²¿·ÖÒ²ÒªËæÖ®¸Ä¶¯
-// µ±Ä³¸öÔªËØÎª0xFFFFUÊ±£¬ËµÃ÷¸ÃĞĞÒÑ±»ÌîÂú
-// ¶¥²¿4ĞĞÓÃÓÚ¸ø·½¿é£¬²»ÏÔÊ¾³öÀ´
-// ÔÙ³ıÈ¥µ×²¿2ĞĞ£¬ÏÔÊ¾³öÀ´µÄÓÎÏ·³Ø¸ß¶ÈÎª22ĞĞ
+// åˆå§‹çŠ¶æ€çš„æ¸¸æˆæ± 
+// æ¯ä¸ªå…ƒç´ è¡¨ç¤ºæ¸¸æˆæ± çš„ä¸€è¡Œï¼Œä¸‹æ ‡å¤§çš„æ˜¯æ¸¸æˆæ± åº•éƒ¨
+// ä¸¤ç«¯å„ç½®2ä¸ª1ï¼Œåº•éƒ¨2å…¨ç½®ä¸º1ï¼Œä¾¿äºè¿›è¡Œç¢°æ’æ£€æµ‹
+// ç”±äºå·¦ç«¯åªæœ‰2ä¸ª1ï¼Œè¦ä¿è¯æ‰€æœ‰æ–¹å—çš„xåæ ‡å¤§äº0ï¼Œå¦åˆ™ä½æ“ä½œæ—¶ä¼šå‡ºBUG
+// è¿™æ ·ä¸€æ¥æ¸¸æˆæ± çš„å®½åº¦ä¸º12åˆ—
+// å¦‚æœæƒ³è¦ä¼ ç»Ÿçš„10åˆ—ï¼Œåªéœ€å¤šå¡«ä¸¤ä¸ª1å³å¯ï¼ˆ0xE007ï¼‰ï¼Œå½“ç„¶æ˜¾ç¤ºç›¸å…³éƒ¨åˆ†ä¹Ÿè¦éšä¹‹æ”¹åŠ¨
+// å½“æŸä¸ªå…ƒç´ ä¸º0xFFFFUæ—¶ï¼Œè¯´æ˜è¯¥è¡Œå·²è¢«å¡«æ»¡
+// é¡¶éƒ¨4è¡Œç”¨äºç»™æ–¹å—ï¼Œä¸æ˜¾ç¤ºå‡ºæ¥
+// å†é™¤å»åº•éƒ¨2è¡Œï¼Œæ˜¾ç¤ºå‡ºæ¥çš„æ¸¸æˆæ± é«˜åº¦ä¸º22è¡Œ
 static const uint16_t gs_uInitialTetrisPool[28] =
 {
     0xC003U, 0xC003U, 0xC003U, 0xC003U, 0xC003U, 0xC003U, 0xC003U,
@@ -68,96 +68,96 @@ static const uint16_t gs_uInitialTetrisPool[28] =
 #define ROW_END 26
 
 // =============================================================================
-typedef struct TetrisManager  // Õâ¸ö½á¹¹Ìå´æ´¢ÓÎÏ·Ïà¹ØÊı¾İ
+typedef struct TetrisManager  // è¿™ä¸ªç»“æ„ä½“å­˜å‚¨æ¸¸æˆç›¸å…³æ•°æ®
 {
-    uint16_t pool[28];  // ÓÎÏ·³Ø
-    int8_t x;  // µ±Ç°·½¿éx×ø±ê£¬´Ë´¦×ø±êÎª·½¿é×óÉÏ½Ç×ø±ê
-    int8_t y;  // µ±Ç°·½¿éy×ø±ê
-    int8_t type[3];  // µ±Ç°¡¢ÏÂÒ»¸öºÍÏÂÏÂÒ»¸ö·½¿éÀàĞÍ
-    int8_t orientation[3];  // µ±Ç°¡¢ÏÂÒ»¸öºÍÏÂÏÂÒ»¸ö·½¿éĞı×ª×´Ì¬
+    uint16_t pool[28];  // æ¸¸æˆæ± 
+    int8_t x;  // å½“å‰æ–¹å—xåæ ‡ï¼Œæ­¤å¤„åæ ‡ä¸ºæ–¹å—å·¦ä¸Šè§’åæ ‡
+    int8_t y;  // å½“å‰æ–¹å—yåæ ‡
+    int8_t type[3];  // å½“å‰ã€ä¸‹ä¸€ä¸ªå’Œä¸‹ä¸‹ä¸€ä¸ªæ–¹å—ç±»å‹
+    int8_t orientation[3];  // å½“å‰ã€ä¸‹ä¸€ä¸ªå’Œä¸‹ä¸‹ä¸€ä¸ªæ–¹å—æ—‹è½¬çŠ¶æ€
 } TetrisManager;
 
 // =============================================================================
-typedef struct TetrisControl  // Õâ¸ö½á¹¹Ìå´æ´¢¿ØÖÆÏà¹ØÊı¾İ
+typedef struct TetrisControl  // è¿™ä¸ªç»“æ„ä½“å­˜å‚¨æ§åˆ¶ç›¸å…³æ•°æ®
 {
-    // ÓÎÏ·³ØÄÚÃ¿¸ñµÄÑÕÉ«
-    // ÓÉÓÚ´Ë°æ±¾ÊÇ²ÊÉ«µÄ£¬½öÓÃÓÎÏ·³ØÊı¾İÎŞ·¨´æ´¢ÑÕÉ«ĞÅÏ¢
-    // µ±È»£¬Èç¹ûÖ»ÊµÏÖµ¥É«°æµÄ£¬¾ÍÃ»±ØÒªÓÃÕâ¸öÊı×éÁË
+    // æ¸¸æˆæ± å†…æ¯æ ¼çš„é¢œè‰²
+    // ç”±äºæ­¤ç‰ˆæœ¬æ˜¯å½©è‰²çš„ï¼Œä»…ç”¨æ¸¸æˆæ± æ•°æ®æ— æ³•å­˜å‚¨é¢œè‰²ä¿¡æ¯
+    // å½“ç„¶ï¼Œå¦‚æœåªå®ç°å•è‰²ç‰ˆçš„ï¼Œå°±æ²¡å¿…è¦ç”¨è¿™ä¸ªæ•°ç»„äº†
     int8_t color[28][16];
-    bool dead;  // ¹Ò
-    bool pause;  // ÔİÍ£
-    bool clockwise;  // Ğı×ª·½Ïò£ºË³Ê±ÕëÎªtrue
-    int8_t direction;  // ÒÆ¶¯·½Ïò£º0Ïò×óÒÆ¶¯ 1ÏòÓÒÒÆ¶¯
-    bool model;  // Ä£Ê½ ÓÎÏ·Ä£Ê½Îªfalse
-    unsigned score;  // µÃ·Ö
-    unsigned erasedCount[4];  // ÏûĞĞÊı
-    unsigned erasedTotal;  // ÏûĞĞ×ÜÊı
-    unsigned tetrisCount[7];  // ¸÷·½¿éÊı
-    unsigned tetrisTotal;  // ·½¿é×ÜÊı
+    bool dead;  // æŒ‚
+    bool pause;  // æš‚åœ
+    bool clockwise;  // æ—‹è½¬æ–¹å‘ï¼šé¡ºæ—¶é’ˆä¸ºtrue
+    int8_t direction;  // ç§»åŠ¨æ–¹å‘ï¼š0å‘å·¦ç§»åŠ¨ 1å‘å³ç§»åŠ¨
+    bool model;  // æ¨¡å¼ æ¸¸æˆæ¨¡å¼ä¸ºfalse
+    unsigned score;  // å¾—åˆ†
+    unsigned erasedCount[4];  // æ¶ˆè¡Œæ•°
+    unsigned erasedTotal;  // æ¶ˆè¡Œæ€»æ•°
+    unsigned tetrisCount[7];  // å„æ–¹å—æ•°
+    unsigned tetrisTotal;  // æ–¹å—æ€»æ•°
 } TetrisControl;
 
-HANDLE g_hConsoleOutput;  // ¿ØÖÆÌ¨Êä³ö¾ä±ú
+HANDLE g_hConsoleOutput;  // æ§åˆ¶å°è¾“å‡ºå¥æŸ„
 
 // =============================================================================
-// º¯ÊıÉùÃ÷
-// Èç¹ûÊ¹ÓÃÈ«¾Ö±äÁ¿·½Ê½ÊµÏÖ£¬¾ÍÃ»±ØÒª´«²ÎÁË
-void initGame(TetrisManager *manager, TetrisControl *control, bool model);  // ³õÊ¼»¯ÓÎÏ·
-void giveTetris(TetrisManager *manager, TetrisControl *control);  // ¸øÒ»¸ö·½¿é
-bool checkCollision(const TetrisManager *manager);  // Åö×²¼ì²â
-void insertTetris(TetrisManager *manager);  // ²åÈë·½¿é
-void removeTetris(TetrisManager *manager);  // ÒÆ³ı·½¿é
-void horzMoveTetris(TetrisManager *manager, TetrisControl *control);  // Ë®Æ½ÒÆ¶¯·½¿é
-void moveDownTetris(TetrisManager *manager, TetrisControl *control);  // ÏòÏÂÒÆ¶¯·½¿é
-void rotateTetris(TetrisManager *manager, TetrisControl *control);  // Ğı×ª·½¿é
-void dropDownTetris(TetrisManager *manager, TetrisControl *control);  // ·½¿éÖ±½ÓÂäµØ
-bool checkErasing(TetrisManager *manager, TetrisControl *control);  // ÏûĞĞ¼ì²â
-void keydownControl(TetrisManager *manager, TetrisControl *control, int key);  // ¼ü°´ÏÂ
-void setPoolColor(const TetrisManager *manager, TetrisControl *control);  // ÉèÖÃÑÕÉ«
-void gotoxyWithFullwidth(short x, short y);  // ÒÔÈ«½Ç¶¨Î»µ½Ä³µã
-void printPoolBorder();  // ÏÔÊ¾ÓÎÏ·³Ø±ß½ç
-void printTetrisPool(const TetrisManager *manager, const TetrisControl *control);  // ÏÔÊ¾ÓÎÏ·³Ø
-void printCurrentTetris(const TetrisManager *manager, const TetrisControl *control);  // ÏÔÊ¾µ±Ç°·½¿é
-void printNextTetris(const TetrisManager *manager);  // ÏÔÊ¾ÏÂÒ»¸öºÍÏÂÏÂÒ»¸ö·½¿é
-void printScore(const TetrisManager *manager, const TetrisControl *control);  // ÏÔÊ¾µÃ·ÖĞÅÏ¢
-void runGame(TetrisManager *manager, TetrisControl *control);  // ÔËĞĞÓÎÏ·
-void printPrompting();  // ÏÔÊ¾ÌáÊ¾ĞÅÏ¢
-int mainMenu();  // Ö÷²Ëµ¥
-void autoRun(TetrisManager *manager, TetrisControl *control);  // ×Ô¶¯ÔËĞĞ
+// å‡½æ•°å£°æ˜
+// å¦‚æœä½¿ç”¨å…¨å±€å˜é‡æ–¹å¼å®ç°ï¼Œå°±æ²¡å¿…è¦ä¼ å‚äº†
+void initGame(TetrisManager *manager, TetrisControl *control, bool model);  // åˆå§‹åŒ–æ¸¸æˆ
+void giveTetris(TetrisManager *manager, TetrisControl *control);  // ç»™ä¸€ä¸ªæ–¹å—
+bool checkCollision(const TetrisManager *manager);  // ç¢°æ’æ£€æµ‹
+void insertTetris(TetrisManager *manager);  // æ’å…¥æ–¹å—
+void removeTetris(TetrisManager *manager);  // ç§»é™¤æ–¹å—
+void horzMoveTetris(TetrisManager *manager, TetrisControl *control);  // æ°´å¹³ç§»åŠ¨æ–¹å—
+void moveDownTetris(TetrisManager *manager, TetrisControl *control);  // å‘ä¸‹ç§»åŠ¨æ–¹å—
+void rotateTetris(TetrisManager *manager, TetrisControl *control);  // æ—‹è½¬æ–¹å—
+void dropDownTetris(TetrisManager *manager, TetrisControl *control);  // æ–¹å—ç›´æ¥è½åœ°
+bool checkErasing(TetrisManager *manager, TetrisControl *control);  // æ¶ˆè¡Œæ£€æµ‹
+void keydownControl(TetrisManager *manager, TetrisControl *control, int key);  // é”®æŒ‰ä¸‹
+void setPoolColor(const TetrisManager *manager, TetrisControl *control);  // è®¾ç½®é¢œè‰²
+void gotoxyWithFullwidth(short x, short y);  // ä»¥å…¨è§’å®šä½åˆ°æŸç‚¹
+void printPoolBorder();  // æ˜¾ç¤ºæ¸¸æˆæ± è¾¹ç•Œ
+void printTetrisPool(const TetrisManager *manager, const TetrisControl *control);  // æ˜¾ç¤ºæ¸¸æˆæ± 
+void printCurrentTetris(const TetrisManager *manager, const TetrisControl *control);  // æ˜¾ç¤ºå½“å‰æ–¹å—
+void printNextTetris(const TetrisManager *manager);  // æ˜¾ç¤ºä¸‹ä¸€ä¸ªå’Œä¸‹ä¸‹ä¸€ä¸ªæ–¹å—
+void printScore(const TetrisManager *manager, const TetrisControl *control);  // æ˜¾ç¤ºå¾—åˆ†ä¿¡æ¯
+void runGame(TetrisManager *manager, TetrisControl *control);  // è¿è¡Œæ¸¸æˆ
+void printPrompting();  // æ˜¾ç¤ºæç¤ºä¿¡æ¯
+int mainMenu();  // ä¸»èœå•
+void autoRun(TetrisManager *manager, TetrisControl *control);  // è‡ªåŠ¨è¿è¡Œ
 
 // =============================================================================
-// Ö÷º¯Êı
+// ä¸»å‡½æ•°
 int main()
 {
     int model;
     TetrisManager tetrisManager;
     TetrisControl tetrisControl;
-    CONSOLE_CURSOR_INFO cursorInfo = { 1, FALSE };  // ¹â±êĞÅÏ¢
+    CONSOLE_CURSOR_INFO cursorInfo = { 1, FALSE };  // å…‰æ ‡ä¿¡æ¯
 
-    g_hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);  // »ñÈ¡¿ØÖÆÌ¨Êä³ö¾ä±ú
-    SetConsoleCursorInfo(g_hConsoleOutput, &cursorInfo);  // ÉèÖÃ¹â±êÒş²Ø
-    SetConsoleTitleA("¶íÂŞË¹·½¿é¿ØÖÆÌ¨°æ¡ª¡ªBy: wohaaitinciu");
+    g_hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);  // è·å–æ§åˆ¶å°è¾“å‡ºå¥æŸ„
+    SetConsoleCursorInfo(g_hConsoleOutput, &cursorInfo);  // è®¾ç½®å…‰æ ‡éšè—
+    SetConsoleTitleA("ä¿„ç½—æ–¯æ–¹å—æ§åˆ¶å°ç‰ˆâ€•â€•By: wohaaitinciu");
 
     do
     {
         model = mainMenu();
         SetConsoleTextAttribute(g_hConsoleOutput, 0x07);
         system("cls");
-        initGame(&tetrisManager, &tetrisControl, model == 0);  // ³õÊ¼»¯ÓÎÏ·
-        printPrompting();  // ÏÔÊ¾ÌáÊ¾ĞÅÏ¢
-        printPoolBorder();  // ÏÔÊ¾ÓÎÏ·³Ø±ß½ç
+        initGame(&tetrisManager, &tetrisControl, model == 0);  // åˆå§‹åŒ–æ¸¸æˆ
+        printPrompting();  // æ˜¾ç¤ºæç¤ºä¿¡æ¯
+        printPoolBorder();  // æ˜¾ç¤ºæ¸¸æˆæ± è¾¹ç•Œ
 
         if (model == 0)
         {
-            runGame(&tetrisManager, &tetrisControl);  // ÔËĞĞÓÎÏ·
+            runGame(&tetrisManager, &tetrisControl);  // è¿è¡Œæ¸¸æˆ
         }
         else
         {
-            autoRun(&tetrisManager, &tetrisControl);  // ×Ô¶¯ÔËĞĞ
+            autoRun(&tetrisManager, &tetrisControl);  // è‡ªåŠ¨è¿è¡Œ
         }
 
         SetConsoleTextAttribute(g_hConsoleOutput, 0xF0);
         gotoxyWithFullwidth(13, 10);
-        printf("°´ÈÎÒâ¼ü»ØÖ÷²Ëµ¥");
+        printf("æŒ‰ä»»æ„é”®å›ä¸»èœå•");
         SetConsoleTextAttribute(g_hConsoleOutput, 0x07);
         system("pause > nul");
         system("cls");
@@ -170,48 +170,48 @@ int main()
 }
 
 // =============================================================================
-// ³õÊ¼»¯ÓÎÏ·
+// åˆå§‹åŒ–æ¸¸æˆ
 void initGame(TetrisManager *manager, TetrisControl *control, bool model)
 {
-    memset(manager, 0, sizeof(TetrisManager));  // È«²¿ÖÃ0
+    memset(manager, 0, sizeof(TetrisManager));  // å…¨éƒ¨ç½®0
 
-    // ³õÊ¼»¯ÓÎÏ·³Ø
+    // åˆå§‹åŒ–æ¸¸æˆæ± 
     memcpy(manager->pool, gs_uInitialTetrisPool, sizeof(uint16_t [28]));
-    srand((unsigned)time(NULL));  // ÉèÖÃËæ»úÖÖ×Ó
+    srand((unsigned)time(NULL));  // è®¾ç½®éšæœºç§å­
 
-    manager->type[1] = rand() % 7;  // ÏÂÒ»¸ö
+    manager->type[1] = rand() % 7;  // ä¸‹ä¸€ä¸ª
     manager->orientation[1] = rand() & 3;
 
-    manager->type[2] = rand() % 7;  // ÏÂÏÂÒ»¸ö
+    manager->type[2] = rand() % 7;  // ä¸‹ä¸‹ä¸€ä¸ª
     manager->orientation[2] = rand() & 3;
 
-    memset(control, 0, sizeof(TetrisControl));  // È«²¿ÖÃ0
+    memset(control, 0, sizeof(TetrisControl));  // å…¨éƒ¨ç½®0
     control->model = model;
 
-    giveTetris(manager, control);  // ¸øÏÂÒ»¸ö·½¿é
-    setPoolColor(manager, control);  // ÉèÖÃÑÕÉ«
-    printScore(manager, control);  // ÏÔÊ¾µÃ·ÖĞÅÏ¢
+    giveTetris(manager, control);  // ç»™ä¸‹ä¸€ä¸ªæ–¹å—
+    setPoolColor(manager, control);  // è®¾ç½®é¢œè‰²
+    printScore(manager, control);  // æ˜¾ç¤ºå¾—åˆ†ä¿¡æ¯
 }
 
 // =============================================================================
-// ¸øÒ»¸ö·½¿é
+// ç»™ä¸€ä¸ªæ–¹å—
 void giveTetris(TetrisManager *manager, TetrisControl *control)
 {
     uint16_t tetris;
 
-    manager->type[0] = manager->type[1];  // ÏÂÒ»¸ö·½¿éÖÃÎªµ±Ç°
+    manager->type[0] = manager->type[1];  // ä¸‹ä¸€ä¸ªæ–¹å—ç½®ä¸ºå½“å‰
     manager->orientation[0] = manager->orientation[1];
 
-    manager->type[1] = manager->type[2];// ÏÂÏÂÒ»¸öÖÃ·½¿éÎªÏÂÒ»¸ö
+    manager->type[1] = manager->type[2];// ä¸‹ä¸‹ä¸€ä¸ªç½®æ–¹å—ä¸ºä¸‹ä¸€ä¸ª
     manager->orientation[1] = manager->orientation[2];
 
-    manager->type[2] = rand() % 7;// Ëæ»úÉú³ÉÏÂÏÂÒ»¸ö·½¿é
+    manager->type[2] = rand() % 7;// éšæœºç”Ÿæˆä¸‹ä¸‹ä¸€ä¸ªæ–¹å—
     manager->orientation[2] = rand() & 3;
 
-    tetris = gs_uTetrisTable[manager->type[0]][manager->orientation[0]];  // µ±Ç°·½¿é
+    tetris = gs_uTetrisTable[manager->type[0]][manager->orientation[0]];  // å½“å‰æ–¹å—
 
-    // ÉèÖÃµ±Ç°·½¿éy×ø±ê£¬±£Ö¤¸Õ¸ø³öÊ±Ö»ÏÔÊ¾·½¿é×îÏÂÃæÒ»ĞĞ
-    // ÕâÖÖÊµÏÖÊ¹µÃÍæ¼Ò¿ÉÒÔÒÔºÜ¿ìµÄËÙ¶È½«·½¿éÂäÔÚ²»ÏÔÊ¾³öÀ´µÄ¶¥²¿4ĞĞÄÚ
+    // è®¾ç½®å½“å‰æ–¹å—yåæ ‡ï¼Œä¿è¯åˆšç»™å‡ºæ—¶åªæ˜¾ç¤ºæ–¹å—æœ€ä¸‹é¢ä¸€è¡Œ
+    // è¿™ç§å®ç°ä½¿å¾—ç©å®¶å¯ä»¥ä»¥å¾ˆå¿«çš„é€Ÿåº¦å°†æ–¹å—è½åœ¨ä¸æ˜¾ç¤ºå‡ºæ¥çš„é¡¶éƒ¨4è¡Œå†…
     if (tetris & 0xF000)
     {
         manager->y = 0;
@@ -220,50 +220,50 @@ void giveTetris(TetrisManager *manager, TetrisControl *control)
     {
         manager->y = (tetris & 0xFF00) ? 1 : 2;
     }
-    manager->x = 6;  // ÉèÖÃµ±Ç°·½¿éx×ø±ê
+    manager->x = 6;  // è®¾ç½®å½“å‰æ–¹å—xåæ ‡
 
-    if (checkCollision(manager))  // ¼ì²âµ½Åö×²
+    if (checkCollision(manager))  // æ£€æµ‹åˆ°ç¢°æ’
     {
-        control->dead = true;  // ±ê¼ÇÓÎÏ·½áÊø
+        control->dead = true;  // æ ‡è®°æ¸¸æˆç»“æŸ
     }
-    else  // Î´¼ì²âµ½Åö×²
+    else  // æœªæ£€æµ‹åˆ°ç¢°æ’
     {
-        insertTetris(manager);  // ½«µ±Ç°·½¿é¼ÓÈëÓÎÏ·³Ø
+        insertTetris(manager);  // å°†å½“å‰æ–¹å—åŠ å…¥æ¸¸æˆæ± 
     }
 
-    ++control->tetrisTotal;  // ·½¿é×ÜÊı
-    ++control->tetrisCount[manager->type[0]];  // ÏàÓ¦·½¿éÊı
+    ++control->tetrisTotal;  // æ–¹å—æ€»æ•°
+    ++control->tetrisCount[manager->type[0]];  // ç›¸åº”æ–¹å—æ•°
 
-    printNextTetris(manager);  // ÏÔÊ¾ÏÂÒ»¸ö·½¿é
+    printNextTetris(manager);  // æ˜¾ç¤ºä¸‹ä¸€ä¸ªæ–¹å—
 }
 
 // =============================================================================
-// Åö×²¼ì²â
+// ç¢°æ’æ£€æµ‹
 bool checkCollision(const TetrisManager *manager)
 {
-    // µ±Ç°·½¿é
+    // å½“å‰æ–¹å—
     uint16_t tetris = gs_uTetrisTable[manager->type[0]][manager->orientation[0]];
     uint16_t dest = 0U;
 
-    // »ñÈ¡µ±Ç°·½¿éÔÚÓÎÏ·³ØÖĞµÄÇøÓò£º
-    // ÓÎÏ·³Ø×ø±êx y´¦Ğ¡·½¸ñĞÅÏ¢£¬°´µÍµ½¸ß´æ·ÅÔÚ16Î»ÎŞ·ûºÅÊıÖĞ
+    // è·å–å½“å‰æ–¹å—åœ¨æ¸¸æˆæ± ä¸­çš„åŒºåŸŸï¼š
+    // æ¸¸æˆæ± åæ ‡x yå¤„å°æ–¹æ ¼ä¿¡æ¯ï¼ŒæŒ‰ä½åˆ°é«˜å­˜æ”¾åœ¨16ä½æ— ç¬¦å·æ•°ä¸­
     dest |= (((manager->pool[manager->y + 0] >> manager->x) << 0x0) & 0x000F);
     dest |= (((manager->pool[manager->y + 1] >> manager->x) << 0x4) & 0x00F0);
     dest |= (((manager->pool[manager->y + 2] >> manager->x) << 0x8) & 0x0F00);
     dest |= (((manager->pool[manager->y + 3] >> manager->x) << 0xC) & 0xF000);
 
-    // Èôµ±Ç°·½¿éÓëÄ¿±êÇøÓò´æÔÚÖØµş£¨Åö×²£©£¬ÔòÎ»ÓëµÄ½á¹û²»Îª0
+    // è‹¥å½“å‰æ–¹å—ä¸ç›®æ ‡åŒºåŸŸå­˜åœ¨é‡å ï¼ˆç¢°æ’ï¼‰ï¼Œåˆ™ä½ä¸çš„ç»“æœä¸ä¸º0
     return ((dest & tetris) != 0);
 }
 
 // =============================================================================
-// ²åÈë·½¿é
+// æ’å…¥æ–¹å—
 void insertTetris(TetrisManager *manager)
 {
-    // µ±Ç°·½¿é
+    // å½“å‰æ–¹å—
     uint16_t tetris = gs_uTetrisTable[manager->type[0]][manager->orientation[0]];
 
-    // µ±Ç°·½¿éÃ¿4Î»È¡³ö£¬Î»»òµ½ÓÎÏ·³ØÏàÓ¦Î»ÖÃ£¬¼´Íê³É²åÈë·½¿é
+    // å½“å‰æ–¹å—æ¯4ä½å–å‡ºï¼Œä½æˆ–åˆ°æ¸¸æˆæ± ç›¸åº”ä½ç½®ï¼Œå³å®Œæˆæ’å…¥æ–¹å—
     manager->pool[manager->y + 0] |= (((tetris >> 0x0) & 0x000F) << manager->x);
     manager->pool[manager->y + 1] |= (((tetris >> 0x4) & 0x000F) << manager->x);
     manager->pool[manager->y + 2] |= (((tetris >> 0x8) & 0x000F) << manager->x);
@@ -271,13 +271,13 @@ void insertTetris(TetrisManager *manager)
 }
 
 // =============================================================================
-// ÒÆ³ı·½¿é
+// ç§»é™¤æ–¹å—
 void removeTetris(TetrisManager *manager)
 {
-    // µ±Ç°·½¿é
+    // å½“å‰æ–¹å—
     uint16_t tetris = gs_uTetrisTable[manager->type[0]][manager->orientation[0]];
 
-    // µ±Ç°·½¿éÃ¿4Î»È¡³ö£¬°´Î»È¡·´ºóÎ»Óëµ½ÓÎÏ·³ØÏàÓ¦Î»ÖÃ£¬¼´Íê³ÉÒÆ³ı·½¿é
+    // å½“å‰æ–¹å—æ¯4ä½å–å‡ºï¼ŒæŒ‰ä½å–ååä½ä¸åˆ°æ¸¸æˆæ± ç›¸åº”ä½ç½®ï¼Œå³å®Œæˆç§»é™¤æ–¹å—
     manager->pool[manager->y + 0] &= ~(((tetris >> 0x0) & 0x000F) << manager->x);
     manager->pool[manager->y + 1] &= ~(((tetris >> 0x4) & 0x000F) << manager->x);
     manager->pool[manager->y + 2] &= ~(((tetris >> 0x8) & 0x000F) << manager->x);
@@ -285,145 +285,145 @@ void removeTetris(TetrisManager *manager)
 }
 
 // =============================================================================
-// ÉèÖÃÑÕÉ«
+// è®¾ç½®é¢œè‰²
 void setPoolColor(const TetrisManager *manager, TetrisControl *control)
 {
-    // ÓÉÓÚÏÔÊ¾ÓÎÏ·³ØÊ±£¬ÏÈÒªÔÚÓÎÏ·³ØÀïÅĞ¶ÏÄ³Ò»·½¸ñÓĞ·½¿é²ÅÏÔÊ¾ÏàÓ¦·½¸ñµÄÑÕÉ«
-    // ÕâÀïÖ»×÷ÉèÖÃ¼´¿É£¬Ã»±ØÒªÇå³ı
-    // µ±ÒÆ¶¯·½¿é»ò¸øÒ»¸ö·½¿éÊ±µ÷ÓÃ
+    // ç”±äºæ˜¾ç¤ºæ¸¸æˆæ± æ—¶ï¼Œå…ˆè¦åœ¨æ¸¸æˆæ± é‡Œåˆ¤æ–­æŸä¸€æ–¹æ ¼æœ‰æ–¹å—æ‰æ˜¾ç¤ºç›¸åº”æ–¹æ ¼çš„é¢œè‰²
+    // è¿™é‡Œåªä½œè®¾ç½®å³å¯ï¼Œæ²¡å¿…è¦æ¸…é™¤
+    // å½“ç§»åŠ¨æ–¹å—æˆ–ç»™ä¸€ä¸ªæ–¹å—æ—¶è°ƒç”¨
 
     int8_t i, x, y;
 
-    // µ±Ç°·½¿é
+    // å½“å‰æ–¹å—
     uint16_t tetris = gs_uTetrisTable[manager->type[0]][manager->orientation[0]];
 
     for (i = 0; i < 16; ++i)
     {
-        y = (i >> 2) + manager->y;  // ´ıÉèÖÃµÄÁĞ
-        if (y > ROW_END)  // ³¬¹ıµ×²¿ÏŞÖÆ
+        y = (i >> 2) + manager->y;  // å¾…è®¾ç½®çš„åˆ—
+        if (y > ROW_END)  // è¶…è¿‡åº•éƒ¨é™åˆ¶
         {
             break;
         }
-        x = (i & 3) + manager->x;  // ´ıÉèÖÃµÄĞĞ
-        if ((tetris >> i) & 1)  // ¼ì²âµÄµ½Ğ¡·½¸ñÊôÓÚµ±Ç°·½¿éÇøÓò
+        x = (i & 3) + manager->x;  // å¾…è®¾ç½®çš„è¡Œ
+        if ((tetris >> i) & 1)  // æ£€æµ‹çš„åˆ°å°æ–¹æ ¼å±äºå½“å‰æ–¹å—åŒºåŸŸ
         {
-            control->color[y][x] = (manager->type[0] | 8);  // ÉèÖÃÑÕÉ«
+            control->color[y][x] = (manager->type[0] | 8);  // è®¾ç½®é¢œè‰²
         }
     }
 }
 
 // =============================================================================
-// Ğı×ª·½¿é
+// æ—‹è½¬æ–¹å—
 void rotateTetris(TetrisManager *manager, TetrisControl *control)
 {
-    int8_t ori = manager->orientation[0];  // ¼ÇÂ¼Ô­Ğı×ª×´Ì¬
+    int8_t ori = manager->orientation[0];  // è®°å½•åŸæ—‹è½¬çŠ¶æ€
 
-    removeTetris(manager);  // ÒÆ×ßµ±Ç°·½¿é
+    removeTetris(manager);  // ç§»èµ°å½“å‰æ–¹å—
 
-    // Ë³/ÄæÊ±ÕëĞı×ª
+    // é¡º/é€†æ—¶é’ˆæ—‹è½¬
     manager->orientation[0] = (control->clockwise) ? ((ori + 1) & 3) : ((ori + 3) & 3);
 
-    if (checkCollision(manager))  // ¼ì²âµ½Åö×²
+    if (checkCollision(manager))  // æ£€æµ‹åˆ°ç¢°æ’
     {
-        manager->orientation[0] = ori;  // »Ö¸´ÎªÔ­Ğı×ª×´Ì¬
-        insertTetris(manager);  // ·ÅÈëµ±Ç°·½¿é¡£ÓÉÓÚ×´Ì¬Ã»¸Ä±ä£¬²»ĞèÒªÉèÖÃÑÕÉ«
+        manager->orientation[0] = ori;  // æ¢å¤ä¸ºåŸæ—‹è½¬çŠ¶æ€
+        insertTetris(manager);  // æ”¾å…¥å½“å‰æ–¹å—ã€‚ç”±äºçŠ¶æ€æ²¡æ”¹å˜ï¼Œä¸éœ€è¦è®¾ç½®é¢œè‰²
     }
     else
     {
-        insertTetris(manager);  // ·ÅÈëµ±Ç°·½¿é
-        setPoolColor(manager, control);  // ÉèÖÃÑÕÉ«
-        printCurrentTetris(manager, control);  // ÏÔÊ¾µ±Ç°·½¿é
+        insertTetris(manager);  // æ”¾å…¥å½“å‰æ–¹å—
+        setPoolColor(manager, control);  // è®¾ç½®é¢œè‰²
+        printCurrentTetris(manager, control);  // æ˜¾ç¤ºå½“å‰æ–¹å—
     }
 }
 
 // =============================================================================
-// Ë®Æ½ÒÆ¶¯·½¿é
+// æ°´å¹³ç§»åŠ¨æ–¹å—
 void horzMoveTetris(TetrisManager *manager, TetrisControl *control)
 {
-    int x = manager->x;  // ¼ÇÂ¼Ô­ÁĞÎ»ÖÃ
+    int x = manager->x;  // è®°å½•åŸåˆ—ä½ç½®
 
-    removeTetris(manager);  // ÒÆ×ßµ±Ç°·½¿é
-    control->direction == 0 ? (--manager->x) : (++manager->x);  // ×ó/ÓÒÒÆ¶¯
+    removeTetris(manager);  // ç§»èµ°å½“å‰æ–¹å—
+    control->direction == 0 ? (--manager->x) : (++manager->x);  // å·¦/å³ç§»åŠ¨
 
-    if (checkCollision(manager))  // ¼ì²âµ½Åö×²
+    if (checkCollision(manager))  // æ£€æµ‹åˆ°ç¢°æ’
     {
-        manager->x = x;  // »Ö¸´ÎªÔ­ÁĞÎ»ÖÃ
-        insertTetris(manager);  // ·ÅÈëµ±Ç°·½¿é¡£ÓÉÓÚÎ»ÖÃÃ»¸Ä±ä£¬²»ĞèÒªÉèÖÃÑÕÉ«
+        manager->x = x;  // æ¢å¤ä¸ºåŸåˆ—ä½ç½®
+        insertTetris(manager);  // æ”¾å…¥å½“å‰æ–¹å—ã€‚ç”±äºä½ç½®æ²¡æ”¹å˜ï¼Œä¸éœ€è¦è®¾ç½®é¢œè‰²
     }
     else
     {
-        insertTetris(manager);  // ·ÅÈëµ±Ç°·½¿é
-        setPoolColor(manager, control);  // ÉèÖÃÑÕÉ«
-        printCurrentTetris(manager, control);  // ÏÔÊ¾µ±Ç°·½¿é
+        insertTetris(manager);  // æ”¾å…¥å½“å‰æ–¹å—
+        setPoolColor(manager, control);  // è®¾ç½®é¢œè‰²
+        printCurrentTetris(manager, control);  // æ˜¾ç¤ºå½“å‰æ–¹å—
     }
 }
 
 // =============================================================================
-// ÏòÏÂÒÆ¶¯·½¿é
+// å‘ä¸‹ç§»åŠ¨æ–¹å—
 void moveDownTetris(TetrisManager *manager, TetrisControl *control)
 {
-    int8_t y = manager->y;  // ¼ÇÂ¼Ô­ĞĞÎ»ÖÃ
+    int8_t y = manager->y;  // è®°å½•åŸè¡Œä½ç½®
 
-    removeTetris(manager);  // ÒÆ×ßµ±Ç°·½¿é
-    ++manager->y;  // ÏòÏÂÒÆ¶¯
+    removeTetris(manager);  // ç§»èµ°å½“å‰æ–¹å—
+    ++manager->y;  // å‘ä¸‹ç§»åŠ¨
 
-    if (checkCollision(manager))  // ¼ì²âµ½Åö×²
+    if (checkCollision(manager))  // æ£€æµ‹åˆ°ç¢°æ’
     {
-        manager->y = y;  // »Ö¸´ÎªÔ­ĞĞÎ»ÖÃ
-        insertTetris(manager);  // ·ÅÈëµ±Ç°·½¿é¡£ÓÉÓÚÎ»ÖÃÃ»¸Ä±ä£¬²»ĞèÒªÉèÖÃÑÕÉ«
-        if (checkErasing(manager, control))  // ¼ì²âµ½ÏûĞĞ
+        manager->y = y;  // æ¢å¤ä¸ºåŸè¡Œä½ç½®
+        insertTetris(manager);  // æ”¾å…¥å½“å‰æ–¹å—ã€‚ç”±äºä½ç½®æ²¡æ”¹å˜ï¼Œä¸éœ€è¦è®¾ç½®é¢œè‰²
+        if (checkErasing(manager, control))  // æ£€æµ‹åˆ°æ¶ˆè¡Œ
         {
-            printTetrisPool(manager, control);  // ÏÔÊ¾ÓÎÏ·³Ø
+            printTetrisPool(manager, control);  // æ˜¾ç¤ºæ¸¸æˆæ± 
         }
     }
     else
     {
-        insertTetris(manager);  // ·ÅÈëµ±Ç°·½¿é
-        setPoolColor(manager, control);  // ÉèÖÃÑÕÉ«
-        printCurrentTetris(manager, control);  // ÏÔÊ¾µ±Ç°·½¿é
+        insertTetris(manager);  // æ”¾å…¥å½“å‰æ–¹å—
+        setPoolColor(manager, control);  // è®¾ç½®é¢œè‰²
+        printCurrentTetris(manager, control);  // æ˜¾ç¤ºå½“å‰æ–¹å—
     }
 }
 
 // =============================================================================
-// ·½¿éÖ±½ÓÂäµØ
+// æ–¹å—ç›´æ¥è½åœ°
 void dropDownTetris(TetrisManager *manager, TetrisControl *control)
 {
-    removeTetris(manager);  // ÒÆ×ßµ±Ç°·½¿é
+    removeTetris(manager);  // ç§»èµ°å½“å‰æ–¹å—
 
-    // ´ÓÉÏÍùÏÂ¼ì²â
-    // ×¢ÒâÕâÀï²»ÄÜ´ÓÏÂÍùÉÏ£¬·ñÔò»á³öÏÖ·½¿é´©¹ı¸ÇÂñÈë¿Õ¶´µÄBUG
+    // ä»ä¸Šå¾€ä¸‹æ£€æµ‹
+    // æ³¨æ„è¿™é‡Œä¸èƒ½ä»ä¸‹å¾€ä¸Šï¼Œå¦åˆ™ä¼šå‡ºç°æ–¹å—ç©¿è¿‡ç›–åŸ‹å…¥ç©ºæ´çš„BUG
     for (; manager->y < ROW_END; ++manager->y)
     {
-        if (checkCollision(manager))  // ¼ì²âµ½Åö×²
+        if (checkCollision(manager))  // æ£€æµ‹åˆ°ç¢°æ’
         {
             break;
         }
     }
-    --manager->y;  // ÉÏÒÆÒ»¸ñµ±È»Ã»ÓĞÅö×²
+    --manager->y;  // ä¸Šç§»ä¸€æ ¼å½“ç„¶æ²¡æœ‰ç¢°æ’
 
-    insertTetris(manager);  // ·ÅÈëµ±Ç°·½¿é
-    setPoolColor(manager, control);  // ÉèÖÃÑÕÉ«
+    insertTetris(manager);  // æ”¾å…¥å½“å‰æ–¹å—
+    setPoolColor(manager, control);  // è®¾ç½®é¢œè‰²
 
-    checkErasing(manager, control);  // ¼ì²âÏûĞĞ
-    printTetrisPool(manager, control);  // ÏÔÊ¾ÓÎÏ·³Ø
+    checkErasing(manager, control);  // æ£€æµ‹æ¶ˆè¡Œ
+    printTetrisPool(manager, control);  // æ˜¾ç¤ºæ¸¸æˆæ± 
 }
 
 // =============================================================================
-// ÏûĞĞ¼ì²â
+// æ¶ˆè¡Œæ£€æµ‹
 bool checkErasing(TetrisManager *manager, TetrisControl *control)
 {
-    static const unsigned scores[5] = { 0, 10, 30, 90, 150 };  // ÏûĞĞµÃ·Ö
+    static const unsigned scores[5] = { 0, 10, 30, 90, 150 };  // æ¶ˆè¡Œå¾—åˆ†
     int8_t count = 0;
     int8_t k = 0, y = manager->y + 3;
 
-    do  // ´ÓÏÂÍùÉÏ¼ì²â
+    do  // ä»ä¸‹å¾€ä¸Šæ£€æµ‹
     {
-        if (y < ROW_END && manager->pool[y] == 0xFFFFU)  // ÓĞĞ§ÇøÓòÄÚÇÒÒ»ĞĞÒÑÌîÂú
+        if (y < ROW_END && manager->pool[y] == 0xFFFFU)  // æœ‰æ•ˆåŒºåŸŸå†…ä¸”ä¸€è¡Œå·²å¡«æ»¡
         {
             ++count;
-            // Ïû³ıÒ»ĞĞ·½¿é
+            // æ¶ˆé™¤ä¸€è¡Œæ–¹å—
             memmove(manager->pool + 1, manager->pool, sizeof(uint16_t) * y);
-            // ÑÕÉ«Êı×éµÄÔªËØËæÖ®ÒÆ¶¯
+            // é¢œè‰²æ•°ç»„çš„å…ƒç´ éšä¹‹ç§»åŠ¨
             memmove(control->color[1], control->color[0], sizeof(int8_t [16]) * y);
         }
         else
@@ -433,58 +433,58 @@ bool checkErasing(TetrisManager *manager, TetrisControl *control)
         }
     } while (y >= manager->y && k < 4);
 
-    control->erasedTotal += count;  // ÏûĞĞ×ÜÊı
-    control->score += scores[count];  // µÃ·Ö
+    control->erasedTotal += count;  // æ¶ˆè¡Œæ€»æ•°
+    control->score += scores[count];  // å¾—åˆ†
 
     if (count > 0)
     {
-        ++control->erasedCount[count - 1];  // ÏûĞĞ
+        ++control->erasedCount[count - 1];  // æ¶ˆè¡Œ
     }
 
-    giveTetris(manager, control);  // ¸øÏÂÒ»¸ö·½¿é
-    setPoolColor(manager, control);  // ÉèÖÃÑÕÉ«
-    printScore(manager, control);  // ÏÔÊ¾µÃ·ÖĞÅÏ¢
+    giveTetris(manager, control);  // ç»™ä¸‹ä¸€ä¸ªæ–¹å—
+    setPoolColor(manager, control);  // è®¾ç½®é¢œè‰²
+    printScore(manager, control);  // æ˜¾ç¤ºå¾—åˆ†ä¿¡æ¯
 
     return (count > 0);
 }
 
 // =============================================================================
-// ¼ü°´ÏÂ
+// é”®æŒ‰ä¸‹
 void keydownControl(TetrisManager *manager, TetrisControl *control, int key)
 {
-    if (key == 13)  // ÔİÍ£/½â³ıÔİÍ£
+    if (key == 13)  // æš‚åœ/è§£é™¤æš‚åœ
     {
         control->pause = !control->pause;
     }
 
-    if (control->pause)  // ÔİÍ£×´Ì¬£¬²»×÷´¦Àí
+    if (control->pause)  // æš‚åœçŠ¶æ€ï¼Œä¸ä½œå¤„ç†
     {
         return;
     }
 
     switch (key)
     {
-    case 'w': case 'W': case '8': case 72:  // ÉÏ
-        control->clockwise = true;  // Ë³Ê±ÕëĞı×ª
-        rotateTetris(manager, control);  // Ğı×ª·½¿é
+    case 'w': case 'W': case '8': case 72:  // ä¸Š
+        control->clockwise = true;  // é¡ºæ—¶é’ˆæ—‹è½¬
+        rotateTetris(manager, control);  // æ—‹è½¬æ–¹å—
         break;
-    case 'a': case 'A': case '4': case 75:  // ×ó
-        control->direction = 0;  // Ïò×óÒÆ¶¯
-        horzMoveTetris(manager, control);  // Ë®Æ½ÒÆ¶¯·½¿é
+    case 'a': case 'A': case '4': case 75:  // å·¦
+        control->direction = 0;  // å‘å·¦ç§»åŠ¨
+        horzMoveTetris(manager, control);  // æ°´å¹³ç§»åŠ¨æ–¹å—
         break;
-    case 'd': case 'D': case '6': case 77:  // ÓÒ
-        control->direction = 1;  // ÏòÓÒÒÆ¶¯
-        horzMoveTetris(manager, control);  // Ë®Æ½ÒÆ¶¯·½¿é
+    case 'd': case 'D': case '6': case 77:  // å³
+        control->direction = 1;  // å‘å³ç§»åŠ¨
+        horzMoveTetris(manager, control);  // æ°´å¹³ç§»åŠ¨æ–¹å—
         break;
-    case 's': case 'S': case '2': case 80:  // ÏÂ
-        moveDownTetris(manager, control);  // ÏòÏÂÒÆ¶¯·½¿é
+    case 's': case 'S': case '2': case 80:  // ä¸‹
+        moveDownTetris(manager, control);  // å‘ä¸‹ç§»åŠ¨æ–¹å—
         break;
-    case ' ':  // Ö±½ÓÂäµØ
+    case ' ':  // ç›´æ¥è½åœ°
         dropDownTetris(manager, control);
         break;
-    case '0':  // ·´×ª
-        control->clockwise = false;  // ÄæÊ±ÕëĞı×ª
-        rotateTetris(manager, control);  // Ğı×ª·½¿é
+    case '0':  // åè½¬
+        control->clockwise = false;  // é€†æ—¶é’ˆæ—‹è½¬
+        rotateTetris(manager, control);  // æ—‹è½¬æ–¹å—
         break;
     default:
         break;
@@ -492,7 +492,7 @@ void keydownControl(TetrisManager *manager, TetrisControl *control, int key)
 }
 
 // =============================================================================
-// ÒÔÈ«½Ç¶¨Î»µ½Ä³µã
+// ä»¥å…¨è§’å®šä½åˆ°æŸç‚¹
 void gotoxyWithFullwidth(short x, short y)
 {
     static COORD cd;
@@ -503,19 +503,19 @@ void gotoxyWithFullwidth(short x, short y)
 }
 
 // =============================================================================
-// Ö÷²Ëµ¥
+// ä¸»èœå•
 int mainMenu()
 {
-    static const char *modelItem[] = { "1.ÓÎÏ·Ä£Ê½", "2.¹Û¿´Ä£Ê½" };
+    static const char *modelItem[] = { "1.æ¸¸æˆæ¨¡å¼", "2.è§‚çœ‹æ¨¡å¼" };
     int index = 0, ch;
 
     SetConsoleTextAttribute(g_hConsoleOutput, 0x0F);
     gotoxyWithFullwidth(15, 5);
-    printf("©³©¥©¥©¥©¥©¥©¥©¥©·");
+    printf("â”â”â”â”â”â”â”â”â”“");
     gotoxyWithFullwidth(15, 6);
-    printf("©§%2s%s%2s©§", "", "¶íÂŞË¹·½¿é", "");
+    printf("â”ƒ%2s%s%2sâ”ƒ", "", "ä¿„ç½—æ–¯æ–¹å—", "");
     gotoxyWithFullwidth(15, 7);
-    printf("©»©¥©¥©¥©¥©¥©¥©¥©¿");
+    printf("â”—â”â”â”â”â”â”â”â”›");
 
     SetConsoleTextAttribute(g_hConsoleOutput, 0xF0);
     gotoxyWithFullwidth(16, 14);
@@ -529,10 +529,10 @@ int mainMenu()
         ch = _getch();
         switch (ch)
         {
-        case 'w': case 'W': case '8': case 72:  // ÉÏ
-        case 'a': case 'A': case '4': case 75:  // ×ó
-        case 'd': case 'D': case '6': case 77:  // ÓÒ
-        case 's': case 'S': case '2': case 80:  // ÏÂ
+        case 'w': case 'W': case '8': case 72:  // ä¸Š
+        case 'a': case 'A': case '4': case 75:  // å·¦
+        case 'd': case 'D': case '6': case 77:  // å³
+        case 's': case 'S': case '2': case 80:  // ä¸‹
             if (index == 1)
             {
                 index = 0;
@@ -561,13 +561,13 @@ int mainMenu()
 }
 
 // =============================================================================
-// ÏÔÊ¾ÓÎÏ·³Ø±ß½ç
+// æ˜¾ç¤ºæ¸¸æˆæ± è¾¹ç•Œ
 void printPoolBorder()
 {
     int8_t y;
 
     SetConsoleTextAttribute(g_hConsoleOutput, 0xF0);
-    for (y = ROW_BEGIN; y < ROW_END; ++y)  // ²»ÏÔÊ¾¶¥²¿4ĞĞºÍµ×²¿2ĞĞ
+    for (y = ROW_BEGIN; y < ROW_END; ++y)  // ä¸æ˜¾ç¤ºé¡¶éƒ¨4è¡Œå’Œåº•éƒ¨2è¡Œ
     {
         gotoxyWithFullwidth(10, y - 3);
         printf("%2s", "");
@@ -575,31 +575,31 @@ void printPoolBorder()
         printf("%2s", "");
     }
 
-    gotoxyWithFullwidth(10, y - 3);  // µ×²¿±ß½ç
+    gotoxyWithFullwidth(10, y - 3);  // åº•éƒ¨è¾¹ç•Œ
     printf("%28s", "");
 }
 
-// ¶¨Î»µ½ÓÎÏ·³ØÖĞµÄ·½¸ñ
+// å®šä½åˆ°æ¸¸æˆæ± ä¸­çš„æ–¹æ ¼
 #define gotoxyInPool(x, y) gotoxyWithFullwidth(x + 9, y - 3)
 
 // =============================================================================
-// ÏÔÊ¾ÓÎÏ·³Ø
+// æ˜¾ç¤ºæ¸¸æˆæ± 
 void printTetrisPool(const TetrisManager *manager, const TetrisControl *control)
 {
     int8_t x, y;
 
-    for (y = ROW_BEGIN; y < ROW_END; ++y)  // ²»ÏÔÊ¾¶¥²¿4ĞĞºÍµ×²¿2ĞĞ
+    for (y = ROW_BEGIN; y < ROW_END; ++y)  // ä¸æ˜¾ç¤ºé¡¶éƒ¨4è¡Œå’Œåº•éƒ¨2è¡Œ
     {
-        gotoxyInPool(2, y);  // ¶¨µãµ½ÓÎÏ·³ØÖĞµÄ·½¸ñ
-        for (x = COL_BEGIN; x < COL_END; ++x)  // ²»ÏÔÊ¾×óÓÒ±ß½ç
+        gotoxyInPool(2, y);  // å®šç‚¹åˆ°æ¸¸æˆæ± ä¸­çš„æ–¹æ ¼
+        for (x = COL_BEGIN; x < COL_END; ++x)  // ä¸æ˜¾ç¤ºå·¦å³è¾¹ç•Œ
         {
-            if ((manager->pool[y] >> x) & 1)  // ÓÎÏ·³Ø¸Ã·½¸ñÓĞ·½¿é
+            if ((manager->pool[y] >> x) & 1)  // æ¸¸æˆæ± è¯¥æ–¹æ ¼æœ‰æ–¹å—
             {
-                // ÓÃÏàÓ¦ÑÕÉ«£¬ÏÔÊ¾Ò»¸öÊµĞÄ·½¿é
+                // ç”¨ç›¸åº”é¢œè‰²ï¼Œæ˜¾ç¤ºä¸€ä¸ªå®å¿ƒæ–¹å—
                 SetConsoleTextAttribute(g_hConsoleOutput, control->color[y][x]);
-                printf("¡ö");
+                printf("â– ");
             }
-            else  // Ã»ÓĞ·½¿é£¬ÏÔÊ¾¿Õ°×
+            else  // æ²¡æœ‰æ–¹å—ï¼Œæ˜¾ç¤ºç©ºç™½
             {
                 SetConsoleTextAttribute(g_hConsoleOutput, 0);
                 printf("%2s", "");
@@ -609,27 +609,27 @@ void printTetrisPool(const TetrisManager *manager, const TetrisControl *control)
 }
 
 // =============================================================================
-// ÏÔÊ¾µ±Ç°·½¿é
+// æ˜¾ç¤ºå½“å‰æ–¹å—
 void printCurrentTetris(const TetrisManager *manager, const TetrisControl *control)
 {
     int8_t x, y;
 
-    // ÏÔÊ¾µ±Ç°·½¿éÊÇÔÚÒÆ¶¯ºóµ÷ÓÃµÄ£¬Îª²ÁÈ¥ÒÆ¶¯Ç°µÄ·½¿é£¬ĞèÒªÀ©Õ¹ÏÔÊ¾ÇøÓò
-    // ÓÉÓÚ²»¿ÉÄÜÏòÉÏÒÆ¶¯£¬¹Ê²»ĞèÒªÏòÏÂÀ©Õ¹
-    y = (manager->y > ROW_BEGIN) ? (manager->y - 1) : ROW_BEGIN;  // ÏòÉÏÀ©Õ¹Ò»¸ñ
+    // æ˜¾ç¤ºå½“å‰æ–¹å—æ˜¯åœ¨ç§»åŠ¨åè°ƒç”¨çš„ï¼Œä¸ºæ“¦å»ç§»åŠ¨å‰çš„æ–¹å—ï¼Œéœ€è¦æ‰©å±•æ˜¾ç¤ºåŒºåŸŸ
+    // ç”±äºä¸å¯èƒ½å‘ä¸Šç§»åŠ¨ï¼Œæ•…ä¸éœ€è¦å‘ä¸‹æ‰©å±•
+    y = (manager->y > ROW_BEGIN) ? (manager->y - 1) : ROW_BEGIN;  // å‘ä¸Šæ‰©å±•ä¸€æ ¼
     for (; y < ROW_END && y < manager->y + 4; ++y)
     {
-        x = (manager->x > COL_BEGIN) ? (manager->x - 1) : COL_BEGIN;  // Ïò×óÀ©Õ¹Ò»¸ñ
-        for (; x < COL_END && x < manager->x + 5; ++x)  // ÏòÓÒÀ©Õ¹Ò»¸ñ
+        x = (manager->x > COL_BEGIN) ? (manager->x - 1) : COL_BEGIN;  // å‘å·¦æ‰©å±•ä¸€æ ¼
+        for (; x < COL_END && x < manager->x + 5; ++x)  // å‘å³æ‰©å±•ä¸€æ ¼
         {
-            gotoxyInPool(x, y);  // ¶¨µãµ½ÓÎÏ·³ØÖĞµÄ·½¸ñ
-            if ((manager->pool[y] >> x) & 1)  // ÓÎÏ·³Ø¸Ã·½¸ñÓĞ·½¿é
+            gotoxyInPool(x, y);  // å®šç‚¹åˆ°æ¸¸æˆæ± ä¸­çš„æ–¹æ ¼
+            if ((manager->pool[y] >> x) & 1)  // æ¸¸æˆæ± è¯¥æ–¹æ ¼æœ‰æ–¹å—
             {
-                // ÓÃÏàÓ¦ÑÕÉ«£¬ÏÔÊ¾Ò»¸öÊµĞÄ·½¿é
+                // ç”¨ç›¸åº”é¢œè‰²ï¼Œæ˜¾ç¤ºä¸€ä¸ªå®å¿ƒæ–¹å—
                 SetConsoleTextAttribute(g_hConsoleOutput, control->color[y][x]);
-                printf("¡ö");
+                printf("â– ");
             }
-            else  // Ã»ÓĞ·½¿é£¬ÏÔÊ¾¿Õ°×
+            else  // æ²¡æœ‰æ–¹å—ï¼Œæ˜¾ç¤ºç©ºç™½
             {
                 SetConsoleTextAttribute(g_hConsoleOutput, 0);
                 printf("%2s", "");
@@ -639,145 +639,145 @@ void printCurrentTetris(const TetrisManager *manager, const TetrisControl *contr
 }
 
 // =============================================================================
-// ÏÔÊ¾ÏÂÒ»¸öºÍÏÂÏÂÒ»¸ö·½¿é
+// æ˜¾ç¤ºä¸‹ä¸€ä¸ªå’Œä¸‹ä¸‹ä¸€ä¸ªæ–¹å—
 void printNextTetris(const TetrisManager *manager)
 {
     int8_t i;
     uint16_t tetris;
 
-    // ±ß¿ò
+    // è¾¹æ¡†
     SetConsoleTextAttribute(g_hConsoleOutput, 0xF);
     gotoxyWithFullwidth(26, 1);
-    printf("©³©¥©¥©¥©¥©×©¥©¥©¥©¥©·");
+    printf("â”â”â”â”â”â”³â”â”â”â”â”“");
     gotoxyWithFullwidth(26, 2);
-    printf("©§%8s©§%8s©§", "", "");
+    printf("â”ƒ%8sâ”ƒ%8sâ”ƒ", "", "");
     gotoxyWithFullwidth(26, 3);
-    printf("©§%8s©§%8s©§", "", "");
+    printf("â”ƒ%8sâ”ƒ%8sâ”ƒ", "", "");
     gotoxyWithFullwidth(26, 4);
-    printf("©§%8s©§%8s©§", "", "");
+    printf("â”ƒ%8sâ”ƒ%8sâ”ƒ", "", "");
     gotoxyWithFullwidth(26, 5);
-    printf("©§%8s©§%8s©§", "", "");
+    printf("â”ƒ%8sâ”ƒ%8sâ”ƒ", "", "");
     gotoxyWithFullwidth(26, 6);
-    printf("©»©¥©¥©¥©¥©ß©¥©¥©¥©¥©¿");
+    printf("â”—â”â”â”â”â”»â”â”â”â”â”›");
 
-    // ÏÂÒ»¸ö£¬ÓÃÏàÓ¦ÑÕÉ«ÏÔÊ¾
+    // ä¸‹ä¸€ä¸ªï¼Œç”¨ç›¸åº”é¢œè‰²æ˜¾ç¤º
     tetris = gs_uTetrisTable[manager->type[1]][manager->orientation[1]];
     SetConsoleTextAttribute(g_hConsoleOutput, manager->type[1] | 8);
     for (i = 0; i < 16; ++i)
     {
         gotoxyWithFullwidth((i & 3) + 27, (i >> 2) + 2);
-        ((tetris >> i) & 1) ? printf("¡ö") : printf("%2s", "");
+        ((tetris >> i) & 1) ? printf("â– ") : printf("%2s", "");
     }
 
-    // ÏÂÏÂÒ»¸ö£¬²»ÏÔÊ¾²ÊÉ«
+    // ä¸‹ä¸‹ä¸€ä¸ªï¼Œä¸æ˜¾ç¤ºå½©è‰²
     tetris = gs_uTetrisTable[manager->type[2]][manager->orientation[2]];
     SetConsoleTextAttribute(g_hConsoleOutput, 8);
     for (i = 0; i < 16; ++i)
     {
         gotoxyWithFullwidth((i & 3) + 32, (i >> 2) + 2);
-        ((tetris >> i) & 1) ? printf("¡ö") : printf("%2s", "");
+        ((tetris >> i) & 1) ? printf("â– ") : printf("%2s", "");
     }
 }
 
 // =============================================================================
-// ÏÔÊ¾µÃ·ÖĞÅÏ¢
+// æ˜¾ç¤ºå¾—åˆ†ä¿¡æ¯
 void printScore(const TetrisManager *manager, const TetrisControl *control)
 {
-    static const char *modelName[] = { "ÓÎÏ·Ä£Ê½", "¹Û¿´Ä£Ê½" };
+    static const char *modelName[] = { "æ¸¸æˆæ¨¡å¼", "è§‚çœ‹æ¨¡å¼" };
     static const char *tetrisName = "ITLJZSO";
     int8_t i;
 
     SetConsoleTextAttribute(g_hConsoleOutput, 0xE);
 
     gotoxyWithFullwidth(1, 1);
-    printf("¡ö%s", control->model ? modelName[0] : modelName[1]);
+    printf("â– %s", control->model ? modelName[0] : modelName[1]);
 
     gotoxyWithFullwidth(1, 3);
-    printf("¡õ°´Esc»ØÖ÷²Ëµ¥");
+    printf("â–¡æŒ‰Escå›ä¸»èœå•");
 
     gotoxyWithFullwidth(1, 6);
-    printf("¡öµÃ·Ö£º%u", control->score);
+    printf("â– å¾—åˆ†ï¼š%u", control->score);
 
     gotoxyWithFullwidth(1, 8);
-    printf("¡öÏûĞĞ×ÜÊı£º%u", control->erasedTotal);
+    printf("â– æ¶ˆè¡Œæ€»æ•°ï¼š%u", control->erasedTotal);
     for (i = 0; i < 4; ++i)
     {
         gotoxyWithFullwidth(2, 10 + i);
-        printf("¡õÏû%d£º%u", i + 1, control->erasedCount[i]);
+        printf("â–¡æ¶ˆ%dï¼š%u", i + 1, control->erasedCount[i]);
     }
 
     gotoxyWithFullwidth(1, 15);
-    printf("¡ö·½¿é×ÜÊı£º%u", control->tetrisTotal);
+    printf("â– æ–¹å—æ€»æ•°ï¼š%u", control->tetrisTotal);
 
     for (i = 0; i < 7; ++i)
     {
         gotoxyWithFullwidth(2, 17 + i);
-        printf("¡õ%cĞÎ£º%u", tetrisName[i], control->tetrisCount[i]);
+        printf("â–¡%cå½¢ï¼š%u", tetrisName[i], control->tetrisCount[i]);
     }
 }
 
 // =============================================================================
-// ÏÔÊ¾ÌáÊ¾ĞÅÏ¢
+// æ˜¾ç¤ºæç¤ºä¿¡æ¯
 void printPrompting()
 {
     SetConsoleTextAttribute(g_hConsoleOutput, 0xB);
     gotoxyWithFullwidth(26, 8);
-    printf("¡öÓÎÏ·Ä£Ê½£º");
+    printf("â– æ¸¸æˆæ¨¡å¼ï¼š");
     gotoxyWithFullwidth(27, 10);
-    printf("¡õÏò×óÒÆ¶¯£º¡û A 4");
+    printf("â–¡å‘å·¦ç§»åŠ¨ï¼šâ† A 4");
     gotoxyWithFullwidth(27, 11);
-    printf("¡õÏòÓÒÒÆ¶¯£º¡ú D 6");
+    printf("â–¡å‘å³ç§»åŠ¨ï¼šâ†’ D 6");
     gotoxyWithFullwidth(27, 12);
-    printf("¡õÏòÏÂÒÆ¶¯£º¡ı S 2");
+    printf("â–¡å‘ä¸‹ç§»åŠ¨ï¼šâ†“ S 2");
     gotoxyWithFullwidth(27, 13);
-    printf("¡õË³Ê±Õë×ª£º¡ü W 8");
+    printf("â–¡é¡ºæ—¶é’ˆè½¬ï¼šâ†‘ W 8");
     gotoxyWithFullwidth(27, 14);
-    printf("¡õÄæÊ±Õë×ª£º0");
+    printf("â–¡é€†æ—¶é’ˆè½¬ï¼š0");
     gotoxyWithFullwidth(27, 15);
-    printf("¡õÖ±½ÓÂäµØ£º¿Õ¸ñ");
+    printf("â–¡ç›´æ¥è½åœ°ï¼šç©ºæ ¼");
     gotoxyWithFullwidth(27, 16);
-    printf("¡õÔİÍ£ÓÎÏ·£º»Ø³µ");
+    printf("â–¡æš‚åœæ¸¸æˆï¼šå›è½¦");
     gotoxyWithFullwidth(26, 18);
-    printf("¡ö¹Û¿´Ä£Ê½£º");
+    printf("â– è§‚çœ‹æ¨¡å¼ï¼š");
     gotoxyWithFullwidth(27, 20);
-    printf("¡õ¼ÓËÙ£º¡ü +");
+    printf("â–¡åŠ é€Ÿï¼šâ†‘ +");
     gotoxyWithFullwidth(27, 21);
-    printf("¡õ¼õËÙ£º¡ı -");
+    printf("â–¡å‡é€Ÿï¼šâ†“ -");
     gotoxyWithFullwidth(25, 23);
 
-    printf("¡öBy: wohaaitinciu 13.01.01");
+    printf("â– By: wohaaitinciu 13.01.01");
 }
 
 // =============================================================================
-// ÔËĞĞÓÎÏ·
+// è¿è¡Œæ¸¸æˆ
 void runGame(TetrisManager *manager, TetrisControl *control)
 {
     int ch;
     clock_t clockLast, clockNow;
 
-    clockLast = clock();  // ¼ÆÊ±
-    printTetrisPool(manager, control);  // ÏÔÊ¾ÓÎÏ·³Ø
+    clockLast = clock();  // è®¡æ—¶
+    printTetrisPool(manager, control);  // æ˜¾ç¤ºæ¸¸æˆæ± 
 
-    while (!control->dead)  // Ã»¹Ò
+    while (!control->dead)  // æ²¡æŒ‚
     {
-        while (_kbhit())  // ÓĞ¼ü°´ÏÂ
+        while (_kbhit())  // æœ‰é”®æŒ‰ä¸‹
         {
             ch = _getch();
-            if (ch == 27)  // Esc¼ü
+            if (ch == 27)  // Escé”®
             {
                 return;
             }
-            keydownControl(manager, control, ch);  // ´¦Àí°´¼ü
+            keydownControl(manager, control, ch);  // å¤„ç†æŒ‰é”®
         }
 
-        if (!control->pause)  // Î´ÔİÍ£
+        if (!control->pause)  // æœªæš‚åœ
         {
-            clockNow = clock();  // ¼ÆÊ±
-            // Á½´Î¼ÇÊ±µÄ¼ä¸ô³¬¹ı0.45Ãë
+            clockNow = clock();  // è®¡æ—¶
+            // ä¸¤æ¬¡è®°æ—¶çš„é—´éš”è¶…è¿‡0.45ç§’
             if (clockNow - clockLast > 0.45F * CLOCKS_PER_SEC)
             {
                 clockLast = clockNow;
-                keydownControl(manager, control, 80);  // ·½¿éÍùÏÂÒÆ
+                keydownControl(manager, control, 80);  // æ–¹å—å¾€ä¸‹ç§»
             }
         }
     }
@@ -787,48 +787,48 @@ void runGame(TetrisManager *manager, TetrisControl *control)
 
 http://ielashi.com/el-tetris-an-improvement-on-pierre-dellacheries-algorithm/
 
-¸Ä½øµÄPierre DellacherieËã·¨£º£¨Ö»¿¼ÂÇµ±Ç°·½¿é£©
+æ”¹è¿›çš„Pierre Dellacherieç®—æ³•ï¼šï¼ˆåªè€ƒè™‘å½“å‰æ–¹å—ï¼‰
 
-Ò»¡¢³¢ÊÔ×Å¶Ôµ±Ç°Âä×ÓµÄÃ¿Ò»ÖÖĞı×ª±ä»»¡¢´Ó×óµ½ÓÒµØ°Ú·Å£¬²úÉúËùÓĞ°Ú·¨¡£
+ä¸€ã€å°è¯•ç€å¯¹å½“å‰è½å­çš„æ¯ä¸€ç§æ—‹è½¬å˜æ¢ã€ä»å·¦åˆ°å³åœ°æ‘†æ”¾ï¼Œäº§ç”Ÿæ‰€æœ‰æ‘†æ³•ã€‚
 
-¶ş¡¢¶ÔÃ¿Ò»ÖÖ°Ú·¨½øĞĞÆÀ¼Û¡£ÆÀ¼Û°üº¬ÈçÏÂ6ÏîÖ¸±ê£º
+äºŒã€å¯¹æ¯ä¸€ç§æ‘†æ³•è¿›è¡Œè¯„ä»·ã€‚è¯„ä»·åŒ…å«å¦‚ä¸‹6é¡¹æŒ‡æ ‡ï¼š
 
-    1.ÏÂÂä¸ß¶È£¨Landing Height£©£º
-        µ±Ç°·½¿éÂäÏÂÈ¥Ö®ºó£¬·½¿éÖĞµã¾àµ×²¿µÄ·½¸ñÊı
-        ÊÂÊµÉÏ£¬²»ÇóÖĞµãÒ²ÊÇ¿ÉÒÔµÄ£¬Ïê¼ûÍøÖ·
+    1.ä¸‹è½é«˜åº¦ï¼ˆLanding Heightï¼‰ï¼š
+        å½“å‰æ–¹å—è½ä¸‹å»ä¹‹åï¼Œæ–¹å—ä¸­ç‚¹è·åº•éƒ¨çš„æ–¹æ ¼æ•°
+        äº‹å®ä¸Šï¼Œä¸æ±‚ä¸­ç‚¹ä¹Ÿæ˜¯å¯ä»¥çš„ï¼Œè¯¦è§ç½‘å€
 
-    2.ÏûĞĞÊı£¨Rows eliminated£©
-        ÏûĞĞ²ãÊıÓëµ±Ç°·½¿é¹±Ï×³öµÄ·½¸ñÊı³Ë»ı
+    2.æ¶ˆè¡Œæ•°ï¼ˆRows eliminatedï¼‰
+        æ¶ˆè¡Œå±‚æ•°ä¸å½“å‰æ–¹å—è´¡çŒ®å‡ºçš„æ–¹æ ¼æ•°ä¹˜ç§¯
 
-    3.ĞĞ±ä»»£¨Row Transitions£©£º
-        ´Ó×óµ½ÓÒ£¨»òÕß·´¹ıÀ´£©¼ì²âÒ»ĞĞ£¬µ±¸ÃĞĞÖĞÄ³¸ö·½¸ñ´ÓÓĞ·½¿éµ½ÎŞ·½¿é£¨»òÎŞ·½¿éµ½ÓĞ·½¿é£©£¬
-        ÊÓÎªÒ»´Î±ä»»¡£ÓÎÏ·³Ø±ß½çËã×÷ÓĞ·½¿é¡£ĞĞ±ä»»´ÓÒ»¶¨³Ì¶ÈÉÏ·´Ó³³öÒ»ĞĞµÄÆ½Õû³Ì¶È£¬Ô½Æ½ÕûÖµÔ½Ğ¡
-        ¸ÃÖ¸±êÎªËùÓĞĞĞµÄ±ä»»ÊıÖ®ºÍ
-        ÈçÍ¼£º¡ö±íÊ¾ÓĞ·½¿é£¬¡õ±íÊ¾¿Õ¸ñ£¨ÓÎÏ·³Ø±ß½çÎ´»­³ö£©
-        ¡ö¡ö¡õ¡õ¡ö¡ö¡õ¡õ¡ö¡ö¡õ¡õ ±ä»»ÊıÎª6
-        ¡õ¡õ¡õ¡õ¡õ¡ö¡õ¡ö¡õ¡ö¡õ¡ö ±ä»»ÊıÎª9
-        ¡ö¡ö¡ö¡ö¡õ¡õ¡õ¡õ¡õ¡õ¡ö¡ö ±ä»»ÊıÎª2
-        ¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö ±ä»»ÊıÎª0
+    3.è¡Œå˜æ¢ï¼ˆRow Transitionsï¼‰ï¼š
+        ä»å·¦åˆ°å³ï¼ˆæˆ–è€…åè¿‡æ¥ï¼‰æ£€æµ‹ä¸€è¡Œï¼Œå½“è¯¥è¡Œä¸­æŸä¸ªæ–¹æ ¼ä»æœ‰æ–¹å—åˆ°æ— æ–¹å—ï¼ˆæˆ–æ— æ–¹å—åˆ°æœ‰æ–¹å—ï¼‰ï¼Œ
+        è§†ä¸ºä¸€æ¬¡å˜æ¢ã€‚æ¸¸æˆæ± è¾¹ç•Œç®—ä½œæœ‰æ–¹å—ã€‚è¡Œå˜æ¢ä»ä¸€å®šç¨‹åº¦ä¸Šåæ˜ å‡ºä¸€è¡Œçš„å¹³æ•´ç¨‹åº¦ï¼Œè¶Šå¹³æ•´å€¼è¶Šå°
+        è¯¥æŒ‡æ ‡ä¸ºæ‰€æœ‰è¡Œçš„å˜æ¢æ•°ä¹‹å’Œ
+        å¦‚å›¾ï¼šâ– è¡¨ç¤ºæœ‰æ–¹å—ï¼Œâ–¡è¡¨ç¤ºç©ºæ ¼ï¼ˆæ¸¸æˆæ± è¾¹ç•Œæœªç”»å‡ºï¼‰
+        â– â– â–¡â–¡â– â– â–¡â–¡â– â– â–¡â–¡ å˜æ¢æ•°ä¸º6
+        â–¡â–¡â–¡â–¡â–¡â– â–¡â– â–¡â– â–¡â–  å˜æ¢æ•°ä¸º9
+        â– â– â– â– â–¡â–¡â–¡â–¡â–¡â–¡â– â–  å˜æ¢æ•°ä¸º2
+        â– â– â– â– â– â– â– â– â– â– â– â–  å˜æ¢æ•°ä¸º0
 
-    4.ÁĞ±ä»»£¨Column Transitions£©£º´óÒâÍ¬ÉÏ
-        ÁĞ±ä»»´ÓÒ»¶¨³Ì¶ÈÉÏ·´Ó³³öÒ»ÁĞÖĞ¿Õ¶´µÄ¼¯ÖĞ³Ì¶È£¬¿Õ¶´Ô½¼¯ÖĞÖµÔ½Ğ¡
+    4.åˆ—å˜æ¢ï¼ˆColumn Transitionsï¼‰ï¼šå¤§æ„åŒä¸Š
+        åˆ—å˜æ¢ä»ä¸€å®šç¨‹åº¦ä¸Šåæ˜ å‡ºä¸€åˆ—ä¸­ç©ºæ´çš„é›†ä¸­ç¨‹åº¦ï¼Œç©ºæ´è¶Šé›†ä¸­å€¼è¶Šå°
 
-    5.¿Õ¶´Êı£¨Number of Holes£©
-        ²»½âÊÍ
+    5.ç©ºæ´æ•°ï¼ˆNumber of Holesï¼‰
+        ä¸è§£é‡Š
 
-    6.¾®µÄ×ÜºÍ£¨Well Sums£©£º
-        ¾®Ö¸Á½±ß½ÔÓĞ·½¿éµÄ¿ÕÁĞ¡£¸ÃÖ¸±êÎªËùÓĞ¾®µÄÉî¶ÈÁ¬¼Óµ½1ÔÙÇó×ÜºÍ
-        ×¢ÒâÒ»ÁĞÖĞ¿ÉÄÜÓĞ¶à¸ö¾®£¬ÈçÍ¼£º
-        ¡ö¡õ¡õ
-        ¡ö¡õ¡ö
-        ¡ö¡õ¡ö
-        ¡ö¡ö¡ö
-        ¡ö¡õ¡ö
-        ¡ö¡õ¡ö
-        ¡ö¡õ¡ö
-        ÖĞ¼äÒ»ÁĞÎª¾®£¬Éî¶ÈÁ¬¼Óµ½Ò»µÄºÍÎª (2+1)+(3+2+1)=9
+    6.äº•çš„æ€»å’Œï¼ˆWell Sumsï¼‰ï¼š
+        äº•æŒ‡ä¸¤è¾¹çš†æœ‰æ–¹å—çš„ç©ºåˆ—ã€‚è¯¥æŒ‡æ ‡ä¸ºæ‰€æœ‰äº•çš„æ·±åº¦è¿åŠ åˆ°1å†æ±‚æ€»å’Œ
+        æ³¨æ„ä¸€åˆ—ä¸­å¯èƒ½æœ‰å¤šä¸ªäº•ï¼Œå¦‚å›¾ï¼š
+        â– â–¡â–¡
+        â– â–¡â– 
+        â– â–¡â– 
+        â– â– â– 
+        â– â–¡â– 
+        â– â–¡â– 
+        â– â–¡â– 
+        ä¸­é—´ä¸€åˆ—ä¸ºäº•ï¼Œæ·±åº¦è¿åŠ åˆ°ä¸€çš„å’Œä¸º (2+1)+(3+2+1)=9
 
-    ¸÷ÏîÖ¸±êÈ¨ÖØ¾­ÑéÖµ£º
+    å„é¡¹æŒ‡æ ‡æƒé‡ç»éªŒå€¼ï¼š
     1	-4.500158825082766
     2	3.4181268101392694
     3	-3.2178882868487753
@@ -836,61 +836,61 @@ http://ielashi.com/el-tetris-an-improvement-on-pierre-dellacheries-algorithm/
     5	-7.899265427351652
     6	-3.3855972247263626
 
-Èı¡¢±È½ÏÃ¿Ò»ÖÖ°Ú·¨µÄÆÀ·Ö£¬È¡×î¸ßÕß¡£µ±ÆÀ·ÖÏàÍ¬Ê±£¬±È½ÏÓÅÏÈ¶È
-    ¼ÆËã¹«Ê½
+ä¸‰ã€æ¯”è¾ƒæ¯ä¸€ç§æ‘†æ³•çš„è¯„åˆ†ï¼Œå–æœ€é«˜è€…ã€‚å½“è¯„åˆ†ç›¸åŒæ—¶ï¼Œæ¯”è¾ƒä¼˜å…ˆåº¦
+    è®¡ç®—å…¬å¼
 
-        ÂäÓÚ×ó²àµÄ°Ú·¨£º100 * Ë®Æ½Æ½ÒÆ¸ñ×ÓÊı + 10 + Ğı×ª´ÎÊı;
+        è½äºå·¦ä¾§çš„æ‘†æ³•ï¼š100 * æ°´å¹³å¹³ç§»æ ¼å­æ•° + 10 + æ—‹è½¬æ¬¡æ•°;
 
-        ÂäÓÚÓÒ²àµÄ°Ú·¨£º100 * Ë®Æ½Æ½ÒÆ¸ñ×ÓÊı + Ğı×ª´ÎÊı;
+        è½äºå³ä¾§çš„æ‘†æ³•ï¼š100 * æ°´å¹³å¹³ç§»æ ¼å­æ•° + æ—‹è½¬æ¬¡æ•°;
 *******************************************************************************/
 
-typedef struct AIPlacing  // °Ú·¨
+typedef struct AIPlacing  // æ‘†æ³•
 {
-    uint16_t action;  // ²Ù×÷£º¸ß8Î»ÊÇĞı×ª´ÎÊı£¬µÍ8Î»ÊÇÄ¿±êÁĞ
-    uint16_t priority;  // ÓÅÏÈ¶È
-    int value;  // ¹ÀÖµ
+    uint16_t action;  // æ“ä½œï¼šé«˜8ä½æ˜¯æ—‹è½¬æ¬¡æ•°ï¼Œä½8ä½æ˜¯ç›®æ ‡åˆ—
+    uint16_t priority;  // ä¼˜å…ˆåº¦
+    int value;  // ä¼°å€¼
 } AIPlacing;
 
-void putDownTetris(TetrisManager *manager);  // ½«·½¿éÂäµ½µ×
-int calcLanding(TetrisManager *manager);  // ÏÂÂä¸ß¶ÈºÍÏûĞĞÊı
-int calcTrans(const TetrisManager *manager);  // ĞĞÁĞ±ä»»
-int calcStatus(const TetrisManager *manager);  // ¿Õ¶´ºÍ¾®
-int evaluate(TetrisManager *manager);  // ¹ÀÖµ
-uint16_t getBestPlacing(const TetrisManager *manager);  // »ñÈ¡×îºÃ°Ú·¨
+void putDownTetris(TetrisManager *manager);  // å°†æ–¹å—è½åˆ°åº•
+int calcLanding(TetrisManager *manager);  // ä¸‹è½é«˜åº¦å’Œæ¶ˆè¡Œæ•°
+int calcTrans(const TetrisManager *manager);  // è¡Œåˆ—å˜æ¢
+int calcStatus(const TetrisManager *manager);  // ç©ºæ´å’Œäº•
+int evaluate(TetrisManager *manager);  // ä¼°å€¼
+uint16_t getBestPlacing(const TetrisManager *manager);  // è·å–æœ€å¥½æ‘†æ³•
 
 // =============================================================================
-// ½«·½¿éÂäµ½µ×
+// å°†æ–¹å—è½åˆ°åº•
 void putDownTetris(TetrisManager *manager)
 {
-    removeTetris(manager);  // ÒÆ×ßµ±Ç°·½¿é
-    for (; manager->y < ROW_END; ++manager->y)  // ´ÓÉÏÍùÏÂ
+    removeTetris(manager);  // ç§»èµ°å½“å‰æ–¹å—
+    for (; manager->y < ROW_END; ++manager->y)  // ä»ä¸Šå¾€ä¸‹
     {
-        if (checkCollision(manager))  // ¼ì²âµ½Åö×²
+        if (checkCollision(manager))  // æ£€æµ‹åˆ°ç¢°æ’
         {
             break;
         }
     }
-    --manager->y;  // ÉÏÒÆÒ»¸ñµ±È»Ã»ÓĞÅö×²
-    insertTetris(manager);  // ²åÈëµ±Ç°·½¿é
+    --manager->y;  // ä¸Šç§»ä¸€æ ¼å½“ç„¶æ²¡æœ‰ç¢°æ’
+    insertTetris(manager);  // æ’å…¥å½“å‰æ–¹å—
 }
 
 // =============================================================================
-// ÏÂÂä¸ß¶ÈºÍÏûĞĞÊı
+// ä¸‹è½é«˜åº¦å’Œæ¶ˆè¡Œæ•°
 int calcLanding(TetrisManager *manager)
 {
     int8_t x, y, k, count, cells;
-    int8_t height = 25 - manager->y;  // ÏÂÂä¸ß¶È
+    int8_t height = 25 - manager->y;  // ä¸‹è½é«˜åº¦
     uint16_t tetris = gs_uTetrisTable[manager->type[0]][manager->orientation[0]];
 
-    if ((tetris & 0xF000) == 0)  // µ±Ç°·½¿é×îÉÏÒ»ĞĞÃ»ÓĞ·½¸ñ
+    if ((tetris & 0xF000) == 0)  // å½“å‰æ–¹å—æœ€ä¸Šä¸€è¡Œæ²¡æœ‰æ–¹æ ¼
     {
         --height;
     }
-    if ((tetris & 0xFF00) == 0)  // µ±Ç°·½¿éµÚ¶şĞĞÃ»ÓĞ·½¸ñ
+    if ((tetris & 0xFF00) == 0)  // å½“å‰æ–¹å—ç¬¬äºŒè¡Œæ²¡æœ‰æ–¹æ ¼
     {
         --height;
     }
-    if ((tetris & 0xFFF0) == 0)  // µ±Ç°·½¿éµÚÈıĞĞÃ»ÓĞ·½¸ñ
+    if ((tetris & 0xFFF0) == 0)  // å½“å‰æ–¹å—ç¬¬ä¸‰è¡Œæ²¡æœ‰æ–¹æ ¼
     {
         --height;
     }
@@ -898,20 +898,20 @@ int calcLanding(TetrisManager *manager)
     cells = 0;
     count = 0;
     k = 0;
-    y = manager->y + 3;  // ´ÓÏÂÍùÉÏ¼ì²â
+    y = manager->y + 3;  // ä»ä¸‹å¾€ä¸Šæ£€æµ‹
     do
     {
-        if (y < ROW_END && manager->pool[y] == 0xFFFFU)  // ÓĞĞ§ÇøÓòÄÚÇÒÒ»ĞĞÒÑÌîÂú
+        if (y < ROW_END && manager->pool[y] == 0xFFFFU)  // æœ‰æ•ˆåŒºåŸŸå†…ä¸”ä¸€è¡Œå·²å¡«æ»¡
         {
-            for (x = 0; x < 4; ++x)  // ¼ì²âµ±Ç°·½¿éµÄ¶ÔÓ¦ĞĞ
+            for (x = 0; x < 4; ++x)  // æ£€æµ‹å½“å‰æ–¹å—çš„å¯¹åº”è¡Œ
             {
-                if (((tetris >> (k << 2)) >> x) & 1)  // ÕâÒ»ĞĞÓĞ·½¿é
+                if (((tetris >> (k << 2)) >> x) & 1)  // è¿™ä¸€è¡Œæœ‰æ–¹å—
                 {
-                    ++cells;  // ÏûĞĞ¹±Ï×µÄ·½¸ñÊı
+                    ++cells;  // æ¶ˆè¡Œè´¡çŒ®çš„æ–¹æ ¼æ•°
                 }
             }
             ++count;
-            // Ïû³ıÒ»ĞĞ·½¿é
+            // æ¶ˆé™¤ä¸€è¡Œæ–¹å—
             memmove(manager->pool + 1, manager->pool, sizeof(uint16_t) * y);
         }
         else
@@ -921,52 +921,52 @@ int calcLanding(TetrisManager *manager)
         }
     } while (y >= manager->y && k < 4);
 
-    height -= count;  // ÔÙ½µµÍÏÂÂä¸ß¶È
+    height -= count;  // å†é™ä½ä¸‹è½é«˜åº¦
 
     return count * cells * 34 - 45 * height;
 }
 
 // =============================================================================
-// ĞĞÁĞ±ä»»
+// è¡Œåˆ—å˜æ¢
 int calcTrans(const TetrisManager *manager)
 {
     int8_t x, y;
     int rowTrans = 0, colTrans = 0;
     int filled, test;
 
-    // ĞĞ±ä»»
-    for (y = ROW_BEGIN; y < ROW_END; ++y)  // ÒÀ´Î¼ì²â¸÷ĞĞ
+    // è¡Œå˜æ¢
+    for (y = ROW_BEGIN; y < ROW_END; ++y)  // ä¾æ¬¡æ£€æµ‹å„è¡Œ
     {
-        filled = 1;  // ÓÎÏ·³Ø±ß½çËã×÷ÒÑÌî³ä×´Ì¬
+        filled = 1;  // æ¸¸æˆæ± è¾¹ç•Œç®—ä½œå·²å¡«å……çŠ¶æ€
         for (x = COL_BEGIN; x < COL_END; ++x)
         {
-            test = (manager->pool[y] >> x) & 1;  // ¼ì²â¸ñµÄÌî³ä×´Ì¬
-            if (filled != test)  // ±ä»»
+            test = (manager->pool[y] >> x) & 1;  // æ£€æµ‹æ ¼çš„å¡«å……çŠ¶æ€
+            if (filled != test)  // å˜æ¢
             {
                 ++rowTrans;
                 filled = test;
             }
         }
-        if (filled != 1)  // ÓÎÏ·³Ø±ß½ç
+        if (filled != 1)  // æ¸¸æˆæ± è¾¹ç•Œ
         {
             ++rowTrans;
         }
     }
 
-    // ÁĞ±ä»»
-    for (x = COL_BEGIN ; x < COL_END; ++x)  // ÒÀ´Î¼ì²â¸÷ÁĞ
+    // åˆ—å˜æ¢
+    for (x = COL_BEGIN ; x < COL_END; ++x)  // ä¾æ¬¡æ£€æµ‹å„åˆ—
     {
-        filled = 1;  // ÓÎÏ·³Ø±ß½çËã×÷ÒÑÌî³ä×´Ì¬
+        filled = 1;  // æ¸¸æˆæ± è¾¹ç•Œç®—ä½œå·²å¡«å……çŠ¶æ€
         for (y = ROW_BEGIN; y < ROW_END; ++y)
         {
-            test = (manager->pool[y] >> x) & 1;  // ¼ì²â¸ñµÄÌî³ä×´Ì¬
-            if (filled != test)  // ±ä»»
+            test = (manager->pool[y] >> x) & 1;  // æ£€æµ‹æ ¼çš„å¡«å……çŠ¶æ€
+            if (filled != test)  // å˜æ¢
             {
                 ++colTrans;
                 filled = test;
             }
         }
-        if (filled != 1)  // ÓÎÏ·³Ø±ß½ç
+        if (filled != 1)  // æ¸¸æˆæ± è¾¹ç•Œ
         {
             ++colTrans;
         }
@@ -976,7 +976,7 @@ int calcTrans(const TetrisManager *manager)
 }
 
 // =============================================================================
-// ¿Õ¶´ºÍ¾®
+// ç©ºæ´å’Œäº•
 int calcStatus(const TetrisManager *manager)
 {
     static const int wellDepthTable[29] =
@@ -988,34 +988,34 @@ int calcStatus(const TetrisManager *manager)
     int8_t x, y;
     int holeCount = 0, wellDepthSum, depth;
 
-    for (x = COL_BEGIN; x < COL_END; ++x)  // ĞĞ
+    for (x = COL_BEGIN; x < COL_END; ++x)  // è¡Œ
     {
-        for (y = ROW_BEGIN; y < ROW_END; ++y)  // ÁĞ
+        for (y = ROW_BEGIN; y < ROW_END; ++y)  // åˆ—
         {
-            if ((manager->pool[y] >> x) & 1)  // ÓĞ·½¿é
+            if ((manager->pool[y] >> x) & 1)  // æœ‰æ–¹å—
             {
                 break;
             }
         }
         while (y < 26)
         {
-            if (!((manager->pool[y] >> x) & 1))  // ÎŞ·½¿é
+            if (!((manager->pool[y] >> x) & 1))  // æ— æ–¹å—
             {
-                ++holeCount;  // ¶´µÄ¸öÊı
+                ++holeCount;  // æ´çš„ä¸ªæ•°
             }
             ++y;
         }
     }
 
     wellDepthSum = 0;
-    for (x = COL_BEGIN; x < COL_END; ++x)  // ÁĞ
+    for (x = COL_BEGIN; x < COL_END; ++x)  // åˆ—
     {
         depth = 0;
-        for (y = ROW_END - 1; y >= ROW_BEGIN; --y)  // ĞĞ£¬´ÓÉÏÍùÏÂ
+        for (y = ROW_END - 1; y >= ROW_BEGIN; --y)  // è¡Œï¼Œä»ä¸Šå¾€ä¸‹
         {
-            if (!((manager->pool[y] >> x) & 1))  // ÎŞ·½¿é
+            if (!((manager->pool[y] >> x) & 1))  // æ— æ–¹å—
             {
-                // ×óÓÒÁ½±ß¶¼ÓĞ·½¿é
+                // å·¦å³ä¸¤è¾¹éƒ½æœ‰æ–¹å—
                 if (((manager->pool[y - 1] >> x) & 1) && ((manager->pool[y + 1] >> x) & 1))
                 {
                     ++depth;
@@ -1034,21 +1034,21 @@ int calcStatus(const TetrisManager *manager)
 }
 
 // =============================================================================
-// ¹ÀÖµ
+// ä¼°å€¼
 int evaluate(TetrisManager *manager)
 {
     int value = 0;
 
-    putDownTetris(manager);  // ½«·½¿éÂäµ½µ×
-    value += calcLanding(manager);  // ÏÂÂä¸ß¶ÈºÍÏûĞĞÊı
-    value -= calcTrans(manager);  // ĞĞÁĞ±ä»»
-    value -= calcStatus(manager);  // ¿Õ¶´ºÍ¾®
+    putDownTetris(manager);  // å°†æ–¹å—è½åˆ°åº•
+    value += calcLanding(manager);  // ä¸‹è½é«˜åº¦å’Œæ¶ˆè¡Œæ•°
+    value -= calcTrans(manager);  // è¡Œåˆ—å˜æ¢
+    value -= calcStatus(manager);  // ç©ºæ´å’Œäº•
 
     return value;
 }
 
 // =============================================================================
-// »ñÈ¡×îºÃ°Ú·¨
+// è·å–æœ€å¥½æ‘†æ³•
 uint16_t getBestPlacing(const TetrisManager *manager)
 {
     int8_t i, j, count, type, ori, rotateLimit, deltaX;
@@ -1056,80 +1056,80 @@ uint16_t getBestPlacing(const TetrisManager *manager)
     AIPlacing *best = NULL;
     static TetrisManager backup;
 
-    memset(placing, 0, sizeof(AIPlacing [48]));  // Çå0ËùÓĞ°Ú·¨
+    memset(placing, 0, sizeof(AIPlacing [48]));  // æ¸…0æ‰€æœ‰æ‘†æ³•
 
     type = manager->type[0];
     ori = manager->orientation[0];
 
-    switch (type)  // µ±Ç°·½¿éÀàĞÍ
+    switch (type)  // å½“å‰æ–¹å—ç±»å‹
     {
-    case TETRIS_I: case TETRIS_Z: case TETRIS_S:  // IĞÎ¡¢ZĞÎ¡¢SĞÎ£¬Á½ÖÖĞı×ª×´Ì¬
+    case TETRIS_I: case TETRIS_Z: case TETRIS_S:  // Iå½¢ã€Zå½¢ã€Så½¢ï¼Œä¸¤ç§æ—‹è½¬çŠ¶æ€
         rotateLimit = 2;
         break;
-    case TETRIS_T: case TETRIS_L: case TETRIS_J:  // TĞÎ¡¢LĞÎ¡¢JĞÎ£¬4ÖÖĞı×ª×´Ì¬
+    case TETRIS_T: case TETRIS_L: case TETRIS_J:  // Tå½¢ã€Lå½¢ã€Jå½¢ï¼Œ4ç§æ—‹è½¬çŠ¶æ€
         rotateLimit = 4;
         break;
-    case TETRIS_O:  // OĞÎ£¬1ÖÖĞı×ª×´Ì¬
+    case TETRIS_O:  // Oå½¢ï¼Œ1ç§æ—‹è½¬çŠ¶æ€
         rotateLimit = 1;
         break;
     default:
         break;
     }
 
-    // ÊµÏÖÎ´¿¼ÂÇÏÂÂäÒ»Ğ©¸ñºóÆ½ÒÆÀ´Ìî²¹¿Õ¶´£¬Ö»¼ÆËã´Ó¶¥²¿Ö±½ÓÂäÏÂµÄËùÓĞ°Ú·¨
+    // å®ç°æœªè€ƒè™‘ä¸‹è½ä¸€äº›æ ¼åå¹³ç§»æ¥å¡«è¡¥ç©ºæ´ï¼Œåªè®¡ç®—ä»é¡¶éƒ¨ç›´æ¥è½ä¸‹çš„æ‰€æœ‰æ‘†æ³•
     count = 0;
-    for (i = 0; i < rotateLimit; ++i)  // ³¢ÊÔ¸÷ÖÖĞı×ª×´Ì¬
+    for (i = 0; i < rotateLimit; ++i)  // å°è¯•å„ç§æ—‹è½¬çŠ¶æ€
     {
-        for (j = 0; j < 13; ++j)  // ³¢ÊÔÃ¿Ò»ÁĞ
+        for (j = 0; j < 13; ++j)  // å°è¯•æ¯ä¸€åˆ—
         {
-            memcpy(&backup, manager, sizeof(TetrisManager));  // ÓÎÏ·Êı¾İ±¸·İ
-            removeTetris(&backup);  // ÒÆ³ıµ±Ç°·½¿é
-            backup.orientation[0] = (i + ori) & 3;  // ÉèÖÃĞı×ª×´Ì¬
-            backup.x = j;  // ÉèÖÃÒªµ½´ïµÄÁĞ
+            memcpy(&backup, manager, sizeof(TetrisManager));  // æ¸¸æˆæ•°æ®å¤‡ä»½
+            removeTetris(&backup);  // ç§»é™¤å½“å‰æ–¹å—
+            backup.orientation[0] = (i + ori) & 3;  // è®¾ç½®æ—‹è½¬çŠ¶æ€
+            backup.x = j;  // è®¾ç½®è¦åˆ°è¾¾çš„åˆ—
 
-            // Èç¹û¼ì²âµ½Åö×²£¬ËµÃ÷·½¿é¸ù±¾ÒÆ²»µ½ÄÇÒ»ÁĞÈ¥
-            if (!checkCollision(&backup))  // Î´¼ì²âµ½Åö×²£¬µÃµ½Ò»ÖÖ°Ú·¨
+            // å¦‚æœæ£€æµ‹åˆ°ç¢°æ’ï¼Œè¯´æ˜æ–¹å—æ ¹æœ¬ç§»ä¸åˆ°é‚£ä¸€åˆ—å»
+            if (!checkCollision(&backup))  // æœªæ£€æµ‹åˆ°ç¢°æ’ï¼Œå¾—åˆ°ä¸€ç§æ‘†æ³•
             {
                 placing[count].action = i;
                 placing[count].action <<= 8;
-                placing[count].action |= j;  // ¸ß8Î»ÎªĞı×ª×´Ì¬£¬µÍ8Î»ÎªÒª·ÅÖÃµÄÁĞ
-                placing[count].value = 100000 + evaluate(&backup);  // ¹ÀÖµ
-                deltaX = j - manager->x;  // Æ½ÒÆµÄ¸ñ×ÓÊı ÕıÎªÓÒÒÆ£¬¸ºÎª×óÒÆ
-                if (deltaX > 0)  // ÂäÓÚÓÒ²àµÄ°Ú·¨
+                placing[count].action |= j;  // é«˜8ä½ä¸ºæ—‹è½¬çŠ¶æ€ï¼Œä½8ä½ä¸ºè¦æ”¾ç½®çš„åˆ—
+                placing[count].value = 100000 + evaluate(&backup);  // ä¼°å€¼
+                deltaX = j - manager->x;  // å¹³ç§»çš„æ ¼å­æ•° æ­£ä¸ºå³ç§»ï¼Œè´Ÿä¸ºå·¦ç§»
+                if (deltaX > 0)  // è½äºå³ä¾§çš„æ‘†æ³•
                 {
-                    placing[count].priority = 100 * deltaX + i;  // ÓÅÏÈ¶È
+                    placing[count].priority = 100 * deltaX + i;  // ä¼˜å…ˆåº¦
                 }
-                else  // ÂäÓÚ×ó²àµÄ°Ú·¨
+                else  // è½äºå·¦ä¾§çš„æ‘†æ³•
                 {
-                    placing[count].priority = 100 * (-deltaX) + 10 + i;  // ÓÅÏÈ¶È
+                    placing[count].priority = 100 * (-deltaX) + 10 + i;  // ä¼˜å…ˆåº¦
                 }
                 ++count;
             }
         }
     }
 
-    // Ëã·¨Ö»¿¼ÂÇµ±Ç°·½¿é£¬²»µİ¹é
+    // ç®—æ³•åªè€ƒè™‘å½“å‰æ–¹å—ï¼Œä¸é€’å½’
     best = placing;
     for (i = 1; i < count; ++i)
     {
-        if (placing[i].value > best->value)  // È¡¹ÀÖµ×î¸ßÕß
+        if (placing[i].value > best->value)  // å–ä¼°å€¼æœ€é«˜è€…
         {
             best = placing + i;
         }
-        else if (placing[i].value == best->value)  // ¹ÀÖµÏàÍ¬
+        else if (placing[i].value == best->value)  // ä¼°å€¼ç›¸åŒ
         {
-            if (placing[i].priority > best->priority)  // È¡ÓÅÏÈ¶È¸ßÕß
+            if (placing[i].priority > best->priority)  // å–ä¼˜å…ˆåº¦é«˜è€…
             {
                 best = placing + i;
             }
         }
     }
 
-    return best->action;  // ·µ»Ø°Ú·¨
+    return best->action;  // è¿”å›æ‘†æ³•
 }
 
 // =============================================================================
-// ×Ô¶¯ÔËĞĞ
+// è‡ªåŠ¨è¿è¡Œ
 void autoRun(TetrisManager *manager, TetrisControl *control)
 {
     uint16_t best;
@@ -1137,27 +1137,27 @@ void autoRun(TetrisManager *manager, TetrisControl *control)
     DWORD delayTime = 100;
     int ch;
 
-    printTetrisPool(manager, control);  // ÏÔÊ¾ÓÎÏ·³Ø
+    printTetrisPool(manager, control);  // æ˜¾ç¤ºæ¸¸æˆæ± 
 
-    while (!control->dead)  // Ã»¹Ò
+    while (!control->dead)  // æ²¡æŒ‚
     {
-        while (_kbhit())  // ´¦Àí°´¼ü
+        while (_kbhit())  // å¤„ç†æŒ‰é”®
         {
             ch = _getch();
             switch (ch)
             {
-            case 27: // Esc¼ü
+            case 27: // Escé”®
                 return;
-            case 13:  // »Ø³µ¼ü
-                control->pause = !control->pause;  // ÇĞ»»ÔİÍ£×´Ì¬
+            case 13:  // å›è½¦é”®
+                control->pause = !control->pause;  // åˆ‡æ¢æš‚åœçŠ¶æ€
                 break;
-            case 72: case '+': // ÉÏ
+            case 72: case '+': // ä¸Š
                 if (delayTime > 0)
                 {
                     delayTime -= 5;
                 }
                 break;
-            case 80: case '-':  // ÏÂ
+            case 80: case '-':  // ä¸‹
                 if (delayTime < 200)
                 {
                     delayTime += 5;
@@ -1166,22 +1166,22 @@ void autoRun(TetrisManager *manager, TetrisControl *control)
             }
         }
 
-        if (control->pause)  // ÔİÍ£×´Ì¬
+        if (control->pause)  // æš‚åœçŠ¶æ€
         {
             continue;
         }
 
-        for (i = 0; i < 3; ++i)  // ½«¸øµÄ·½¿éÏÂÒÆ3¸ñ£¬·½±ã¹Û²ì
+        for (i = 0; i < 3; ++i)  // å°†ç»™çš„æ–¹å—ä¸‹ç§»3æ ¼ï¼Œæ–¹ä¾¿è§‚å¯Ÿ
         {
             keydownControl(manager, control, 's');
         }
 
-        best = getBestPlacing(manager);  // »ñÈ¡×îºÃ°Ú·¨
-        rotate = (best >> 8);  // ¸ß8Î»ÊÇĞı×ª´ÎÊı
-        destX = (best & 0x0F);  // µÍ8Î»ÊÇÄ¿±êÁĞ
-        deltaX = destX - manager->x;  // ÒÆ¶¯µÄ¸ñÊı£¬½á¹ûÎªÕıÏòÓÒÒÆ£¬¸ºÏò×óÒÆ
+        best = getBestPlacing(manager);  // è·å–æœ€å¥½æ‘†æ³•
+        rotate = (best >> 8);  // é«˜8ä½æ˜¯æ—‹è½¬æ¬¡æ•°
+        destX = (best & 0x0F);  // ä½8ä½æ˜¯ç›®æ ‡åˆ—
+        deltaX = destX - manager->x;  // ç§»åŠ¨çš„æ ¼æ•°ï¼Œç»“æœä¸ºæ­£å‘å³ç§»ï¼Œè´Ÿå‘å·¦ç§»
 
-        for (i = 0; i < rotate; ++i)  // Ğı×ª
+        for (i = 0; i < rotate; ++i)  // æ—‹è½¬
         {
             keydownControl(manager, control, 'w');
             Sleep(delayTime);
@@ -1189,7 +1189,7 @@ void autoRun(TetrisManager *manager, TetrisControl *control)
 
         if (deltaX > 0)
         {
-            for (i = 0; i < deltaX; ++i)  // ÏòÓÒÒÆ
+            for (i = 0; i < deltaX; ++i)  // å‘å³ç§»
             {
                 keydownControl(manager, control, 'd');
                 Sleep(delayTime);
@@ -1197,13 +1197,13 @@ void autoRun(TetrisManager *manager, TetrisControl *control)
         }
         else if (deltaX < 0)
         {
-            for (i = 0; i < -deltaX; ++i)  // Ïò×óÒÆ
+            for (i = 0; i < -deltaX; ++i)  // å‘å·¦ç§»
             {
                 keydownControl(manager, control, 'a');
                 Sleep(delayTime);
             }
         }
 
-        keydownControl(manager, control, ' ');  // ÒÆ¶¯ºÃºó£¬Ö±½ÓÂäµØ
+        keydownControl(manager, control, ' ');  // ç§»åŠ¨å¥½åï¼Œç›´æ¥è½åœ°
     }
 }

@@ -11,11 +11,11 @@ LINKOBJ   = library.obj
 SOURSE    = library.cpp
 LIBS      = -L"D:/MSYS32/MinGW32/lib"
 INCS      = -I"D:/MSYS32/MinGW32/include"
-CXXINCS   = -I"D:/MSYS32/MinGW32/include" 
+CXXINCS   = -I"D:/MSYS32/MinGW32/include"
 BIN       = library.exe
-DEFINES   = 
+DEFINES   =
 CXXFLAGS  = $(CXXINCS) $(DEFINES) -O3 -g3 -Wall
-CFLAGS    = $(INCS) $(DEFINES)	-O3 -g3 -Wall 
+CFLAGS    = $(INCS) $(DEFINES)	-O3 -g3 -Wall
 GPROF     = gprof.exe
 RM        = rm  -rf
 LINK      = g++.exe
@@ -25,7 +25,7 @@ all: all-before $(BIN) all-after
 
 clean: clean-custom
 	$(RM) $(OBJ) $(BIN)
-	
+
 
 $(BIN): $(LINKOBJ)
 	$(LINK) $(LINKOBJ) -o $(BIN) $(LIBS)

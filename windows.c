@@ -14,7 +14,7 @@
 
 
 //==============================================================================
-//´°¿ÚêÓ°Ä£Ê½
+//çª—å£é™°å½±æ¨¡å¼
 enum Mode
 {
     LEFT,
@@ -23,7 +23,7 @@ enum Mode
     LRIGHT,
 };
 //______________________________________________________________________________
-//´°¿Ú¾€ĞÍ
+//çª—å£ç·šå‹
 enum LineMode
 {
     NONE=-1,
@@ -62,7 +62,7 @@ char *Main_Menu[]=
 //______________________________________________________________________________
 void TextWindow(int X,int Y,int R,int B,int ShadowMode,int ShadowColor,int LineMode,int LineColor,int BackColor,int TitleColor,char *Title,int TextColor)
 {
-    //ÅĞ”à´°¿ÚêÓ°î\uFFFDĞÍ¼°êÓ°µÄî†É«
+    //åˆ¤æ–·çª—å£é™°å½±é «uFFFDå‹åŠé™°å½±çš„é¡”è‰²
     int i=0;
     textbackground(ShadowColor);
     switch (ShadowMode)
@@ -87,7 +87,7 @@ void TextWindow(int X,int Y,int R,int B,int ShadowMode,int ShadowColor,int LineM
     clrscr();
 
     //------------------------------------------------------------------------------
-    //»æÖÆ´°¿Ú±ß¿ò
+    //ç»˜åˆ¶çª—å£è¾¹æ¡†
     if (LineMode != -1)
     {
         putch(Line[LineMode][0]);
@@ -115,7 +115,7 @@ void TextWindow(int X,int Y,int R,int B,int ShadowMode,int ShadowColor,int LineM
 
 
     //------------------------------------------------------------------------------
-    //ÅĞ¶Ï´°¿Ú¶¨ÒåµÄ¼ÊÌâ
+    //åˆ¤æ–­çª—å£å®šä¹‰çš„é™…é¢˜
     if (Title != NULL)
     {
         gotoxy((R-X-strlen(Title))/2,1);
@@ -123,7 +123,7 @@ void TextWindow(int X,int Y,int R,int B,int ShadowMode,int ShadowColor,int LineM
         cputs(Title);
     }
     //------------------------------------------------------------------------------
-    //ÀLÖÆ´°¿ÚµÄÓÃ‘ôÓĞĞ§…^Óò
+    //ç¹ªåˆ¶çª—å£çš„ç”¨æˆ¶æœ‰æ•ˆå€åŸŸ
     window(X+1,Y+1,R-1,B-1);
     textcolor(TextColor);
     clrscr();
@@ -177,7 +177,7 @@ char *GetPass(char ch,char *Mesg)
 
 
 
-//İ”³ö²Ë†Îí—Ä¿
+//è¼¸å‡ºèœå–®é …ç›®
 void CoutMenu(int HighColor,int TextColor,char *Menu)
 {
     char p=Menu[0];
@@ -200,7 +200,7 @@ void CoutMenu(int HighColor,int TextColor,char *Menu)
 
 
 
-//ÀLÖÆ²Ë†Î
+//ç¹ªåˆ¶èœå–®
 void DisplayMenu(int X,int Y,char *Menu[],int ShadowMode,int ShadowColor,int LineMode,int LineColor,int MenuColor,int TextColor,int HighColor,int Count)
 {
     int i=0;
@@ -216,7 +216,7 @@ void DisplayMenu(int X,int Y,char *Menu[],int ShadowMode,int ShadowColor,int Lin
 //==============================================================================
 
 
-//ÀLÖÆ°´¼~
+//ç¹ªåˆ¶æŒ‰ç´
 void Button(int X,int Y,char *Title,int ShadowMode,int ShadowColor,int ButtonColor,int TextColor,int MainWindowColor)
 {
     int i=0;

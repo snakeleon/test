@@ -1,7 +1,7 @@
-//Í¼Êé¹İ¹ÜÀíÏµÍ³ For Dos
+//å›¾ä¹¦é¦†ç®¡ç†ç³»ç»Ÿ For Dos
 //Compile by Borland C++ 5.02
-//ÎŞ´°¿Ú½éÃæµÄ¿ØÖÆÌ¨³ÌĞò
-//Marked by ¤¸ĞÄ¤ÎÏ¶ég  QQ:26481904
+//æ— çª—å£ä»‹é¢çš„æ§åˆ¶å°ç¨‹åº
+//Marked by ã˜å¿ƒã®éš™é–“  QQ:26481904
 
 
 #include <iostream>
@@ -11,40 +11,40 @@
 
 using namespace std;
 
-const int Maxr=30;//×î´ó¶ÁÕßÊı
-const int Maxb=100;//Êé¿â×î´ó´æÊé
-const int Maxbor=2;//¶ÁÕß×î´ó½èÊé2±¾
+const int Maxr=30;//æœ€å¤§è¯»è€…æ•°
+const int Maxb=100;//ä¹¦åº“æœ€å¤§å­˜ä¹¦
+const int Maxbor=2;//è¯»è€…æœ€å¤§å€Ÿä¹¦2æœ¬
 
 
 class Reader
 {
     friend class Book;
-    int tag;//¶ÁÕßÉ¾³ı±ê¼Ç
-    int no;//¶ÁÕßºÅ
-    char name[20];//¶ÁÕßÃû
-    int borbook[Maxbor];//Ëù½èÊé
+    int tag;//è¯»è€…åˆ é™¤æ ‡è®°
+    int no;//è¯»è€…å·
+    char name[20];//è¯»è€…å
+    int borbook[Maxbor];//æ‰€å€Ÿä¹¦
 public:
     char *getname()
     {
-        return name;    //»ñÈ¡¶ÁÕßÃû
+        return name;    //è·å–è¯»è€…å
     }
     int gettag()
     {
-        return tag;    //»ñÈ¡É¾³ı±ê¼Ç
+        return tag;    //è·å–åˆ é™¤æ ‡è®°
     }
     int getno()
     {
-        return no;    //»ñÈ¡¶ÁÕßºÅ
+        return no;    //è·å–è¯»è€…å·
     }
-    void setname (char na[])//ÉèÖÃ¶ÁÕßÃû
+    void setname (char na[])//è®¾ç½®è¯»è€…å
     {
         strcpy (name,na);
     }
     void delbook()
     {
-        tag=1;    //ÉèÖÃÉ¾³ı±ê¼Ç1
+        tag=1;    //è®¾ç½®åˆ é™¤æ ‡è®°1
     }
-    void addreader (int n,char *na)//Ôö¼Ó¶ÁÕß
+    void addreader (int n,char *na)//å¢åŠ è¯»è€…
     {
         tag=0;
         no=n;
@@ -52,7 +52,7 @@ public:
         for (int i=0; i<Maxbor; i++)
             borbook[i]=0;
     }
-    void borrowbook(int bookid)//½èÊé²Ù×÷
+    void borrowbook(int bookid)//å€Ÿä¹¦æ“ä½œ
     {
         int k=0;
         for (int i=0; i<Maxbor; i++)
@@ -61,30 +61,30 @@ public:
             {
                 borbook[i]=bookid;
                 k++;
-                cout<<"½èÊé³É¹¦!"<<endl;
+                cout<<"å€Ÿä¹¦æˆåŠŸ!"<<endl;
                 break;
             }
         }
-        if (k==0)cout<<"ÄãÒÑ½è¹»2±¾Êé,ÎŞ·¨ÔÚ½è!"<<endl;
+        if (k==0)cout<<"ä½ å·²å€Ÿå¤Ÿ2æœ¬ä¹¦,æ— æ³•åœ¨å€Ÿ!"<<endl;
     }
-    int retbook(int bookid)//»¹Êé²Ù×÷
+    int retbook(int bookid)//è¿˜ä¹¦æ“ä½œ
     {
         for (int i=0; i<Maxbor; i++)
         {
             if (borbook[i]==bookid)
             {
                 borbook[i]=0;
-                cout<<"»¹Êé³É¹¦!"<<endl;
+                cout<<"è¿˜ä¹¦æˆåŠŸ!"<<endl;
                 return 1;
             }
         }
         return 0;
     }
-    void disp()//ÏÔÊ¾½èÊéÕßĞÅÏ¢
+    void disp()//æ˜¾ç¤ºå€Ÿä¹¦è€…ä¿¡æ¯
     {
         if (gettag()==0)
         {
-            cout<<setw(15)<<no<<setw(15)<<name<<"½èÊé±àºÅ:[";
+            cout<<setw(15)<<no<<setw(15)<<name<<"å€Ÿä¹¦ç¼–å·:[";
             for (int i=0; i<Maxbor; i++)
                 if (borbook[i]!=0)
                     cout<<borbook[i]<<"|";
@@ -97,12 +97,12 @@ public:
 /*....................................................................................*/
 
 
-class Book//Í¼ÊéÀà
+class Book//å›¾ä¹¦ç±»
 {
-    int tag;//Í¼ÊéÉ¾³ı
-    int no;//Í¼ÊéºÅ
-    char name[20];//ÊéÃû
-    int onshelf;//²éÕÒÍ¼ÊéÊÇ·ñÔÚ¼Ü
+    int tag;//å›¾ä¹¦åˆ é™¤
+    int no;//å›¾ä¹¦å·
+    char name[20];//ä¹¦å
+    int onshelf;//æŸ¥æ‰¾å›¾ä¹¦æ˜¯å¦åœ¨æ¶
 public:
     char *getname()
     {
@@ -122,16 +122,16 @@ public:
     }
     void delbook()
     {
-        tag=1;    //É¾³ıÍ¼Êé
+        tag=1;    //åˆ é™¤å›¾ä¹¦
     }
-    void addbook(int n,char *na)// ¼ÓÊé²Ù×÷
+    void addbook(int n,char *na)// åŠ ä¹¦æ“ä½œ
     {
         tag=0;
         no=n;
         strcpy(name,na);
         onshelf=1;
     }
-    int borrowbook()//½èÊé²Ù×÷
+    int borrowbook()//å€Ÿä¹¦æ“ä½œ
     {
         if (onshelf==1)
         {
@@ -140,13 +140,13 @@ public:
         }
         return 0;
     }
-    void retbook()//»¹Êé²Ù×÷
+    void retbook()//è¿˜ä¹¦æ“ä½œ
     {
         onshelf=1;
     }
-    void disp()//ÏÔÊ¾Í¼ÊéĞÅÏ¢
+    void disp()//æ˜¾ç¤ºå›¾ä¹¦ä¿¡æ¯
     {
-        cout<<setw(6)<<"Í¼ÊéĞÅÏ¢"<<setw(6)<<no<<setw(15)<<name<<setw(15)<<(onshelf==1?"ÔÚÊé¼Ü":"ÒÑ½è³ö")<<endl;
+        cout<<setw(6)<<"å›¾ä¹¦ä¿¡æ¯"<<setw(6)<<no<<setw(15)<<name<<setw(15)<<(onshelf==1?"åœ¨ä¹¦æ¶":"å·²å€Ÿå‡º")<<endl;
     }
 };
 
@@ -156,16 +156,16 @@ public:
 
 
 
-class RDatabase//¶ÁÕßĞÅÏ¢¿â
+class RDatabase//è¯»è€…ä¿¡æ¯åº“
 {
-    int top;//¶ÁÕß¼ÇÂ¼Ö¸Õë
+    int top;//è¯»è€…è®°å½•æŒ‡é’ˆ
     Reader read[Maxr];
 public:
     RDatabase()
     {
         top=-1;
         fstream file;
-        file.open("reader.txt",ios::in|ios::binary);//´Ó´ÅÅÌµÄreader.txtÎÄ¼şÖĞ¶ÁÈ¡¶ÁÕßĞÅÏ¢
+        file.open("reader.txt",ios::in|ios::binary);//ä»ç£ç›˜çš„reader.txtæ–‡ä»¶ä¸­è¯»å–è¯»è€…ä¿¡æ¯
         while (1)
         {
             if (!file) break;
@@ -175,7 +175,7 @@ public:
         file.close();
         top++;
     }
-    int addreader(int n,char *na)//Ìí¼Ó¶ÁÕß
+    int addreader(int n,char *na)//æ·»åŠ è¯»è€…
     {
         Reader *p=query(n);
         if (p==NULL)
@@ -201,7 +201,7 @@ public:
             read[i].disp();
     }
     void readerdata();
-    ~RDatabase()//½«¶ÁÕßĞÅÏ¢Ğ´Èëreader.txt
+    ~RDatabase()//å°†è¯»è€…ä¿¡æ¯å†™å…¥reader.txt
     {
         fstream file;
         file.open("reader.txt",ios::out|ios::binary);
@@ -225,54 +225,54 @@ void RDatabase::readerdata()
     Reader *r;
     while (choice!=0)
     {
-        cout<<"¶ÁÕß¹ÜÀí:"<<endl;
-        cout<<"1:ĞÂÔö¶ÁÕß"<<endl;
-        cout<<"2:¸ü¸Ä¶ÁÕßÃû"<<endl;
-        cout<<"3:É¾³ı¶ÁÕß"<<endl;
-        cout<<"4:²éÕÒ¶ÁÕß"<<endl;
-        cout<<"5:ÏÔÊ¾ËùÓĞ¶ÁÕß"<<endl;
-        cout<<"0:ÍË³ö"<<endl;
+        cout<<"è¯»è€…ç®¡ç†:"<<endl;
+        cout<<"1:æ–°å¢è¯»è€…"<<endl;
+        cout<<"2:æ›´æ”¹è¯»è€…å"<<endl;
+        cout<<"3:åˆ é™¤è¯»è€…"<<endl;
+        cout<<"4:æŸ¥æ‰¾è¯»è€…"<<endl;
+        cout<<"5:æ˜¾ç¤ºæ‰€æœ‰è¯»è€…"<<endl;
+        cout<<"0:é€€å‡º"<<endl;
         cin>>choice;
         switch (choice)
         {
         case 1:
-            cout<<"ÇëÊäÈëĞÂ¶ÁÕßµÄ±àºÅ"<<endl;
+            cout<<"è¯·è¾“å…¥æ–°è¯»è€…çš„ç¼–å·"<<endl;
             cin>>readerid;
-            cout<<"ÇëÊäÈëĞÂ¶ÁÕßµÄĞÕÃû:"<<endl;
+            cout<<"è¯·è¾“å…¥æ–°è¯»è€…çš„å§“å:"<<endl;
             cin>>rname;
             addreader(readerid,rname);
             break;
         case 2:
-            cout<<"ÇëÊäÈëÄãµÄ¶ÁÕß±àºÅ:"<<endl;
+            cout<<"è¯·è¾“å…¥ä½ çš„è¯»è€…ç¼–å·:"<<endl;
             cin>>readerid;
             r=query(readerid);
             if (r==NULL)
             {
-                cout<<"¶Ô²»Æğ!ÄúµÄ±àºÅÓĞÎó,ÇëºËÊµºóÔÚÔÙÊä"<<endl;
+                cout<<"å¯¹ä¸èµ·!æ‚¨çš„ç¼–å·æœ‰è¯¯,è¯·æ ¸å®ååœ¨å†è¾“"<<endl;
                 break;
             }
-            cout<<"ÇëÊäÈëÄãµÄĞÂĞÕÃû:"<<endl;
+            cout<<"è¯·è¾“å…¥ä½ çš„æ–°å§“å:"<<endl;
             cin>>rname;
             r->setname(rname);
             break;
         case 3:
-            cout<<"!!!ÏëÉ¾³ıÒ»¸ö¶ÁÕßÂğ?ÊäÈëÄãÏëÉ¾³ıµÄ¶ÁÕß±àºÅ:"<<endl;
+            cout<<"!!!æƒ³åˆ é™¤ä¸€ä¸ªè¯»è€…å—?è¾“å…¥ä½ æƒ³åˆ é™¤çš„è¯»è€…ç¼–å·:"<<endl;
             cin>>readerid;
             r=query(readerid);
             if (r==NULL)
             {
-                cout<<"¸Ã¶ÁÕß²»´æÔÚ,ÎŞĞëÉ¾³ı,ÇëºËÊµºóÔÙ²Ù×÷"<<endl;
+                cout<<"è¯¥è¯»è€…ä¸å­˜åœ¨,æ— é¡»åˆ é™¤,è¯·æ ¸å®åå†æ“ä½œ"<<endl;
                 break;
             }
             r->delbook();
             break;
         case 4:
-            cout<<"ÇëÊäÈëÄãÏë²éÕÒµÄ¶ÁÕß±àºÅ:";
+            cout<<"è¯·è¾“å…¥ä½ æƒ³æŸ¥æ‰¾çš„è¯»è€…ç¼–å·:";
             cin>>readerid;
             r=query(readerid);
             if (r==NULL)
             {
-                cout<<"¸Ã¶ÁÕß²»´æÔÚ,ÎŞ·¨È¡µÃÏà¹ØĞÅÏ¢:";
+                cout<<"è¯¥è¯»è€…ä¸å­˜åœ¨,æ— æ³•å–å¾—ç›¸å…³ä¿¡æ¯:";
                 break;
             }
             r->disp();
@@ -290,12 +290,12 @@ void RDatabase::readerdata()
 
 
 
-class BDatabase//Í¼Êé¿â¹ÜÀíÀà
+class BDatabase//å›¾ä¹¦åº“ç®¡ç†ç±»
 {
     int top;
     Book book[Maxb];
 public:
-    BDatabase()//¹¹Ôìº¯Êı
+    BDatabase()//æ„é€ å‡½æ•°
     {
         top=-1;
         fstream file;
@@ -309,7 +309,7 @@ public:
         file.close();
         top++;
     }
-    int addbook(int n,char *na)// Ìí¼ÓÍ¼Êé,¼ÓÇ°ÏÈ²éÕÒ
+    int addbook(int n,char *na)// æ·»åŠ å›¾ä¹¦,åŠ å‰å…ˆæŸ¥æ‰¾
     {
         Book *p=query(n);
         if (p==NULL)
@@ -320,21 +320,21 @@ public:
         }
         return 0;
     }
-    Book * query(int bookid)//²éÕÒÍ¼Êé
+    Book * query(int bookid)//æŸ¥æ‰¾å›¾ä¹¦
     {
         for (int i=0; i<top; i++)
             if (book[i].getno()==bookid&&book[i].gettag()==0)
                 return &book[i];
         return NULL;
     }
-    void bookdata();//Í¼ÊéÎ¬»¤
+    void bookdata();//å›¾ä¹¦ç»´æŠ¤
     void disp()
     {
         for (int i=0; i<top; i++)
             if (book[i].gettag()==0)
                 book[i].disp();
     }
-    ~BDatabase()//Îö¹¹º¯Êı,½«book[i]Ğ´ÈëÎÄ¼ş
+    ~BDatabase()//ææ„å‡½æ•°,å°†book[i]å†™å…¥æ–‡ä»¶
     {
         fstream file("book.txt",ios::out|ios::binary);
         for (int i=0; i<top; i++)
@@ -348,7 +348,7 @@ public:
 
 
 
-void BDatabase::bookdata()//º¯ÊıËµÃ÷
+void BDatabase::bookdata()//å‡½æ•°è¯´æ˜
 {
     int choice=1;
     char bname[40];
@@ -356,54 +356,54 @@ void BDatabase::bookdata()//º¯ÊıËµÃ÷
     Book *b;
     while (choice!=0)
     {
-        cout<<"Í¼Êé¹ÜÀí:"<<endl;
-        cout<<"1:ĞÂÔöÍ¼Êé"<<endl;
-        cout<<"2:¸ü¸ÄÍ¼ÊéÃû"<<endl;
-        cout<<"3:É¾³ıÍ¼Êé"<<endl;
-        cout<<"4:²éÕÒÍ¼Êé"<<endl;
-        cout<<"5:ÏÔÊ¾ËùÓĞÍ¼Êé"<<endl;
-        cout<<"0:ÍË³ö"<<endl;
+        cout<<"å›¾ä¹¦ç®¡ç†:"<<endl;
+        cout<<"1:æ–°å¢å›¾ä¹¦"<<endl;
+        cout<<"2:æ›´æ”¹å›¾ä¹¦å"<<endl;
+        cout<<"3:åˆ é™¤å›¾ä¹¦"<<endl;
+        cout<<"4:æŸ¥æ‰¾å›¾ä¹¦"<<endl;
+        cout<<"5:æ˜¾ç¤ºæ‰€æœ‰å›¾ä¹¦"<<endl;
+        cout<<"0:é€€å‡º"<<endl;
         cin>>choice;
         switch (choice)
         {
         case 1:
-            cout<<"ÊäÈëÄãÒªĞÂ¼ÓÍ¼Êé±àºÅ:"<<endl;
+            cout<<"è¾“å…¥ä½ è¦æ–°åŠ å›¾ä¹¦ç¼–å·:"<<endl;
             cin>>bookid;
-            cout<<"ÊäÈëĞÂµÄÍ¼ÊéÃû:"<<endl;
+            cout<<"è¾“å…¥æ–°çš„å›¾ä¹¦å:"<<endl;
             cin>>bname;
             addbook(bookid,bname);
             break;
         case 2:
-            cout<<"ÊäÈëÔ­Í¼Êé±àºÅ:"<<endl;
+            cout<<"è¾“å…¥åŸå›¾ä¹¦ç¼–å·:"<<endl;
             cin>>bookid;
             b=query(bookid);
             if (b==NULL)
             {
-                cout<<"¸ÃÊé²»´æÔÚ"<<endl;
+                cout<<"è¯¥ä¹¦ä¸å­˜åœ¨"<<endl;
                 break;
             }
-            cout<<"ÊäÈëĞÂµÄÊéÃû:"<<endl;
+            cout<<"è¾“å…¥æ–°çš„ä¹¦å:"<<endl;
             cin>>bname;
             b->setname(bname);
             break;
         case 3:
-            cout<<"ÊäÈëÍ¼Êé±àºÅ:"<<endl;
+            cout<<"è¾“å…¥å›¾ä¹¦ç¼–å·:"<<endl;
             cin>>bookid;
             b=query(bookid);
             if (b==NULL)
             {
-                cout<<"¸ÃÍ¼Êé²»´æÔÚ"<<endl;
+                cout<<"è¯¥å›¾ä¹¦ä¸å­˜åœ¨"<<endl;
                 break;
             }
             b->delbook();
             break;
         case 4:
-            cout<<"ÊäÈëÍ¼Êé±àºÅ:"<<endl;
+            cout<<"è¾“å…¥å›¾ä¹¦ç¼–å·:"<<endl;
             cin>>bookid;
             b=query(bookid);
             if (b==NULL)
             {
-                cout<<"¸ÃÍ¼Êé²»´æÔÚ"<<endl;
+                cout<<"è¯¥å›¾ä¹¦ä¸å­˜åœ¨"<<endl;
                 break;
             }
             b->disp();
@@ -431,53 +431,53 @@ int main()
     Book *b;
     while (choice!=0)
     {
-        cout<<"1:½èÊé:"<<"\nÖ´ĞĞ¶ÁÕß½èÊéµÄ²Ù×÷"<<endl;
-        cout<<"2:»¹Êé:"<<"\nÖ´ĞĞ¶ÁÕß»¹ÊéµÄ²Ù×÷"<<endl;
-        cout<<"3:Í¼Êé¹ÜÀí:"<<"\n¶ÔÍ¼Êé½øĞĞĞÂÔö,¸ü¸Ä,É¾³ı,²éÕÒ,ÏÔÊ¾µÄ²Ù×÷"<<endl;
-        cout<<"4:¶ÁÕß¹ÜÀí:"<<"\n¶Ô¶ÁÕß½øĞĞĞÂÔö,¸ü¸Ä,É¾³ı,²éÕÒ,ÏÔÊ¾µÄ²Ù×÷"<<endl;
-        cout<<"0:Àë¿ª:"<<"\nÍË³ö±¾²Ù×÷µ½ÉÏÒ»²ã"<<endl;
+        cout<<"1:å€Ÿä¹¦:"<<"\næ‰§è¡Œè¯»è€…å€Ÿä¹¦çš„æ“ä½œ"<<endl;
+        cout<<"2:è¿˜ä¹¦:"<<"\næ‰§è¡Œè¯»è€…è¿˜ä¹¦çš„æ“ä½œ"<<endl;
+        cout<<"3:å›¾ä¹¦ç®¡ç†:"<<"\nå¯¹å›¾ä¹¦è¿›è¡Œæ–°å¢,æ›´æ”¹,åˆ é™¤,æŸ¥æ‰¾,æ˜¾ç¤ºçš„æ“ä½œ"<<endl;
+        cout<<"4:è¯»è€…ç®¡ç†:"<<"\nå¯¹è¯»è€…è¿›è¡Œæ–°å¢,æ›´æ”¹,åˆ é™¤,æŸ¥æ‰¾,æ˜¾ç¤ºçš„æ“ä½œ"<<endl;
+        cout<<"0:ç¦»å¼€:"<<"\né€€å‡ºæœ¬æ“ä½œåˆ°ä¸Šä¸€å±‚"<<endl;
         cin>>choice;
         switch (choice)
         {
         case 1:
-            cout<<"½èÊéÕß±àºÅ:"<<endl;
+            cout<<"å€Ÿä¹¦è€…ç¼–å·:"<<endl;
             cin>>readerid;
-            cout<<"Í¼Êé±àºÅ:"<<endl;
+            cout<<"å›¾ä¹¦ç¼–å·:"<<endl;
             cin>>bookid;
             r=ReaderDB.query(readerid);
             b=BookDB.query(bookid);
             if (r==NULL)
             {
-                cout<<"¶ÁÕß²»´æÔÚ,²»ÄÜ½èÊé:"<<endl;
+                cout<<"è¯»è€…ä¸å­˜åœ¨,ä¸èƒ½å€Ÿä¹¦:"<<endl;
                 break;
             }
             if (b==NULL)
             {
-                cout<<"²»´æÔÚÍ¼Êé.²»ÄÜ½èÊé"<<endl;
+                cout<<"ä¸å­˜åœ¨å›¾ä¹¦.ä¸èƒ½å€Ÿä¹¦"<<endl;
                 break;
             }
             if (b->borrowbook()==0)
             {
-                cout<<"Í¼ÊéÒÑ½è³ö"<<endl;
+                cout<<"å›¾ä¹¦å·²å€Ÿå‡º"<<endl;
                 break;
             }
             r->borrowbook(b->getno());
             break;
         case 2:
-            cout<<"»¹ÊéÕß±àºÅ"<<endl;
+            cout<<"è¿˜ä¹¦è€…ç¼–å·"<<endl;
             cin>>readerid;
-            cout<<"Í¼Êé±àºÅ"<<endl;
+            cout<<"å›¾ä¹¦ç¼–å·"<<endl;
             cin>>bookid;
             r=ReaderDB.query(readerid);
             if (r==NULL)
             {
-                cout<<"²»´æÔÚ¶ÁÕß,²»ÄÜ»¹Êé"<<endl;
+                cout<<"ä¸å­˜åœ¨è¯»è€…,ä¸èƒ½è¿˜ä¹¦"<<endl;
                 break;
             }
             b=BookDB.query(bookid);
             if (b==NULL)
             {
-                cout<<"²»´æÔÚÍ¼Êé,ÎŞ·¨»¹Êé"<<endl;
+                cout<<"ä¸å­˜åœ¨å›¾ä¹¦,æ— æ³•è¿˜ä¹¦"<<endl;
                 break;
             }
             b->retbook();

@@ -4,30 +4,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*¶¨ÒåÒ»Ğ©³£Êı*/
+/*å®šä¹‰ä¸€äº›å¸¸æ•°*/
 #define NO 0
 #define YES 1
 #define NONE -1
-#define MAX_MENU 7  /*¸ù¾İÇé¿ö¸Ä±ä¿ÉÒÔÔÚ²Ëµ¥ÏÔÊ¾µÄ×î´óÏî*/
+#define MAX_MENU 7  /*æ ¹æ®æƒ…å†µæ”¹å˜å¯ä»¥åœ¨èœå•æ˜¾ç¤ºçš„æœ€å¤§é¡¹*/
 
-/*È«¾Ö²ÎÊı*/
+/*å…¨å±€å‚æ•°*/
 int X,Y;
 int Selection;
 int button,x,y;
 void *p;
 size_t area;
 
-/*²Ëµ¥½á¹¹*/
+/*èœå•ç»“æ„*/
 struct MENU
 {
-    /*×óÉÏ½Ç*/
+    /*å·¦ä¸Šè§’*/
     int x;
     int y;
-    /*ÓÒÏÂ½Ç*/
+    /*å³ä¸‹è§’*/
     int x1;
     int y1;
-    unsigned char Active[MAX_MENU];/* ²Ëµ¥ÏîÊÇ·ñ¼¤»îµÄ±êÖ¾*/
-    char *head;/* ²Ëµ¥µÄÃû×Ö£¨¿ÉÑ¡Ïî£©*/
+    unsigned char Active[MAX_MENU];/* èœå•é¡¹æ˜¯å¦æ¿€æ´»çš„æ ‡å¿—*/
+    char *head;/* èœå•çš„åå­—ï¼ˆå¯é€‰é¡¹ï¼‰*/
 };
 
 void Comments();
@@ -50,7 +50,7 @@ void HandleMenu(int n,struct MENU *tm);
 void Msg(char *m);
 
 
-/* Í¨¹ıÏÂÃæµÄ²ÎÊıÓÃ»§¿ÉÒÔ¸Ä±ä°´Å¥µÄÎ»ÖÃ¡£*/
+/* é€šè¿‡ä¸‹é¢çš„å‚æ•°ç”¨æˆ·å¯ä»¥æ”¹å˜æŒ‰é’®çš„ä½ç½®ã€‚*/
 
 struct MENU File={200,110,250,130};
 struct MENU Edit={295,110,345,130};
@@ -62,65 +62,65 @@ struct MENU Neeraj={380,300,460,315};
 
 void Process()
 {
-    /*ÎÄ¼ş²Ëµ¥ÏîµÄ×Ó²Ëµ¥Ïî*/
+    /*æ–‡ä»¶èœå•é¡¹çš„å­èœå•é¡¹*/
     char *fm[]={"New","Open","Save","Save as","Exit"};
-    /*±à¼­²Ëµ¥ÏîµÄ×Ó²Ëµ¥Ïî*/
+    /*ç¼–è¾‘èœå•é¡¹çš„å­èœå•é¡¹*/
     char *em[]={"Undo","Cut","Copy","Paste","Delete","Select All"};
-    /*°ïÖú²Ëµ¥ÏîµÄ×Ó²Ëµ¥Ïî*/
+    /*å¸®åŠ©èœå•é¡¹çš„å­èœå•é¡¹*/
     char *hm[]={"Help Topics","About Menus"};
 
-    /* Èç¹ûÓÃ»§ÔÚÕâÀï¸Ä±äµÄÁË²Ëµ¥ÏîµÄÖµ£¬ÄÇÃ´Ò²Í¬ÑùĞèÒª¸Ä±äÔÚº¯Êı
-       ÖĞµÄPullMenuDown(char *,int)Öµ*/
+    /* å¦‚æœç”¨æˆ·åœ¨è¿™é‡Œæ”¹å˜çš„äº†èœå•é¡¹çš„å€¼ï¼Œé‚£ä¹ˆä¹ŸåŒæ ·éœ€è¦æ”¹å˜åœ¨å‡½æ•°
+       ä¸­çš„PullMenuDown(char *,int)å€¼*/
     char KEY;
-    /* »æÖÆ¸÷¸ö²Ëµ¥ */
+    /* ç»˜åˆ¶å„ä¸ªèœå• */
     Win(140,100,500,140);
-    /* »æÖÆÎÄ¼ş²Ëµ¥Ïî */
+    /* ç»˜åˆ¶æ–‡ä»¶èœå•é¡¹ */
     DrawBtn(&File,"File");
-    /* »æÖÆ±à¼­²Ëµ¥Ïî */
+    /* ç»˜åˆ¶ç¼–è¾‘èœå•é¡¹ */
     DrawBtn(&Edit,"Edit");
-    /* »æÖÆ°ïÖú²Ëµ¥Ïî*/
+    /* ç»˜åˆ¶å¸®åŠ©èœå•é¡¹*/
     DrawBtn(&Help,"Help");
     settextstyle(0,0,0);
     outtextxy(Close.x+7,Close.y+7,"x");
     Comments();
     Show();
-    /* ÕıÈçÏÂÃæËùÊ¾ÓÃ»§¿ÉÒÔ¼¤»îºÍÈ¡Ïû¼¤»îÒ»¸ö²Ëµ¥Ïî
-       ÏÂÃæµÄ'save as'±»È¡Ïû¼¤»î*/
+    /* æ­£å¦‚ä¸‹é¢æ‰€ç¤ºç”¨æˆ·å¯ä»¥æ¿€æ´»å’Œå–æ¶ˆæ¿€æ´»ä¸€ä¸ªèœå•é¡¹
+       ä¸‹é¢çš„'save as'è¢«å–æ¶ˆæ¿€æ´»*/
     File.Active[3]=NO;/* Save as*/
-    Edit.Active[0]=NO;/* È¡Ïû¼¤»î*/
+    Edit.Active[0]=NO;/* å–æ¶ˆæ¿€æ´»*/
     while(1)
     {
         if(kbhit())
         {
             KEY=getch();
-            /*Èç¹ûÓÃ»§°´ÏÂ"ESC"»òÕß"-"ÍÆ³ö³ÌĞò*/
+            /*å¦‚æœç”¨æˆ·æŒ‰ä¸‹"ESC"æˆ–è€…"-"æ¨å‡ºç¨‹åº*/
             if(KEY==27|| KEY==45) break;
         }
         Status();
-        /*Èç¹û°´ÏÂÊó±ê×ó¼ü*/
+        /*å¦‚æœæŒ‰ä¸‹é¼ æ ‡å·¦é”®*/
         if(button==1)
         {
-            /*ÓÃ»§µã»÷Close*/
+            /*ç”¨æˆ·ç‚¹å‡»Close*/
             if(MouseOn(&Close)) break;
-            /*ÓÃ»§µã»÷File*/
+            /*ç”¨æˆ·ç‚¹å‡»File*/
             if(MouseOn(&File))
             {
-                PullMenuDown(fm,5,&File);/* ²Ëµ¥ÏîÎª5*/
+                PullMenuDown(fm,5,&File);/* èœå•é¡¹ä¸º5*/
                 if(Selection==NONE) Msg("No Selection !");
                 else Msg(fm[Selection]);
                 if(Selection==4) break;
             }
-            /*ÓÃ»§µã»÷Edit*/
+            /*ç”¨æˆ·ç‚¹å‡»Edit*/
             if(MouseOn(&Edit))
             {
-                PullMenuDown(em,6,&Edit);/* ²Ëµ¥ÏîÎª6*/
+                PullMenuDown(em,6,&Edit);/* èœå•é¡¹ä¸º6*/
                 if(Selection==NONE) Msg("No Selection !");
                 else Msg(em[Selection]);
             }
-            /*ÓÃ»§µã»÷Help*/
+            /*ç”¨æˆ·ç‚¹å‡»Help*/
             if(MouseOn(&Help))
             {
-                PullMenuDown(hm,2,&Help);/* ²Ëµ¥ÏîÎª2*/
+                PullMenuDown(hm,2,&Help);/* èœå•é¡¹ä¸º2*/
                 if(Selection==NONE) Msg("No Selection !");
                 else Msg(hm[Selection]);
                 if(Selection==1) Msg("* Programming By NEERAJ SHARMA *");
@@ -128,15 +128,15 @@ void Process()
         }
         else
         {
-            /*Êó±êÔÚÄÇ¸ö²Ëµ¥ÏîÉÏ£¬¾Í¸ßÁÁÏÔÊ¾Ö®*/
+            /*é¼ æ ‡åœ¨é‚£ä¸ªèœå•é¡¹ä¸Šï¼Œå°±é«˜äº®æ˜¾ç¤ºä¹‹*/
 
-            /*¸ßÁÁÏÔÊ¾ÎÄ¼ş²Ëµ¥Ïî*/
+            /*é«˜äº®æ˜¾ç¤ºæ–‡ä»¶èœå•é¡¹*/
             if(MouseOn(&File)) Hlight(&File);
-            /*¸ßÁÁÏÔÊ¾±à¼­²Ëµ¥Ïî*/
+            /*é«˜äº®æ˜¾ç¤ºç¼–è¾‘èœå•é¡¹*/
             if(MouseOn(&Edit)) Hlight(&Edit);
-            /*¸ßÁÁÏÔÊ¾°ïÖú²Ëµ¥Ïî*/
+            /*é«˜äº®æ˜¾ç¤ºå¸®åŠ©èœå•é¡¹*/
             if(MouseOn(&Help)) Hlight(&Help);
-            /*¸ßÁÁÏÔÊ¾¹Ø±Õ²Ëµ¥Ïî*/
+            /*é«˜äº®æ˜¾ç¤ºå…³é—­èœå•é¡¹*/
             if(MouseOn(&Close)) Hlight(&Close);
             if(MouseOn(&Neeraj))
             {
@@ -154,37 +154,37 @@ void Process()
     Msg(":: Bye Bye ::");
 }
 
-/* »æÖÆ²Ëµ¥Ïî */
+/* ç»˜åˆ¶èœå•é¡¹ */
 void DrawBtn(struct MENU *tm,char *txt)
 {
-    /*ÉèÖÃ»æÖÆµÄÑÕÉ«*/
+    /*è®¾ç½®ç»˜åˆ¶çš„é¢œè‰²*/
     setcolor(0);
-    /*ÉèÖÃÎÄ±¾¸ñÊ½*/
+    /*è®¾ç½®æ–‡æœ¬æ ¼å¼*/
     settextstyle(2,0,4);
-    /*Êä³ötxtÎÄ±¾*/
+    /*è¾“å‡ºtxtæ–‡æœ¬*/
     outtextxy(tm->x+15,tm->y+4,txt);
 }
 
-/*¸ßÁÁÏÔÊ¾º¯Êı*/
+/*é«˜äº®æ˜¾ç¤ºå‡½æ•°*/
 void Hlight(struct MENU *t)
 {
-    /* ¸ßÁÁ */
+    /* é«˜äº® */
     winp(t,0);
-    /* ÏÔÊ¾²Ëµ¥ÏîÃû³Æ  */
+    /* æ˜¾ç¤ºèœå•é¡¹åç§°  */
     Msg(t->head);
-    /*ÔÚÃ»ÓĞÊäÈëµÄÇé¿öÏÂ£¬Ò»Ö±¸ßÁÁ*/
+    /*åœ¨æ²¡æœ‰è¾“å…¥çš„æƒ…å†µä¸‹ï¼Œä¸€ç›´é«˜äº®*/
     while(MouseOn(t))
     {
         Status();
         if(button!=0) break;
         if(kbhit()) break;
     }
-    /*Ïû³ı¸ßÁÁ*/
+    /*æ¶ˆé™¤é«˜äº®*/
     setcolor(7);
     Hide();
     rectangle(t->x,t->y,t->x1,t->y1);
     Msg("");
-    /*ÖØ»æ*/
+    /*é‡ç»˜*/
     Show();
 }
 
@@ -231,22 +231,22 @@ void Up(struct MENU *tm)
     }
 }
 
-/*µ¯³öÏÂÀ­²Ëµ¥*/
+/*å¼¹å‡ºä¸‹æ‹‰èœå•*/
 void PullMenuDown(char *H[],int n,struct MENU *tm)
 {
     int i;
     i=n*20;
-    /* ±£´æ±³¾°*/
+    /* ä¿å­˜èƒŒæ™¯*/
     Push(tm);
-    /* Òş²ØÊó±ê¹â±ê*/
+    /* éšè—é¼ æ ‡å…‰æ ‡*/
     Hide();
-    /* °Ñ²Ëµ¥ÏîÎ»Í¼¶ÁÈëÄÚ´æ£¬ÒÔ¹©ÊÕ»Øµ¯³öÏîÊ±ÖØĞÂ»æÖÆ*/
+    /* æŠŠèœå•é¡¹ä½å›¾è¯»å…¥å†…å­˜ï¼Œä»¥ä¾›æ”¶å›å¼¹å‡ºé¡¹æ—¶é‡æ–°ç»˜åˆ¶*/
     getimage(tm->x+1,tm->y1+2,tm->x+100,tm->y1+i+5,p);
-    /* ÖØĞÂÉèÖÃÕâ¿éÇøÓò*/
+    /* é‡æ–°è®¾ç½®è¿™å—åŒºåŸŸ*/
     Win(tm->x+1,tm->y1+2,tm->x+100,tm->y1+i+5);
     setcolor(0);
     settextstyle(2,0,4);
-    /*µ¯³öÏÂÀ­²Ëµ¥Ïî*/
+    /*å¼¹å‡ºä¸‹æ‹‰èœå•é¡¹*/
     for(i=0;i<n;i++)
     {
         if(!tm->Active[i])
@@ -258,7 +258,7 @@ void PullMenuDown(char *H[],int n,struct MENU *tm)
         }
         else    outtextxy(tm->x+14,tm->y1+8+i*20,H[i]);
     }
-    /*ÏÔÊ¾Êó±ê¹â±ê*/
+    /*æ˜¾ç¤ºé¼ æ ‡å…‰æ ‡*/
     Show();
     while(button==1)  Status();
     HandleMenu(n,tm);
@@ -267,15 +267,15 @@ void PullMenuDown(char *H[],int n,struct MENU *tm)
 void PullMenuUp(int n,struct MENU *tm)
 {
     int i;
-    /*Òş²ØÊó±ê¹â±ê*/
+    /*éšè—é¼ æ ‡å…‰æ ‡*/
     Hide();
-    /* °Ñ¶ÁÈëÄÚÈİµÄÔ­²Ëµ¥ÏîÎ»Í¼ÖØĞÂ»æÖÆ³öÀ´*/
+    /* æŠŠè¯»å…¥å†…å®¹çš„åŸèœå•é¡¹ä½å›¾é‡æ–°ç»˜åˆ¶å‡ºæ¥*/
     putimage(tm->x+1,tm->y1+2,p,COPY_PUT);
-    /*ÏÔÊ¾Êó±ê¹â±ê*/
+    /*æ˜¾ç¤ºé¼ æ ‡å…‰æ ‡*/
     Show();
     Up(tm);
 }
-/* ´¦Àí²Ëµ¥ÏîÃüÁîº¯Êı */
+/* å¤„ç†èœå•é¡¹å‘½ä»¤å‡½æ•° */
 void HandleMenu(int n,struct MENU *tm)
 {
     int i;
@@ -328,21 +328,21 @@ int MouseOn1(int cx,int cy,int cx1,int cy1)
 union REGS i,o;
 struct SREGS ss;
 
-/* ÏÔÊ¾Êó±ê¹â±êº¯Êı */
+/* æ˜¾ç¤ºé¼ æ ‡å…‰æ ‡å‡½æ•° */
 void Show()
 {
     i.x.ax=1;
     int86(0x33,&i,&o);
 }
 
-/* Òş²ØÊó±ê¹â±êº¯Êı*/
+/* éšè—é¼ æ ‡å…‰æ ‡å‡½æ•°*/
 void Hide()
 {
     i.x.ax=2;
     int86(0x33,&i,&o);
 }
 
-/* »ñµÃÊó±ê×´Ì¬º¯Êı */
+/* è·å¾—é¼ æ ‡çŠ¶æ€å‡½æ•° */
 void Status()
 {
     i.x.ax=3;
@@ -352,49 +352,49 @@ void Status()
     y=o.x.dx;
 }
 
-/*»æÖÆ²Ëµ¥ÏîµÄ±³¾°ºÍ±ß¿ò*/
+/*ç»˜åˆ¶èœå•é¡¹çš„èƒŒæ™¯å’Œè¾¹æ¡†*/
 void winp(struct MENU *t,int state)
 {
     Hide();
-    /*·Ç¸ßÁÁÄ£Ê½*/
+    /*éé«˜äº®æ¨¡å¼*/
     if(state==1)
     {
-        /*Á½Ìõ°µ±ß¿òÏß*/
+        /*ä¸¤æ¡æš—è¾¹æ¡†çº¿*/
         setcolor(0);
         line(t->x,t->y,t->x,t->y1);
         line(t->x,t->y,t->x1,t->y);
-        /*Á½ÌõÁÁ±ß¿òÏß*/
+        /*ä¸¤æ¡äº®è¾¹æ¡†çº¿*/
         setcolor(15);
         line(t->x1,t->y,t->x1,t->y1);
         line(t->x,t->y1,t->x1,t->y1);
     }
-    /*¸ßÁÁÄ£Ê½*/
+    /*é«˜äº®æ¨¡å¼*/
     else
     {
-        /*Á½ÌõÁÁ±ß¿òÏß*/
+        /*ä¸¤æ¡äº®è¾¹æ¡†çº¿*/
         setcolor(15);
         line(t->x,t->y,t->x,t->y1);
         line(t->x,t->y,t->x1,t->y);
-        /*Á½Ìõ°µ±ß¿òÏß*/
+        /*ä¸¤æ¡æš—è¾¹æ¡†çº¿*/
         setcolor(0);
         line(t->x1,t->y,t->x1,t->y1);
         line(t->x,t->y1,t->x1,t->y1);
     }
     Show();
 }
-/*»æÖÆÒ»¸ö¾ØĞÎÇøÓò*/
+/*ç»˜åˆ¶ä¸€ä¸ªçŸ©å½¢åŒºåŸŸ*/
 void Win(int sx,int sy,int ex,int ey)
 {
     Hide();
-    /*ÉèÖÃÌî³äµÄÑÕÉ«*/
+    /*è®¾ç½®å¡«å……çš„é¢œè‰²*/
     setfillstyle(1,7);
-    /*»æÖÆÒ»¸öÇøÓò*/
+    /*ç»˜åˆ¶ä¸€ä¸ªåŒºåŸŸ*/
     bar(sx,sy,ex,ey);
-    /*Á½ÌõÁÁ±ß¿òÏß*/
+    /*ä¸¤æ¡äº®è¾¹æ¡†çº¿*/
     setcolor(15);
     line(sx,sy,sx,ey);
     line(sx,sy,ex,sy);
-    /*Á½Ìõ°µ±ß¿òÏß*/
+    /*ä¸¤æ¡æš—è¾¹æ¡†çº¿*/
     setcolor(0);
     line(ex,sy,ex,ey);
     line(sx,ey,ex,ey);
@@ -476,10 +476,10 @@ int main()
 {
     int gd = DETECT,gm;
 
-    /*³õÊ¼»¯Í¼ĞÎ½çÃæ*/
+    /*åˆå§‹åŒ–å›¾å½¢ç•Œé¢*/
     initgraph(&gd, &gm,"");
     Selection=NONE;
-    /*ÊÇ·ñ¼¤»î²Ëµ¥Ïî£¬YES±íÊ¾¼¤»î£»NO±íÊ¾È¡Ïû¼¤»î*/
+    /*æ˜¯å¦æ¿€æ´»èœå•é¡¹ï¼ŒYESè¡¨ç¤ºæ¿€æ´»ï¼›NOè¡¨ç¤ºå–æ¶ˆæ¿€æ´»*/
     (gd=0; gd<MAX_MENU; gd++)
     {
         File.Active[gd]=YES;
@@ -487,16 +487,16 @@ int main()
         Help.Active[gd]=YES;
         Close.Active[gd]=YES;
     }
-    /*²Ëµ¥ÏîµÄÃû×Ö£¬ÓÃ»§¿ÉÒÔĞŞ¸ÄÒÔÏÔÊ¾ÆäËûµÄÃû³Æ*/
+    /*èœå•é¡¹çš„åå­—ï¼Œç”¨æˆ·å¯ä»¥ä¿®æ”¹ä»¥æ˜¾ç¤ºå…¶ä»–çš„åç§°*/
     File.head="[ File Menu ]";
     Edit.head="[ Edit Menu ]";
     Help.head="[ Help Menu ]";
     Close.head="[ Exit ]";
-    /*Îª½çÃæ·ÖÅäÄÚ´æ*/
+    /*ä¸ºç•Œé¢åˆ†é…å†…å­˜*/
     area=imagesize(0,0,150,150);
     p=malloc(area);
 
-    /*Ã»ÓĞ×ã¹»µÄÄÚ´æ*/
+    /*æ²¡æœ‰è¶³å¤Ÿçš„å†…å­˜*/
     if(p==NULL)
     {
         closegraph();
@@ -507,10 +507,10 @@ int main()
     setfillstyle(1,7);
     bar(0,0,640,480);
     X=2;Y=2;
-    /*»æÖÆÕâ¸ö½çÃæ*/
+    /*ç»˜åˆ¶è¿™ä¸ªç•Œé¢*/
     Process();
     End();
-    /*¹Ø±ÕÍ¼ĞÎÏÔÊ¾·½Ê½*/
+    /*å…³é—­å›¾å½¢æ˜¾ç¤ºæ–¹å¼*/
     closegraph();
     printf("GUI-MENUS By Neeraj Sharma  -   n21@indiatimes.com\n");
     getch();

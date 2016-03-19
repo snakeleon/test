@@ -1,66 +1,66 @@
 /*
-   CÓïÑÔ±à³Ì¼¼ÇÉ»ãİÍ(°üº¬´óÁ¿ÊµÓÃº¯Êı£©
+   Cè¯­è¨€ç¼–ç¨‹æŠ€å·§æ±‡èƒ(åŒ…å«å¤§é‡å®ç”¨å‡½æ•°ï¼‰
 
-   ±à³Ìº¯Êı¼¯£¬ÏêÏ¸ÄÚÈİÈçÏÂ£º
+   ç¼–ç¨‹å‡½æ•°é›†ï¼Œè¯¦ç»†å†…å®¹å¦‚ä¸‹ï¼š
 
-   ¶Á¼üÅÌÉ¨ÃèÂë
-   »ñÈ¡»úÆ÷ÈÕÆÚ
-   ½«¸¡µãÊı×ª»¯Îª×Ö·û´®
-   Çå³ıÆÁÄ»
-   ÏÔÊ¾Ê±¼ä
-   ´òÓ¡Ò»¸ö¾ØĞÎ
-   ¿³µô×Ö·û´®ÖĞËùÓĞ¿Õ¸ñ
-   È¡×Ó×Ö·û´®
-   ´ÓÎÄ¼şÖĞ¶ÁÈ¡×Ö·û
-   ×Ö·û´®×ó¿¿Æë
-   È¡×ó×Ö·û´®
-   ÏòÎÄ¼şĞ´Êı¾İ
-   È¡ÓÒ×Ö·û´®
-   ´ò¿ª»ò¹Ø±Õ¹â±ê
-   À®°È·¢Éù
-   Ê±¼äÑÓ³Ù
-   Õıµã±¨Ê±
-   Ğ´ÕûÊıÓÚÎÄ¼şÖĞ
-   ´ÓÎÄ¼şÖĞ¶ÁÈ¡ÕûÊı
-   ±¨¾¯
-   ×Ö·û´®ÓÒ¿¿Æë
-   ×Ö·û´®¾ÓÖĞ
-   É¾³ı×Ó×Ö·û´®
-   ²éÕÒÖ¸¶¨×Ö·û´®
-   ²úÉú¿Õ¸ñ
-   ²úÉú×Ö·û´®
-   ¿³µô×Ö·û´®×ó±ß¿Õ¸ñ
-   ¿³µô×Ö·û´®ÓÒ±ß¿Õ¸ñ
-   ÏÔÊ¾Ò»¸ö×Ö·û´®
-   ¶¨ÒåÆÁÄ»ÑÕÉ«
-   ÏÔÊ¾ÌáÊ¾´°¿ÚÏÔÊ¾¾¯¸æ´°¿Ú
-   µÃµ½ÎÄ¼ş³¤¶È
-   ´°¿Ú¹öÆÁ
-   É¨Ãè¼üÅÌ
-   ²åÈë×Ö·û´®
-   ¼ì²â´ÅÅÌÊÇ·ñ×¼±¸¾ÍĞ÷
-   ¼ì²â´ÅÅÌÊÇ·ñĞ´±£»¤
-   ĞŞ¸ÄÎÄ¼şµÄÄ³Ò»ĞĞ
-   ³ÉÅú¿½±´ÎÄ¼ş
-   ¿½±´Ò»¸öÎÄ¼ş
-   ½¨Á¢Ä¿Â¼
-   µÃµ½Ä¿Â¼
-   µÃµ½ÎÄ¼şÃû
-   ÈÎÒâÁ½¸öÕıÕûÊıÏà¼Ó(<80Î»)
-   ÈÎÒâÁ½¸öÕıÕûÊıÏà³Ë
+   è¯»é”®ç›˜æ‰«æç 
+   è·å–æœºå™¨æ—¥æœŸ
+   å°†æµ®ç‚¹æ•°è½¬åŒ–ä¸ºå­—ç¬¦ä¸²
+   æ¸…é™¤å±å¹•
+   æ˜¾ç¤ºæ—¶é—´
+   æ‰“å°ä¸€ä¸ªçŸ©å½¢
+   ç æ‰å­—ç¬¦ä¸²ä¸­æ‰€æœ‰ç©ºæ ¼
+   å–å­å­—ç¬¦ä¸²
+   ä»æ–‡ä»¶ä¸­è¯»å–å­—ç¬¦
+   å­—ç¬¦ä¸²å·¦é é½
+   å–å·¦å­—ç¬¦ä¸²
+   å‘æ–‡ä»¶å†™æ•°æ®
+   å–å³å­—ç¬¦ä¸²
+   æ‰“å¼€æˆ–å…³é—­å…‰æ ‡
+   å–‡å­å‘å£°
+   æ—¶é—´å»¶è¿Ÿ
+   æ­£ç‚¹æŠ¥æ—¶
+   å†™æ•´æ•°äºæ–‡ä»¶ä¸­
+   ä»æ–‡ä»¶ä¸­è¯»å–æ•´æ•°
+   æŠ¥è­¦
+   å­—ç¬¦ä¸²å³é é½
+   å­—ç¬¦ä¸²å±…ä¸­
+   åˆ é™¤å­å­—ç¬¦ä¸²
+   æŸ¥æ‰¾æŒ‡å®šå­—ç¬¦ä¸²
+   äº§ç”Ÿç©ºæ ¼
+   äº§ç”Ÿå­—ç¬¦ä¸²
+   ç æ‰å­—ç¬¦ä¸²å·¦è¾¹ç©ºæ ¼
+   ç æ‰å­—ç¬¦ä¸²å³è¾¹ç©ºæ ¼
+   æ˜¾ç¤ºä¸€ä¸ªå­—ç¬¦ä¸²
+   å®šä¹‰å±å¹•é¢œè‰²
+   æ˜¾ç¤ºæç¤ºçª—å£æ˜¾ç¤ºè­¦å‘Šçª—å£
+   å¾—åˆ°æ–‡ä»¶é•¿åº¦
+   çª—å£æ»šå±
+   æ‰«æé”®ç›˜
+   æ’å…¥å­—ç¬¦ä¸²
+   æ£€æµ‹ç£ç›˜æ˜¯å¦å‡†å¤‡å°±ç»ª
+   æ£€æµ‹ç£ç›˜æ˜¯å¦å†™ä¿æŠ¤
+   ä¿®æ”¹æ–‡ä»¶çš„æŸä¸€è¡Œ
+   æˆæ‰¹æ‹·è´æ–‡ä»¶
+   æ‹·è´ä¸€ä¸ªæ–‡ä»¶
+   å»ºç«‹ç›®å½•
+   å¾—åˆ°ç›®å½•
+   å¾—åˆ°æ–‡ä»¶å
+   ä»»æ„ä¸¤ä¸ªæ­£æ•´æ•°ç›¸åŠ (<80ä½)
+   ä»»æ„ä¸¤ä¸ªæ­£æ•´æ•°ç›¸ä¹˜
 
 
-   ×¢Òâ£º¸Ãº¯Êı¼¯Ê¡ÂÔÁË²»ÉÙTC±ê×¼Í·ÎÄ¼ş£¬¶ÁÕßÊ¹ÓÃÊ±Òª×ÔĞĞÌí¼Ó¡£¶øÇÒÓÉÓÚ¸Ãº¯Êı¼¯ÄÚ²¿º¯Êı¼äÓĞµÄÓĞµ÷ÓÃ¹ØÏµ£¬¶ÁÕß²ğĞ¶Ê±Òª½÷É÷¡£
+   æ³¨æ„ï¼šè¯¥å‡½æ•°é›†çœç•¥äº†ä¸å°‘TCæ ‡å‡†å¤´æ–‡ä»¶ï¼Œè¯»è€…ä½¿ç”¨æ—¶è¦è‡ªè¡Œæ·»åŠ ã€‚è€Œä¸”ç”±äºè¯¥å‡½æ•°é›†å†…éƒ¨å‡½æ•°é—´æœ‰çš„æœ‰è°ƒç”¨å…³ç³»ï¼Œè¯»è€…æ‹†å¸æ—¶è¦è°¨æ…ã€‚
 
 */
 
-/*±à³Ì¼¼ÇÉÜöİÍ*/
+/*ç¼–ç¨‹æŠ€å·§èŸèƒ*/
 
-/*´Ó¼üÅÌÖĞ¶ÁÈ¡×Ö·û ¹¦ÄÜ£º°´ÏÂÆÕÍ¨¼üÊ±£¬·µ»ØÆäASCIIÂë É¨ÃèÂëCODE=0*/
+/*ä»é”®ç›˜ä¸­è¯»å–å­—ç¬¦ åŠŸèƒ½ï¼šæŒ‰ä¸‹æ™®é€šé”®æ—¶ï¼Œè¿”å›å…¶ASCIIç  æ‰«æç CODE=0*/
 int INKEY(int *code)
 {
     int m;
-    while(!bioskey(1))/*¿É¼ÓÈëÎŞ°´¼üÊ±´úÂë*/;
+    while(!bioskey(1))/*å¯åŠ å…¥æ— æŒ‰é”®æ—¶ä»£ç */;
     *code=bioskey(0);
     m=*code*255;
     if(!m) m=*code>>8;
@@ -68,7 +68,7 @@ int INKEY(int *code)
     return m;
 }
 
-/*»ñÈ¡»úÆ÷ÈÕÆÚ*/
+/*è·å–æœºå™¨æ—¥æœŸ*/
 int DATE(char *s,char type)
 {
     char dat[30];
@@ -102,8 +102,8 @@ int DATE(char *s,char type)
 return num;
 }
 
-/*½«¸¡µãÊı×ª»¯Îª×Ö·û´®*/
-/* ²ÎÊıËµÃ÷ data:Ğè×ª»»µÄ¸¡µãÊı£»s:Êä³ö×Ö·û´®£»len:×ª»»ºóµÄ³¤¶È*/
+/*å°†æµ®ç‚¹æ•°è½¬åŒ–ä¸ºå­—ç¬¦ä¸²*/
+/* å‚æ•°è¯´æ˜ data:éœ€è½¬æ¢çš„æµ®ç‚¹æ•°ï¼›s:è¾“å‡ºå­—ç¬¦ä¸²ï¼›len:è½¬æ¢åçš„é•¿åº¦*/
 void f_to_s(double data,char *s,int len)
 {
     int dec,sign,i;
@@ -157,7 +157,7 @@ void f_to_s(double data,char *s,int len)
     if (strlen(s)>len) s[len]=0;
 }
 
-/*Çå³ıÆÁÄ»*/
+/*æ¸…é™¤å±å¹•*/
 void CLSXY(int color,int x,int y,int xl,int yl)
 {
     int x1,y1;
@@ -169,8 +169,8 @@ void CLSXY(int color,int x,int y,int xl,int yl)
     x1=x+xl-1;
     if (y1>25||x1>80)
         return;
-    r.h.ah=6; /*×Ó¹¦ÄÜºÅ*/
-    r.h.al=0; /*¹ö¶¯ĞĞÊı*/
+    r.h.ah=6; /*å­åŠŸèƒ½å·*/
+    r.h.al=0; /*æ»šåŠ¨è¡Œæ•°*/
     r.h.ch=y;
     r.h.cl=x;
     r.h.dh=y1;
@@ -180,7 +180,7 @@ void CLSXY(int color,int x,int y,int xl,int yl)
 }
 
 
-/*ÏÔÊ¾Ê±¼ä*/
+/*æ˜¾ç¤ºæ—¶é—´*/
 void display_time(int color,int back_color,int y,int x)
 {
     static char oldtime[9]="";
@@ -200,41 +200,41 @@ void display_time(int color,int back_color,int y,int x)
 }
 
 
-/*´òÓ¡Ò»¸ö¾ØĞÎ*/
+/*æ‰“å°ä¸€ä¸ªçŸ©å½¢*/
 void PRINT_KJ(int x,int y,int wide,int high)
 {
     int i;
     for(i=x;i<x+wide;i+=2)
     {
         gotoxy(i,y);
-        cprintf("®â");
+        cprintf("î†¹");
     }
     gotoxy(x,y+high);
-    cprintf("¬ì");
+    cprintf("î„‡");
     gotoxy(x+wide,y+high);
-    cprintf("¬í");
+    cprintf("î„ˆ");
     gotoxy(x,y);
-    cprintf("®Ü");
+    cprintf("î†³");
     gotoxy(x+wide,y);
-    cprintf("®Ş");
+    cprintf("î†µ");
     for(i=x+2;i<x+wide;i+=2)
     {
         gotoxy(i,y+high);
-        cprintf("¬î");
+        cprintf("î„‰");
     }
     for(i=y+1;i<y+high;i++)
     {
         gotoxy(x,i);
-        cprintf("®à");
+        cprintf("î†·");
     }
     for(i=y+1;i<y+high;i++)
     {
         gotoxy(x+wide,i);
-        cprintf("®á");
+        cprintf("î†¸");
     }
 }
 
-/*¿³µô×Ö·û´®ÖĞËùÓĞ¿Õ¸ñ*/
+/*ç æ‰å­—ç¬¦ä¸²ä¸­æ‰€æœ‰ç©ºæ ¼*/
 void CUT_ALL_SPC(char *s)
 {
     int i,n;
@@ -251,7 +251,7 @@ void CUT_ALL_SPC(char *s)
 }
 
 
-/*È¡×Ó×Ö·û´®*/
+/*å–å­å­—ç¬¦ä¸²*/
 void MID(char *s,char *t,int n,int m)
 {
     int i,j,p;
@@ -269,7 +269,7 @@ void MID(char *s,char *t,int n,int m)
 }
 
 
-/*´ÓÎÄ¼şÖĞ¶ÁÈ¡×Ö·û*/
+/*ä»æ–‡ä»¶ä¸­è¯»å–å­—ç¬¦*/
 int READ_STR(char *s,FILE *fp)
 {
     int i=0;
@@ -279,7 +279,7 @@ int READ_STR(char *s,FILE *fp)
     return i;
 }
 
-/*×Ö·û´®×ó¿¿Æë*/
+/*å­—ç¬¦ä¸²å·¦é é½*/
 void MOVE_LEFT(char *d,char *s,int n)
 {
     int i,l;
@@ -290,7 +290,7 @@ void MOVE_LEFT(char *d,char *s,int n)
     *d=0;
 }
 
-/*È¡×ó×Ö·û´®*/
+/*å–å·¦å­—ç¬¦ä¸²*/
 void LEFT(char *d,char *s,int n)
 {
     int i,l;
@@ -303,7 +303,7 @@ void LEFT(char *d,char *s,int n)
 }
 
 
-/*ÏòÎÄ¼şĞ´Êı¾İ*/
+/*å‘æ–‡ä»¶å†™æ•°æ®*/
 void WRITE_STR(char *s,FILE *fp)
 {
     char c=10;
@@ -312,7 +312,7 @@ void WRITE_STR(char *s,FILE *fp)
     fputc(c,fp);
 }
 
-/*È¡ÓÒ×Ö·û´®*/
+/*å–å³å­—ç¬¦ä¸²*/
 void RIGHT(char *dest,char *source,int num)
 {
     int i,j;
@@ -323,7 +323,7 @@ void RIGHT(char *dest,char *source,int num)
 }
 
 
-/*´ò¿ª»ò¹Ø±Õ¹â±ê*/
+/*æ‰“å¼€æˆ–å…³é—­å…‰æ ‡*/
 void CURSOR(int on2off)
 {
     union REGS r;
@@ -334,7 +334,7 @@ void CURSOR(int on2off)
     int86(16,&r,&r);
 }
 
-/*À®°È·¢Éù*/
+/*å–‡å­å‘å£°*/
 void SOUND(int frequency,int time)
 {
     int i;
@@ -346,7 +346,7 @@ void SOUND(int frequency,int time)
     nosound();
 }
 
-/*Ê±¼äÑÓ³Ù*/
+/*æ—¶é—´å»¶è¿Ÿ*/
 void MYDELAY(long t)
 {
     time_t OldTime;
@@ -358,7 +358,7 @@ void MYDELAY(long t)
 }
 
 
-/*Õıµã±¨Ê±*/
+/*æ­£ç‚¹æŠ¥æ—¶*/
 void REPORT_CLOCK(void)
 {
     int i;
@@ -371,7 +371,7 @@ void REPORT_CLOCK(void)
 }
 
 
-/*Ğ´ÕûÊıÓÚÎÄ¼şÖĞ*/
+/*å†™æ•´æ•°äºæ–‡ä»¶ä¸­*/
 void WRITE_INT(int num,FILE *p)
 {
     char s[20],a=10;
@@ -382,7 +382,7 @@ void WRITE_INT(int num,FILE *p)
 }
 
 
-/*´ÓÎÄ¼şÖĞ¶ÁÈ¡ÕûÊı*/
+/*ä»æ–‡ä»¶ä¸­è¯»å–æ•´æ•°*/
 int READ_INT(int *num,FILE *p)
 {
     int i;
@@ -399,7 +399,7 @@ int READ_INT(int *num,FILE *p)
 }
 
 
-/*±¨¾¯ */
+/*æŠ¥è­¦ */
 void WARN(void)
 {
     SOUND(300,1);
@@ -407,7 +407,7 @@ void WARN(void)
 }
 
 
-/*×Ö·û´®ÓÒ¿¿Æë*/
+/*å­—ç¬¦ä¸²å³é é½*/
 void MOVE_RIGHT(char *s,int wide)
 {
     int i,l,n;
@@ -421,7 +421,7 @@ void MOVE_RIGHT(char *s,int wide)
 }
 
 
-/*×Ö·û´®¾ÓÖĞ*/
+/*å­—ç¬¦ä¸²å±…ä¸­*/
 void MOVE_MIDDLE(char *s,int wide)
 {
     int i,l,n;
@@ -438,7 +438,7 @@ void MOVE_MIDDLE(char *s,int wide)
     }
 }
 
-/*É¾³ı×Ó×Ö·û´®*/
+/*åˆ é™¤å­å­—ç¬¦ä¸²*/
 void Delete_SubString(char *source,int start,int num)
 {
     int i,l;
@@ -449,7 +449,7 @@ void Delete_SubString(char *source,int start,int num)
         source[i-1]=source[i+num-1];
 }
 
-/*²éÕÒÖ¸¶¨×Ö·û´®*/
+/*æŸ¥æ‰¾æŒ‡å®šå­—ç¬¦ä¸²*/
 int INSTR(int n,char *source,char *dest)
 {
     int i,j,k1,k2,p;
@@ -482,7 +482,7 @@ int INSTR(int n,char *source,char *dest)
 }
 
 
-/*²úÉú¿Õ¸ñ*/
+/*äº§ç”Ÿç©ºæ ¼*/
 void SPACE(char *s,int n)
 {
     int i;
@@ -492,7 +492,7 @@ void SPACE(char *s,int n)
 }
 
 
-/*²úÉú×Ö·û´®*/
+/*äº§ç”Ÿå­—ç¬¦ä¸²*/
 void STRING(int n,char *s1,char *s2)
 {
     int i;
@@ -502,7 +502,7 @@ void STRING(int n,char *s1,char *s2)
 }
 
 
-/*¿³µô×Ö·û´®×ó±ß¿Õ¸ñ*/
+/*ç æ‰å­—ç¬¦ä¸²å·¦è¾¹ç©ºæ ¼*/
 void CUT_LEFT_SPACE(char *s)
 {
     int i,j,k=0;
@@ -512,7 +512,7 @@ void CUT_LEFT_SPACE(char *s)
 }
 
 
-/*¿³µô×Ö·û´®ÓÒ±ß¿Õ¸ñ*/
+/*ç æ‰å­—ç¬¦ä¸²å³è¾¹ç©ºæ ¼*/
 void CUT_RIGHT_SPACE(char *s)
 {
     int i,j;
@@ -521,7 +521,7 @@ void CUT_RIGHT_SPACE(char *s)
     s[j+1]=0;
 }
 
-/*ÏÔÊ¾Ò»¸ö×Ö·û´®*/
+/*æ˜¾ç¤ºä¸€ä¸ªå­—ç¬¦ä¸²*/
 void DISPLAY(char *s)
 {
     union REGS regs;
@@ -536,7 +536,7 @@ void DISPLAY(char *s)
         regs.h.al=*s;
         regs.h.bh=0;
         regs.h.bl=color;
-        regs.x.cx=1; /*ÏÔÊ¾µÄ´ÎÊı,²»¸Ä±ä¹â±êÎ»ÖÃ*/
+        regs.x.cx=1; /*æ˜¾ç¤ºçš„æ¬¡æ•°,ä¸æ”¹å˜å…‰æ ‡ä½ç½®*/
         int86(16,&regs,&regs);
         x++;
         if(x>80)
@@ -550,7 +550,7 @@ void DISPLAY(char *s)
     }
 }
 
-/*¶¨ÒåÆÁÄ»ÑÕÉ«*/
+/*å®šä¹‰å±å¹•é¢œè‰²*/
 void COLOR(int ForeColor,int BackColor)
 {
     if(ForeColor<0||ForeColor>15) return;
@@ -559,7 +559,7 @@ void COLOR(int ForeColor,int BackColor)
     bjys=BackColor;
 }
 
-/*ÏÔÊ¾ÌáÊ¾´°¿Ú*/
+/*æ˜¾ç¤ºæç¤ºçª—å£*/
 void quit_YesNo(char *s1,char *s2)
 {
     char buffer[2000],jx;
@@ -583,7 +583,7 @@ void quit_YesNo(char *s1,char *s2)
     exit(0);
 }
 
-/*ÏÔÊ¾¾¯¸æ´°¿Ú*/
+/*æ˜¾ç¤ºè­¦å‘Šçª—å£*/
 void warn_message(char *s1,char *s2)
 {
     char buffer[2000];
@@ -596,12 +596,12 @@ void warn_message(char *s1,char *s2)
     gotoxy(35,12);
     DISPLAY(s2);
     gotoxy(40,13);
-    DISPLAY("°´ÈÎÒâ¼ü¼ÌĞø...");
+    DISPLAY("æŒ‰ä»»æ„é”®ç»§ç»­...");
     getch();
     puttext(30,8,76,16,buffer);
 }
 
-/*µÃµ½ÎÄ¼ş³¤¶È*/
+/*å¾—åˆ°æ–‡ä»¶é•¿åº¦*/
 long GetFileLength(char *file)
 {
     FILE *fp;
@@ -622,7 +622,7 @@ long GetFileLength(char *file)
     return (i-1);
 }
 
-/*´°¿Ú¹öÆÁ*/
+/*çª—å£æ»šå±*/
 void WINDOW_ROLL(int y1,int x1,int yl,int xl,int direct)
 {
     union REGS regs;
@@ -631,18 +631,18 @@ void WINDOW_ROLL(int y1,int x1,int yl,int xl,int direct)
     y1--;
     x2=x1+xl-1;
     y2=y1+yl-1;
-    regs.h.ah=5+direct; /*ah=06h ÏòÉÏ¹ö¶¯µ±Ç°Ò³*/
-    /*ah=07h ÏòÏÂ¡£¡£¡£ */
+    regs.h.ah=5+direct; /*ah=06h å‘ä¸Šæ»šåŠ¨å½“å‰é¡µ*/
+    /*ah=07h å‘ä¸‹ã€‚ã€‚ã€‚ */
     regs.h.al=1;
     regs.h.bh=16*pmbj+pmqj;
-    regs.h.ch=y1; /*×óÉÏ½ÇĞĞ*/
-    regs.h.cl=x1; /*ÁĞ*/
-    regs.h.dh=y2; /*ÓÒÏÂ½ÇĞĞ*/
-    regs.h.dl=x2; /*ÁĞ*/
+    regs.h.ch=y1; /*å·¦ä¸Šè§’è¡Œ*/
+    regs.h.cl=x1; /*åˆ—*/
+    regs.h.dh=y2; /*å³ä¸‹è§’è¡Œ*/
+    regs.h.dl=x2; /*åˆ—*/
     int86(16,&regs,&regs);
 }
 
-/*É¨Ãè¼üÅÌ*/
+/*æ‰«æé”®ç›˜*/
 int scan_keyboard(int *m)
 {
     union inkey
@@ -657,7 +657,7 @@ int scan_keyboard(int *m)
     return cc.ch[0];
 }
 
-/*²åÈë×Ö·û´®*/
+/*æ’å…¥å­—ç¬¦ä¸²*/
 void INSERT_STRING(char *ds,char *ss,int n)
 {
     char s[100];
@@ -674,7 +674,7 @@ void STR_ADD_CHAR(char *s,char ch)
     strcat(s,s1);
 }
 
-/*¼ì²â´ÅÅÌÊÇ·ñ×¼±¸¾ÍĞ÷*/
+/*æ£€æµ‹ç£ç›˜æ˜¯å¦å‡†å¤‡å°±ç»ª*/
 int CheckDiskReading(int n)
 {
     int result;
@@ -685,7 +685,7 @@ int CheckDiskReading(int n)
     return 1;
 }
 
-/*¼ì²â´ÅÅÌÊÇ·ñĞ´±£»¤*/
+/*æ£€æµ‹ç£ç›˜æ˜¯å¦å†™ä¿æŠ¤*/
 int CheckDiskWriteProf(void)
 {
     int result;
@@ -695,7 +695,7 @@ int CheckDiskWriteProf(void)
     return 1;
 }
 
-/*ĞŞ¸ÄÎÄ¼şµÄÄ³Ò»ĞĞ*/
+/*ä¿®æ”¹æ–‡ä»¶çš„æŸä¸€è¡Œ*/
 int ModifyFileLine(char *filename,char *s,int n)
 {
     char data[20][80];
@@ -715,7 +715,7 @@ int ModifyFileLine(char *filename,char *s,int n)
     return 1;
 }
 
-/*³ÉÅú¿½±´ÎÄ¼ş*/
+/*æˆæ‰¹æ‹·è´æ–‡ä»¶*/
 int CopyFile(char *sfile,char *dfile,int f2d,int barlong,int height,int x,int y)
 {
     int Copyfile(char *sf,char *df);
@@ -749,7 +749,7 @@ int CopyFile(char *sfile,char *dfile,int f2d,int barlong,int height,int x,int y)
             break;
         }
 
-    /*¿½±´Ò»¸öÎÄ¼ş*/
+    /*æ‹·è´ä¸€ä¸ªæ–‡ä»¶*/
     int Copyfile(char *sf,char *df)
     {
         FILE *in,*out;
@@ -772,7 +772,7 @@ int CopyFile(char *sfile,char *dfile,int f2d,int barlong,int height,int x,int y)
         return 1;
     }
 
-    /*½¨Á¢Ä¿Â¼*/
+    /*å»ºç«‹ç›®å½•*/
     int MakeNdir(char *Dir)
     {
         int i,l,j;
@@ -791,7 +791,7 @@ int CopyFile(char *sfile,char *dfile,int f2d,int barlong,int height,int x,int y)
         return 1;
     }
 
-    /*µÃµ½Ä¿Â¼*/
+    /*å¾—åˆ°ç›®å½•*/
     int GetDir(char *dirF,char dataK[][14])
     {
         struct ffblk ffblk;
@@ -812,7 +812,7 @@ int CopyFile(char *sfile,char *dfile,int f2d,int barlong,int height,int x,int y)
         return i;
     }
 
-    /*µÃµ½ÎÄ¼şÃû*/
+    /*å¾—åˆ°æ–‡ä»¶å*/
     int GetFile(char *dirF,char dataK[][14])
     {
         struct ffblk ffblk;
@@ -829,24 +829,24 @@ int CopyFile(char *sfile,char *dfile,int f2d,int barlong,int height,int x,int y)
         return i;
     }
     
-        /*ÈÎÒâÁ½¸öÕıÕûÊıÏà¼Ó(<80Î»)*/
-        /*²ÎÊıËµÃ÷:numA,numB·Ö±ğÎª¼ÓÊıºÍ±»¼ÓÊı,result´æ·ÅÏà¼ÓºóµÄ½á¹û*/
+        /*ä»»æ„ä¸¤ä¸ªæ­£æ•´æ•°ç›¸åŠ (<80ä½)*/
+        /*å‚æ•°è¯´æ˜:numA,numBåˆ†åˆ«ä¸ºåŠ æ•°å’Œè¢«åŠ æ•°,resultå­˜æ”¾ç›¸åŠ åçš„ç»“æœ*/
         void add(char *numA,char *numB,char *result)
         {
-            int i,j,a,b,c,jw,Alen,Blen; /*¶¨Òå±äÁ¿*/
+            int i,j,a,b,c,jw,Alen,Blen; /*å®šä¹‰å˜é‡*/
             char num[81];
-            char numC[81]; /*¶¨ÒåĞÂµÄ×Ö´®,³¤¶ÈÓënumAÏàÍ¬*/
+            char numC[81]; /*å®šä¹‰æ–°çš„å­—ä¸²,é•¿åº¦ä¸numAç›¸åŒ*/
             char ch;
             char s[1];
             num[0]=0;
             numC[0]=0;
             if (strlen(numA)>=80) return;
             if (strlen(numB)>=80) return;
-            for(i=0;i<strlen(numA);i++) /*ÅĞ¶ÏÊäÈëÊıÊÇ·ñ·Ç·¨*/
-                if (!isdigit(numA[i])) return; /*Èç¹û·Ç·¨·µ»Ø½á¹ûÎª¿Õ*/
+            for(i=0;i<strlen(numA);i++) /*åˆ¤æ–­è¾“å…¥æ•°æ˜¯å¦éæ³•*/
+                if (!isdigit(numA[i])) return; /*å¦‚æœéæ³•è¿”å›ç»“æœä¸ºç©º*/
             for(i=0;i<strlen(numB);i++)
                 if (!isdigit(numB[i])) return;
-            if (strlen(numA)<strlen(numB)) /*½«½Ï´óµÄÊı·ÅÈënumAÖĞ*/
+            if (strlen(numA)<strlen(numB)) /*å°†è¾ƒå¤§çš„æ•°æ”¾å…¥numAä¸­*/
             {
                 strcpy(num,numA);
                 strcpy(numA,numB);
@@ -858,9 +858,9 @@ int CopyFile(char *sfile,char *dfile,int f2d,int barlong,int height,int x,int y)
             strcpy(numC,numB);
             for(i=0;i<Alen;i++)
                 numC[Alen-i-1]=numC[Blen-i-1];
-            for(i=0;i<Alen-Blen;i++) /*ÔÚnumCÖĞ²åÈën¸ö0,Ê¹Æä³¤¶ÈµÈÓÚnumA*/
+            for(i=0;i<Alen-Blen;i++) /*åœ¨numCä¸­æ’å…¥nä¸ª0,ä½¿å…¶é•¿åº¦ç­‰äºnumA*/
                 numC[i]='0';
-            jw=0; /*½øÎ»*/
+            jw=0; /*è¿›ä½*/
             for(i=0;i<Alen;i++)
             {
                 s[0]=numA[Alen-i-1];
@@ -885,18 +885,18 @@ int CopyFile(char *sfile,char *dfile,int f2d,int barlong,int height,int x,int y)
             for(i=0;i<j/2;i++)
             {
                 ch=num[i];
-                num[i]=num[j-i-1]; /*½«num·´×ª*/
+                num[i]=num[j-i-1]; /*å°†numåè½¬*/
                 num[j-i-1]=ch;
             }
             strcpy(result,num);
-            return; /*·µ»ØÏà¼Ó½á¹û*/
+            return; /*è¿”å›ç›¸åŠ ç»“æœ*/
         }
 
-    /*ÈÎÒâÁ½¸öÕıÕûÊıÏà³Ë*/
-    /*²ÎÊıËµÃ÷:numA,numB ·Ö±ğÎª³ËÊıºÍ±»³ËÊı,resultm´æ·Å»ı*/
+    /*ä»»æ„ä¸¤ä¸ªæ­£æ•´æ•°ç›¸ä¹˜*/
+    /*å‚æ•°è¯´æ˜:numA,numB åˆ†åˆ«ä¸ºä¹˜æ•°å’Œè¢«ä¹˜æ•°,resultmå­˜æ”¾ç§¯*/
     void mult(char *numA,char *numB,char *resultm)
     {
-        int i,j,k,l,m,a,b,c,jw,Alen,Blen,f; /*¶¨Òå±äÁ¿*/
+        int i,j,k,l,m,a,b,c,jw,Alen,Blen,f; /*å®šä¹‰å˜é‡*/
         char resulta[82];
         char num[161];
         char ch;
@@ -905,11 +905,11 @@ int CopyFile(char *sfile,char *dfile,int f2d,int barlong,int height,int x,int y)
         f=0;
         if (strlen(numA)>=80) return;
         if (strlen(numB)>=80) return;
-        for(i=0;i<strlen(numA);i++) /*ÅĞ¶ÏÊäÈëÊıÊÇ·ñ·Ç·¨*/
-            if (!isdigit(numA[i])) return; /*Èç¹û·Ç·¨·µ»Ø½á¹ûÎª¿Õ*/
+        for(i=0;i<strlen(numA);i++) /*åˆ¤æ–­è¾“å…¥æ•°æ˜¯å¦éæ³•*/
+            if (!isdigit(numA[i])) return; /*å¦‚æœéæ³•è¿”å›ç»“æœä¸ºç©º*/
         for(i=0;i<strlen(numB);i++)
             if (!isdigit(numB[i])) return;
-        if (strlen(numA)<strlen(numB)) /*½«½Ï´óµÄÊı·ÅÈënumAÖĞ*/
+        if (strlen(numA)<strlen(numB)) /*å°†è¾ƒå¤§çš„æ•°æ”¾å…¥numAä¸­*/
         {
             strcpy(num,numA);
             strcpy(numA,numB);

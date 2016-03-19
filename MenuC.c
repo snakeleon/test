@@ -8,9 +8,9 @@ char    *menu[]= {" File "," Edit "," Help "},
         *edit[]= {" Cut "," Copy "," Paste "," Clear "},
         *help[]= {" Commands... "," About... "};
 
-char    buffer0[7*14*2],buffer1[9*6*2],buffer2[15*4*2], /*´æ·ÅÔ­Ê¼²Ëµ¥*/
+char    buffer0[7*14*2],buffer1[9*6*2],buffer2[15*4*2], /*å­˜æ”¾åŸå§‹èœå•*/
         temp0[14*7*2],temp1[9*6*2],temp2[15*4*2];
-int     ISGETTEXT=-1; /*ÄÄ¸ö²Ëµ¥±»ÏÔÊ¾¹ı*/
+int     ISGETTEXT=-1; /*å“ªä¸ªèœå•è¢«æ˜¾ç¤ºè¿‡*/
 
 void About();
 void BlackItem(int,int);
@@ -24,7 +24,7 @@ void ShowCursor(int);
 void ShowMenu(int,int);
 void UserOperate();
 
-/*---Ñ¡ÏîHelp->AboutµÄÊµÏÖ---*/
+/*---é€‰é¡¹Help->Aboutçš„å®ç°---*/
 void About()
 {
     int i,j;
@@ -79,7 +79,7 @@ void About()
     }
 }
 
-/*---ÔÚ±»Ñ¡ÏîÉÏ¸ÇÉÏºÚÌõ---*/
+/*---åœ¨è¢«é€‰é¡¹ä¸Šç›–ä¸Šé»‘æ¡---*/
 void BlackItem(int whichmenu,int item)
 {
     textcolor(LIGHTGRAY);
@@ -101,10 +101,10 @@ void BlackItem(int whichmenu,int item)
     }
 }
 
-/*---²Ù×÷²Ëµ¥---*/
+/*---æ“ä½œèœå•---*/
 void BlackMenu(int x)
 {
-    int whichmenu; /*ÄÄ¸ö²Ëµ¥±»Ñ¡ÖĞ*/
+    int whichmenu; /*å“ªä¸ªèœå•è¢«é€‰ä¸­*/
     int menu0len=6,menu1len=6;
     textattr(BLACK+LIGHTGRAY<<4);
     RedrawMenu();
@@ -131,7 +131,7 @@ void BlackMenu(int x)
     ShowMenu(whichmenu,0);
 }
 
-/*---ÊµÏÖ²Ëµ¥Ñ¡ÏîµÄ¹¦ÄÜ---*/
+/*---å®ç°èœå•é€‰é¡¹çš„åŠŸèƒ½---*/
 void DealFunction(int whichmenu,int item)
 {
     RedrawMenu();
@@ -141,8 +141,8 @@ void DealFunction(int whichmenu,int item)
     case 0:
         switch(item)
         {
-        case 4: /*µ¥»÷ÁËFile->ExitÑ¡Ïî*/
-            textcolor(WHITE);/*»¹Ô­ÎªTCÔ­ÓĞÇ°¾°ºÍ±³¾°ÑÕÉ«*/
+        case 4: /*å•å‡»äº†File->Exité€‰é¡¹*/
+            textcolor(WHITE);/*è¿˜åŸä¸ºTCåŸæœ‰å‰æ™¯å’ŒèƒŒæ™¯é¢œè‰²*/
             textbackground(BLACK);
             clrscr();
             exit(0);
@@ -155,29 +155,29 @@ void DealFunction(int whichmenu,int item)
     }
 }
 
-/*---»­³öÔ­Ê¼²Ëµ¥---*/
+/*---ç”»å‡ºåŸå§‹èœå•---*/
 void DrawInitmenu(int xchars,int rows,int startposition,int whichmenu)
 {
     int i,j,subnumber;
     char **submenu;
     clrscr();
-    for(i=2; i<2+rows; i++) /*Çå¿Õ²Ëµ¥Õ¼ÓÃµÄÇøÓò*/
+    for(i=2; i<2+rows; i++) /*æ¸…ç©ºèœå•å ç”¨çš„åŒºåŸŸ*/
     {
         gotoxy(startposition,i);
         for(j=0; j<xchars; j++)
             putch(0x20);
     }
     gotoxy(startposition,2);
-    putch(0xffda); /*±ß¿ò×óÉÏ½Ç*/
-    for(i=0; i<xchars-2; i++) /*»­ÉÏ±ß±ß¿ò*/
+    putch(0xffda); /*è¾¹æ¡†å·¦ä¸Šè§’*/
+    for(i=0; i<xchars-2; i++) /*ç”»ä¸Šè¾¹è¾¹æ¡†*/
         putch(0xffc4);
-    putch(0xffbf); /*±ß¿òÓÒÉÏ½Ç*/
+    putch(0xffbf); /*è¾¹æ¡†å³ä¸Šè§’*/
     gotoxy(startposition,1+rows);
-    putch(0xffc0); /*±ß¿ò×óÏÂ½Ç*/
-    for(i=0; i<xchars-2; i++) /*»­ÏÂ±ß±ß¿ò*/
+    putch(0xffc0); /*è¾¹æ¡†å·¦ä¸‹è§’*/
+    for(i=0; i<xchars-2; i++) /*ç”»ä¸‹è¾¹è¾¹æ¡†*/
         putch(0xffc4);
-    putch(0xffd9); /*±ß¿òÓÒÏÂ½Ç*/
-    for(j=3; j<1+rows; j++) /*»­×óÓÒ±ß¿ò*/
+    putch(0xffd9); /*è¾¹æ¡†å³ä¸‹è§’*/
+    for(j=3; j<1+rows; j++) /*ç”»å·¦å³è¾¹æ¡†*/
     {
         gotoxy(startposition,j);
         putch(0xffb3);
@@ -206,28 +206,28 @@ void DrawInitmenu(int xchars,int rows,int startposition,int whichmenu)
     }
 }
 
-/*---³õÊ¼½çÃæ---*/
+/*---åˆå§‹ç•Œé¢---*/
 void InitScreen()
 {
     int i;
     textmode(C80);
     textattr(BLACK+LIGHTGRAY<<4);
-    DrawInitmenu(14,7,2,0); /*»­File²Ëµ¥*/
+    DrawInitmenu(14,7,2,0); /*ç”»Fileèœå•*/
     _conio_gettext(2,2,15,8,buffer0);
-    DrawInitmenu(9,6,8,1); /*»­Edit²Ëµ¥*/
+    DrawInitmenu(9,6,8,1); /*ç”»Editèœå•*/
     _conio_gettext(8,2,16,7,buffer1);
-    DrawInitmenu(15,4,14,2); /*»­Help²Ëµ¥*/
+    DrawInitmenu(15,4,14,2); /*ç”»Helpèœå•*/
     _conio_gettext(14,2,28,5,buffer2);
     textbackground(BLUE);
     clrscr();
     textattr(BLACK+LIGHTGRAY<<4);
     for(i=0; i<80; i++)
-        putch(0x20); /*ÓÃ¿Õ¸ñÌî°×²Ëµ¥ºáÌõ*/
+        putch(0x20); /*ç”¨ç©ºæ ¼å¡«ç™½èœå•æ¨ªæ¡*/
     RedrawMenu();
-    ShowCursor(0); /*Òş²Ø¹â±ê*/
+    ShowCursor(0); /*éšè—å…‰æ ‡*/
 }
 
-/*---»¹Ô­µ½³õÊ¼×´Ì¬---*/
+/*---è¿˜åŸåˆ°åˆå§‹çŠ¶æ€---*/
 void Recover()
 {
     switch(ISGETTEXT)
@@ -245,7 +245,7 @@ void Recover()
     ISGETTEXT=-1;
 }
 
-/*---ÖØ»­²Ëµ¥---*/
+/*---é‡ç”»èœå•---*/
 void RedrawMenu()
 {
     int i;
@@ -255,20 +255,20 @@ void RedrawMenu()
         cprintf("%s",menu[i]);
 }
 
-/*---ÏÔÊ¾/Òş²Ø¹â±ê---*/
+/*---æ˜¾ç¤º/éšè—å…‰æ ‡---*/
 void ShowCursor(int status)
 {
     union REGS r;
-    if(status==1) /*ÏÔÊ¾¹â±ê*/
+    if(status==1) /*æ˜¾ç¤ºå…‰æ ‡*/
         r.h.ch=0x01;
-    else /*Òş²Ø¹â±ê*/
+    else /*éšè—å…‰æ ‡*/
         r.h.ch=0x20;
     r.h.ah=0x01;
     r.h.cl=0x01;
     int86(0x10,&r,&r);
 }
 
-/*---ÏÔÊ¾²Ëµ¥---*/
+/*---æ˜¾ç¤ºèœå•---*/
 void ShowMenu(int whichmenu,int item)
 {
     Recover();
@@ -291,10 +291,10 @@ void ShowMenu(int whichmenu,int item)
     BlackItem(whichmenu,item);
 }
 
-/*---ÓÃ»§²Ù×÷---*/
+/*---ç”¨æˆ·æ“ä½œ---*/
 void UserOperate()
 {
-    while(1)  /*Ñ­»·½øĞĞÊó±êµ¥»÷ÊÂ¼şµÄ²¶»ñ*/
+    while(1)  /*å¾ªç¯è¿›è¡Œé¼ æ ‡å•å‡»äº‹ä»¶çš„æ•è·*/
     {
         union REGS r;
         r.x.ax=0x05;
@@ -356,7 +356,7 @@ void UserOperate()
     }
 }
 
-/*---Ö÷º¯Êı---*/
+/*---ä¸»å‡½æ•°---*/
 int main(void)
 {
     InitScreen();
