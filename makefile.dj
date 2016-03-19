@@ -1,0 +1,38 @@
+# Project: New
+# Compiler: Default DJGPP compiler
+# Compiler Type:  GNU 3.4.4
+# Makefile created by SiFe on 2009-08-05 19:46
+
+DJGPPDIR 	= D:/DJGPP/
+ENV 	  	= DJGPP.ENV
+CPP       	= gpp.exe
+CC        	= gcc.exe
+DOSRES 		=
+OBJ       	= library.o
+LINKOBJ   	= library.o
+SOURSE    	= library.cpp
+LIBS      	= -L"$(DJGPPDIR)lib"
+INCS      	= -I"$(DJGPPDIR)include"
+CXXINCS   	= -I"$(DJGPPDIR)include/cxx/3.44" 
+BIN       	= library.exe
+DEFINES   	= 
+CXXFLAGS  	= $(CXXINCS) $(DEFINES) -O3 -g3 -Wall
+CFLAGS    	= $(INCS) $(DEFINES)	-O3 -g3 -Wall 
+GPROF     	= gprof.exe
+RM        	= del /q
+LINK      	= gpp.exe
+
+.PHONY: all all-before all-after clean clean-custom setenv setenv-custom
+all: all-before $(setenv) $(BIN) all-after
+
+setenv: setenv-custom
+	cmd.exe /c SET DJGPP=$(DJGPPDIR)$(ENV)
+
+clean: clean-custom
+	$(RM) $(OBJ) $(BIN)
+	
+$(BIN): $(LINKOBJ)
+	$(DJGPPDIR)Bin/$(LINK) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+$(LINKOBJ): $(SOURSE)
+	$(DJGPPDIR)Bin/$(CPP) -c $(SOURSE) -o $(OBJ) $(CXXFLAGS)
