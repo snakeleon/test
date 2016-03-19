@@ -1,153 +1,153 @@
 //////////////////////////////////////////////////////////////
-//          Ãû³Æ£º   ¶íÂŞË¹·½¿é ²ÊÉ«°æ	1.1.0				//
-//          ÓïÑÔ£º   CÓïÑÔ									//
-//		ÉÏÒ»°æ±¾£º   ¶íÂŞË¹·½¿é ²ÊÉ«°æ	1.0.0				//
-//		Ôö¼Ó¹¦ÄÜ£º   Ôö¼Ó¹Ø¿¨ ºÍ ×î¸ß·Ö						//
-//          »·¾³£º   Microsoft Visual C++ 6.0				//
-//          ×÷Õß£º   Êó±êÁÔÈË								//
-//          ÈÕÆÚ£º   2015Äê1ÔÂ19ºÅ							//
+//          åç§°ï¼š   ä¿„ç½—æ–¯æ–¹å— å½©è‰²ç‰ˆ	1.1.0				//
+//          è¯­è¨€ï¼š   Cè¯­è¨€									//
+//		ä¸Šä¸€ç‰ˆæœ¬ï¼š   ä¿„ç½—æ–¯æ–¹å— å½©è‰²ç‰ˆ	1.0.0				//
+//		å¢åŠ åŠŸèƒ½ï¼š   å¢åŠ å…³å¡ å’Œ æœ€é«˜åˆ†						//
+//          ç¯å¢ƒï¼š   Microsoft Visual C++ 6.0				//
+//          ä½œè€…ï¼š   é¼ æ ‡çŒäºº								//
+//          æ—¥æœŸï¼š   2015å¹´1æœˆ19å·							//
 //////////////////////////////////////////////////////////////
 #include<stdio.h>
 #include <windows.h>
 #include<conio.h>
 #include<time.h>
-void gotoxy(int x,int y);//¿ØÖÆ¹â±ê¡£X±íÊ¾ºá×ø±ê£¬Y±íÊ¾×İ×ø±ê
-void console();//ÉèÖÃ¿ØÖÆÌ¨´°¿Ú´óĞ¡£¬ÎªÁËÈÃ³ÌĞòÔËĞĞµÃ¸üºÃ¿´
-void my_print();//ÉèÖÃ½çÃæ
-void my_randout();//Ëæ»ú³öÏÖ·½¿é£¬²¢´òÓ¡ÔÚÌáÊ¾Çø
-void my_printblock();//´òÓ¡ 4*4 µÄ·½¸ñÀ´ÏÔÊ¾·½¿é
-void my_up();//Ğı×ª
-void my_down();//ÏÂÒÆ
-void my_lift();//×óÒÆ
-void my_right();//ÓÒÒÆ
-void my_exit();//ÍË³öÇ°±£´æ×î¸ß·Ö
-void clear();//Ïû³ıÕûĞĞ
-void gameover();//ÓÎÏ·½áÊø
-void my_stop();//ÓÎÏ·ÔİÍ£
-int  tem[4][4];//ÓÃ4*4µÄ·½¸ñÀ´¿ØÖÆ·½¿éµÄ²Ù×÷ºÍÏÔÊ¾ Õâ¸ö×÷Îª´«ÖµÃ½½é
-int  block[4][4];//ÌáÊ¾ÇøµÄ·½¿é
-int  BLOCK[4][4];//ÕıÔÚÏÂÂäµÄ·½¿é
-int  scope[25][34] = {0};//²Ù×÷µÄ·¶Î§ ÕâÀïÒª×¢Òâ£¬Ò»¸ö·½¸ñÊÇÕ¼Á½¸öºá×ø±êµ¥Î»µÄ
-int  point_x , point_y;//·½¸ñµÄ×óÉÏ½Ç×ø±ê
-int  fen = 0;//µÃ·Ö
-int  pass = 1;//¹Ø¿¨  ĞÂÔö
-int  hang = 0;//Ïû³ıµÄ×ÜĞĞÊı
-int  max_fen = 0;//×î¸ß·Ö ĞÂÔö
+void gotoxy(int x,int y);//æ§åˆ¶å…‰æ ‡ã€‚Xè¡¨ç¤ºæ¨ªåæ ‡ï¼ŒYè¡¨ç¤ºçºµåæ ‡
+void console();//è®¾ç½®æ§åˆ¶å°çª—å£å¤§å°ï¼Œä¸ºäº†è®©ç¨‹åºè¿è¡Œå¾—æ›´å¥½çœ‹
+void my_print();//è®¾ç½®ç•Œé¢
+void my_randout();//éšæœºå‡ºç°æ–¹å—ï¼Œå¹¶æ‰“å°åœ¨æç¤ºåŒº
+void my_printblock();//æ‰“å° 4*4 çš„æ–¹æ ¼æ¥æ˜¾ç¤ºæ–¹å—
+void my_up();//æ—‹è½¬
+void my_down();//ä¸‹ç§»
+void my_lift();//å·¦ç§»
+void my_right();//å³ç§»
+void my_exit();//é€€å‡ºå‰ä¿å­˜æœ€é«˜åˆ†
+void clear();//æ¶ˆé™¤æ•´è¡Œ
+void gameover();//æ¸¸æˆç»“æŸ
+void my_stop();//æ¸¸æˆæš‚åœ
+int  tem[4][4];//ç”¨4*4çš„æ–¹æ ¼æ¥æ§åˆ¶æ–¹å—çš„æ“ä½œå’Œæ˜¾ç¤º è¿™ä¸ªä½œä¸ºä¼ å€¼åª’ä»‹
+int  block[4][4];//æç¤ºåŒºçš„æ–¹å—
+int  BLOCK[4][4];//æ­£åœ¨ä¸‹è½çš„æ–¹å—
+int  scope[25][34] = {0};//æ“ä½œçš„èŒƒå›´ è¿™é‡Œè¦æ³¨æ„ï¼Œä¸€ä¸ªæ–¹æ ¼æ˜¯å ä¸¤ä¸ªæ¨ªåæ ‡å•ä½çš„
+int  point_x , point_y;//æ–¹æ ¼çš„å·¦ä¸Šè§’åæ ‡
+int  fen = 0;//å¾—åˆ†
+int  pass = 1;//å…³å¡  æ–°å¢
+int  hang = 0;//æ¶ˆé™¤çš„æ€»è¡Œæ•°
+int  max_fen = 0;//æœ€é«˜åˆ† æ–°å¢
 FILE *fp;
-bool check = true;//¼ì²é·½¿é»¹ÄÜ²»ÄÜÏÂÂä
+bool check = true;//æ£€æŸ¥æ–¹å—è¿˜èƒ½ä¸èƒ½ä¸‹è½
 int  block0[4][4] = {
     {0,1,1,0},
     {0,0,1,0},
     {0,0,1,0},
     {0,0,0,0}
-};// 7 ¸ö·½¿é ÓÃÊı×é±íÊ¾ Õı¡°7¡±
+};// 7 ä¸ªæ–¹å— ç”¨æ•°ç»„è¡¨ç¤º æ­£â€œ7â€
 int  block1[4][4] = {
     {0,1,1,0},
     {0,1,0,0},
     {0,1,0,0},
     {0,0,0,0}
-};// ·´¡°7¡±
+};// åâ€œ7â€
 int  block2[4][4] = {
     {0,0,0,0},
     {0,0,1,1},
     {0,1,1,0},
     {0,0,0,0}
-};// ·´¡°z¡±
+};// åâ€œzâ€
 int  block3[4][4] = {
     {0,0,0,0},
     {1,1,0,0},
     {0,1,1,0},
     {0,0,0,0}
-};// Õı¡°z¡±
+};// æ­£â€œzâ€
 int  block4[4][4] = {
     {0,0,0,0},
     {0,1,0,0},
     {1,1,1,0},
     {0,0,0,0}
-};// µ¹¡°T¡±
+};// å€’â€œTâ€
 int  block5[4][4] = {
     {0,0,0,0},
     {0,1,1,0},
     {0,1,1,0},
     {0,0,0,0}
-};// Õı·½ĞÎ
+};// æ­£æ–¹å½¢
 int  block6[4][4] = {
     {0,0,0,0},
     {0,0,0,0},
     {1,1,1,1},
     {0,0,0,0}
-};// Ö±Ìõ
+};// ç›´æ¡
 
 int main()
 {
     if ((fp = fopen("test.txt","r") )== NULL)
     {
-        fp = fopen("test.txt","w+");//´ò¿ªÎÄ¼ş Èç¹ûÃ»ÓĞ¾Í´´½¨
+        fp = fopen("test.txt","w+");//æ‰“å¼€æ–‡ä»¶ å¦‚æœæ²¡æœ‰å°±åˆ›å»º
     }
-    srand((unsigned)time(NULL));//ÉèÖÃËæ»úÊıÖÖ×Ó
+    srand((unsigned)time(NULL));//è®¾ç½®éšæœºæ•°ç§å­
     char key;
     int  i , j;
     fscanf(fp, "%d", &i);
-    max_fen = max_fen>i?max_fen:i;//½«×î¸ß·Ö¸³¸ømax_fen
-    fclose(fp);//¹Ø±ÕÎÄ¼ş
-    int time;//¿ØÖÆÏÂÂäÊ±¼ä
+    max_fen = max_fen>i?max_fen:i;//å°†æœ€é«˜åˆ†èµ‹ç»™max_fen
+    fclose(fp);//å…³é—­æ–‡ä»¶
+    int time;//æ§åˆ¶ä¸‹è½æ—¶é—´
     console();
     my_print();
     my_randout();
-    while( true )//ËÀÑ­»·
+    while( true )//æ­»å¾ªç¯
     {
-        if( check )//Èç¹ûÃ»ÓĞÕıÔÚÏÂÂäµÄ·½¿é¾ÍÖ´ĞĞifÀïÃæµÄ
+        if( check )//å¦‚æœæ²¡æœ‰æ­£åœ¨ä¸‹è½çš„æ–¹å—å°±æ‰§è¡Œifé‡Œé¢çš„
         {
             check = false;
-            point_x = 14;//·½¿é×î³õ³öÏÖµÄµØ·½
+            point_x = 14;//æ–¹å—æœ€åˆå‡ºç°çš„åœ°æ–¹
             point_y = 0;
             for( i=0 ; i < 4 ; i++)
             {
                 for( j = 0 ; j < 4 ; j++)
                 {
-                    BLOCK[i][j] = block[i][j];//½«ÌáÊ¾ÇøµÄ·½¿éÊı×é´«µ½ÏÂÂäµÄ·½¿éÊı×é
+                    BLOCK[i][j] = block[i][j];//å°†æç¤ºåŒºçš„æ–¹å—æ•°ç»„ä¼ åˆ°ä¸‹è½çš„æ–¹å—æ•°ç»„
                 }
             }
-            my_printblock();//ÔÚpoint_x,point_yÏÔÊ¾·½¿é¡£
-            my_randout();//ÌáÊ¾ÇøËæ»ú»»Ò»¸ö·½¿é
+            my_printblock();//åœ¨point_x,point_yæ˜¾ç¤ºæ–¹å—ã€‚
+            my_randout();//æç¤ºåŒºéšæœºæ¢ä¸€ä¸ªæ–¹å—
         }
-        if (kbhit()) //¼ì²â£¬Èç¹ûÓĞ°´¼ü¾ÍÖ´ĞĞifÀïÃæµÄ
+        if (kbhit()) //æ£€æµ‹ï¼Œå¦‚æœæœ‰æŒ‰é”®å°±æ‰§è¡Œifé‡Œé¢çš„
         {
-            key = getch();//²¶»ñ°´¼ü
+            key = getch();//æ•è·æŒ‰é”®
             switch( key )
             {
-                case 72:my_up();//ÉÏ
+                case 72:my_up();//ä¸Š
                         break;
-                case 75:my_lift();//×ó
+                case 75:my_lift();//å·¦
                         break;
-                case 77:my_right();//ÓÒ
+                case 77:my_right();//å³
                         break;
-                case 80:my_down();//ÏÂ
+                case 80:my_down();//ä¸‹
                         break;
-                case 32:my_stop();//¿Õ¸ñ ÔİÍ£»ò¿ªÊ¼
+                case 32:my_stop();//ç©ºæ ¼ æš‚åœæˆ–å¼€å§‹
                         break;
-                case 27:my_exit();//Esc ÍË³ö
+                case 27:my_exit();//Esc é€€å‡º
                 default: ;
             }
         }
-        Sleep(30);//µÈ´ı0.03Ãë 0.03Ãë²ÅÄÜÖ´ĞĞÒ»¸ö°´¼ü Ò²½µµÍCPU
-        if( 0 == ++time % (32 - pass*3))//¿ØÖÆÏÂÂäµÄÊ±¼ä=30*30ºÁÃë
+        Sleep(30);//ç­‰å¾…0.03ç§’ 0.03ç§’æ‰èƒ½æ‰§è¡Œä¸€ä¸ªæŒ‰é”® ä¹Ÿé™ä½CPU
+        if( 0 == ++time % (32 - pass*3))//æ§åˆ¶ä¸‹è½çš„æ—¶é—´=30*30æ¯«ç§’
         {
-            my_down();//Ê±¼äµ½×Ô¶¯ÏÂÂäÒ»¸ñ
+            my_down();//æ—¶é—´åˆ°è‡ªåŠ¨ä¸‹è½ä¸€æ ¼
         }
-        if( true == check)//µ±²»ÄÜÏÂÂäÊ±
+        if( true == check)//å½“ä¸èƒ½ä¸‹è½æ—¶
         {
             for( i=0 ; i < 4 ; i++)
             {
                 for( j = 0 ; j < 4 ; j++)
                 {
                     if( 1 == BLOCK[i][j])
-                        scope[point_x / 2 + j][point_y + i] = BLOCK[i][j];//°ÑÏÂÂäµÄ·½¿é¸³Öµ¸ø²Ù×÷ÇøµÄÊı×é
-                    //ÕâÀïµÄpoint_x³ıÒÔ2ÊÇÒòÎªÒ»¸öĞ¡¸ñ×ÓÕ¼Á½¸öºá×ø±ê
+                        scope[point_x / 2 + j][point_y + i] = BLOCK[i][j];//æŠŠä¸‹è½çš„æ–¹å—èµ‹å€¼ç»™æ“ä½œåŒºçš„æ•°ç»„
+                    //è¿™é‡Œçš„point_xé™¤ä»¥2æ˜¯å› ä¸ºä¸€ä¸ªå°æ ¼å­å ä¸¤ä¸ªæ¨ªåæ ‡
                 }
             }
             my_printblock();
-            clear();//Èç¹ûÓĞÄ³Ò»ĞĞÂúÁË¾ÍÏû³ı
+            clear();//å¦‚æœæœ‰æŸä¸€è¡Œæ»¡äº†å°±æ¶ˆé™¤
         }
     }
     return 0;
@@ -155,59 +155,59 @@ int main()
 
 
 
-//ÉèÖÃ´°¿ÚÎ»ÖÃºÍ´óĞ¡£¬ÎªÁËÈÃ³ÌĞòÔËĞĞµÃ¸üºÃ¿´
+//è®¾ç½®çª—å£ä½ç½®å’Œå¤§å°ï¼Œä¸ºäº†è®©ç¨‹åºè¿è¡Œå¾—æ›´å¥½çœ‹
 void console()
 {
-    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);	// »ñÈ¡±ê×¼Êä³öÉè±¸¾ä±ú
-    CONSOLE_SCREEN_BUFFER_INFO bInfo; // ´°¿Ú»º³åÇøĞÅÏ¢
-    GetConsoleScreenBufferInfo(hOut, &bInfo );	// »ñÈ¡´°¿Ú»º³åÇøĞÅÏ¢
-    SetConsoleTitle("¶íÂŞË¹·½¿é C°æ"); // ÉèÖÃ´°¿ÚµÄ±êÌâ
-    COORD size = {80, 32};//²»ÄÜĞ¡ÓÚÄ¬ÈÏ´óĞ¡£¨80£¬25£©
-    SetConsoleScreenBufferSize(hOut,size); // ÖØĞÂÉèÖÃ»º³åÇø´óĞ¡*/
-    SMALL_RECT rc = {0,0, 63, 31}; //²»ÄÜ´óÓÚ»º³åÇø´óĞ¡
-    SetConsoleWindowInfo(hOut,true ,&rc);	// ÖØÖÃ´°¿Ú´óĞ¡
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);	// è·å–æ ‡å‡†è¾“å‡ºè®¾å¤‡å¥æŸ„
+    CONSOLE_SCREEN_BUFFER_INFO bInfo; // çª—å£ç¼“å†²åŒºä¿¡æ¯
+    GetConsoleScreenBufferInfo(hOut, &bInfo );	// è·å–çª—å£ç¼“å†²åŒºä¿¡æ¯
+    SetConsoleTitle("ä¿„ç½—æ–¯æ–¹å— Cç‰ˆ"); // è®¾ç½®çª—å£çš„æ ‡é¢˜
+    COORD size = {80, 32};//ä¸èƒ½å°äºé»˜è®¤å¤§å°ï¼ˆ80ï¼Œ25ï¼‰
+    SetConsoleScreenBufferSize(hOut,size); // é‡æ–°è®¾ç½®ç¼“å†²åŒºå¤§å°*/
+    SMALL_RECT rc = {0,0, 63, 31}; //ä¸èƒ½å¤§äºç¼“å†²åŒºå¤§å°
+    SetConsoleWindowInfo(hOut,true ,&rc);	// é‡ç½®çª—å£å¤§å°
 }
 
 void my_print()
 {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_INTENSITY);//ºÚµ×ÁÁÀ¶×Ö¡£
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_INTENSITY);//é»‘åº•äº®è“å­—ã€‚
     for(int i = 1 ; i < 30 ; i++)
-        printf("¡ö\t\t\t\t¡ö |                           |\n");
-    printf("¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö |---------------------------|\n");//¿ò¼Ü
+        printf("â– \t\t\t\tâ–  |                           |\n");
+    printf("â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â–  |---------------------------|\n");//æ¡†æ¶
     gotoxy(36,0);
     printf("---------------------------");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN | FOREGROUND_RED |FOREGROUND_INTENSITY);//ºÚµ×ÁÁ»Æ×Ö¡£
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN | FOREGROUND_RED |FOREGROUND_INTENSITY);//é»‘åº•äº®é»„å­—ã€‚
     gotoxy(40,2);
-    printf("¹Ø  ¿¨£º %d",pass);
+    printf("å…³  å¡ï¼š %d",pass);
     gotoxy(40,3);
-    printf("·Ö  Êı£º %d",fen);
+    printf("åˆ†  æ•°ï¼š %d",fen);
     gotoxy(40,4);
-    printf("×î¸ß·Ö£º %d",max_fen);
+    printf("æœ€é«˜åˆ†ï¼š %d",max_fen);
     gotoxy(36,6);
-    printf("ÏÂÒ»¸ö·½¿é£º");
+    printf("ä¸‹ä¸€ä¸ªæ–¹å—ï¼š");
     gotoxy(36,14);
-    printf("²Ù×÷·½·¨£º");
+    printf("æ“ä½œæ–¹æ³•ï¼š");
     gotoxy(40,16);
-    printf("¡ü£ºĞı×ª ¡ı£º³Áµí");
+    printf("â†‘ï¼šæ—‹è½¬ â†“ï¼šæ²‰æ·€");
     gotoxy(40,18);
-    printf("¡ú£ºÓÒÒÆ ¡û£º×óÒÆ");
+    printf("â†’ï¼šå³ç§» â†ï¼šå·¦ç§»");
     gotoxy(39,20);
-    printf("¿Õ¸ñ¼ü£º¿ªÊ¼ / ÔİÍ£");
+    printf("ç©ºæ ¼é”®ï¼šå¼€å§‹ / æš‚åœ");
     gotoxy(39,22);
-    printf("    Esc£ºÍË³ö");
+    printf("    Escï¼šé€€å‡º");
     gotoxy(36,25);
-    printf("¹Ø ÓÚ£º");
+    printf("å…³ äºï¼š");
     gotoxy(40,26);
-    printf("¶íÂŞË¹·½¿é 1.1.0");
+    printf("ä¿„ç½—æ–¯æ–¹å— 1.1.0");
     gotoxy(49,27);
-    printf("×÷Õß£ºÊó±êÁÔÈË");
+    printf("ä½œè€…ï¼šé¼ æ ‡çŒäºº");
     gotoxy(50,28);
-    printf("2015Äê1ÔÂ19ÈÕ");
+    printf("2015å¹´1æœˆ19æ—¥");
 }
 
 
-//ÉèÖÃ¹â±êÊä³öµÄÎ»ÖÃº¯Êı¡£×ø±ê²»ÄÜÎª¸ºÊı
-void gotoxy(int x,int y)//X±íÊ¾ºá×ø±ê£¬Y±íÊ¾×İ×ø±ê¡£
+//è®¾ç½®å…‰æ ‡è¾“å‡ºçš„ä½ç½®å‡½æ•°ã€‚åæ ‡ä¸èƒ½ä¸ºè´Ÿæ•°
+void gotoxy(int x,int y)//Xè¡¨ç¤ºæ¨ªåæ ‡ï¼ŒYè¡¨ç¤ºçºµåæ ‡ã€‚
 {
     HANDLE app;
     COORD  pos;
@@ -216,7 +216,7 @@ void gotoxy(int x,int y)//X±íÊ¾ºá×ø±ê£¬Y±íÊ¾×İ×ø±ê¡£
     app=GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleCursorPosition(app,pos);
 }
-//Ğı×ª ½«4*4·½¸ñË³Ê±ÕëĞı×ª
+//æ—‹è½¬ å°†4*4æ–¹æ ¼é¡ºæ—¶é’ˆæ—‹è½¬
 void my_up()
 {
     int i,j;
@@ -239,8 +239,8 @@ void my_up()
             BLOCK[j][3-i] = tem[i][j];
         }
     }
-    //ÒÔÉÏÎªĞı×ª¡£
-    //ÏÂÃæÎª·ÀÖ¹Ğı×ªºó³¬³ö¿ò¼Ü·¶Î§
+    //ä»¥ä¸Šä¸ºæ—‹è½¬ã€‚
+    //ä¸‹é¢ä¸ºé˜²æ­¢æ—‹è½¬åè¶…å‡ºæ¡†æ¶èŒƒå›´
     for( j = 0 ; j < 2 ; j++)
     {
         for( i = 0 ; i < 4 ; i++)
@@ -255,9 +255,9 @@ void my_up()
             }
         }
     }
-    my_printblock();//Ğı×ªÖ®ºóÁ¢¼´ÏÔÊ¾³öÀ´
+    my_printblock();//æ—‹è½¬ä¹‹åç«‹å³æ˜¾ç¤ºå‡ºæ¥
 }
-//×óÒÆ
+//å·¦ç§»
 void my_lift()
 {
     int i , j ;
@@ -266,7 +266,7 @@ void my_lift()
         {
             if(1 == BLOCK[j][i] && (point_x+2*i-1 < 2 || 1 == scope[point_x / 2 + i - 1][point_y + j]))
             {
-                return ;//Èç¹ûµ½±ßÔµ »òÕßÊÇ×ó±ßÒÑ¾­ÓĞÁË·½¿é
+                return ;//å¦‚æœåˆ°è¾¹ç¼˜ æˆ–è€…æ˜¯å·¦è¾¹å·²ç»æœ‰äº†æ–¹å—
             }
         }
     for( i = 0 ; i  < 4 ; i++ )
@@ -274,7 +274,7 @@ void my_lift()
             if( 1 == BLOCK[i][j])
             {
                 gotoxy(point_x + j*2 , point_y + i);
-                printf("  ");//°ÑÖ®Ç°µÄ²Áµô
+                printf("  ");//æŠŠä¹‹å‰çš„æ“¦æ‰
             }
     point_x -= 2;
     my_printblock();
@@ -288,7 +288,7 @@ void my_right()
         {
             if(1 == BLOCK[j][i] && ( point_x+2*i+2 > 30 || 1 == scope[point_x / 2 + i + 1][point_y + j]))
             {
-                return ;//Èç¹ûµ½±ßÔµ »òÕßÊÇÓÒ±ßÒÑ¾­ÓĞÁË·½¿é
+                return ;//å¦‚æœåˆ°è¾¹ç¼˜ æˆ–è€…æ˜¯å³è¾¹å·²ç»æœ‰äº†æ–¹å—
             }
         }
     for( i = 0 ; i  < 4 ; i++ )
@@ -296,7 +296,7 @@ void my_right()
             if( 1 == BLOCK[i][j])
             {
                 gotoxy(point_x + j*2 , point_y + i);
-                printf("  ");//°ÑÖ®Ç°µÄ²Áµô
+                printf("  ");//æŠŠä¹‹å‰çš„æ“¦æ‰
             }
     point_x += 2;
     my_printblock();
@@ -307,14 +307,14 @@ void my_down( )
     int i , j ;
     if( true == check)
     {
-        return ;//²»ÄÜÏÂÂäÖ±½Ó²»Ö´ĞĞ
+        return ;//ä¸èƒ½ä¸‹è½ç›´æ¥ä¸æ‰§è¡Œ
     }
     gotoxy(point_x,point_y);
-    for( i = 3 ; i > 0 ; i-- )//¼ì²â¸Ã·½¸ñ»¹ÄÜ²»ÄÜÏÂÂä
+    for( i = 3 ; i > 0 ; i-- )//æ£€æµ‹è¯¥æ–¹æ ¼è¿˜èƒ½ä¸èƒ½ä¸‹è½
         for( j = 0 ; j  < 4 ; j++ )
             if ( 1 == BLOCK[i][j] )
             {
-                if (1 == scope[point_x / 2 + j][point_y + i + 1] || point_y + i + 1 > 28 ) //µ½×îÏÂ±ß»òÊÇÏÂÃæÒÑ¾­ÓĞ·½¸ñ
+                if (1 == scope[point_x / 2 + j][point_y + i + 1] || point_y + i + 1 > 28 ) //åˆ°æœ€ä¸‹è¾¹æˆ–æ˜¯ä¸‹é¢å·²ç»æœ‰æ–¹æ ¼
                 {
                     check = true;
                     return ;
@@ -325,65 +325,65 @@ void my_down( )
             if( 1 == BLOCK[i][j])
             {
                 gotoxy(point_x + j*2 , point_y + i);
-                printf("  ");//ÄÜÏÂÂä£¬²Á³ıÒÔÇ°µÄ·½¸ñ
+                printf("  ");//èƒ½ä¸‹è½ï¼Œæ“¦é™¤ä»¥å‰çš„æ–¹æ ¼
             }
     point_y++;
-    my_printblock();//ÔÚÏÂÒ»¸ñÏÔÊ¾
+    my_printblock();//åœ¨ä¸‹ä¸€æ ¼æ˜¾ç¤º
 }
-//ÔİÍ£
+//æš‚åœ
 void my_stop()
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_INTENSITY);
     gotoxy(10,10);	printf("              ");
-    gotoxy(10,11);	printf("  ¡ö¡ö¡ö¡ö¡ö  ");
-    gotoxy(10,12);	printf("  ¡ö      ¡ö  ");
-    gotoxy(10,13);	printf("  ¡ö      ¡ö  ");
-    gotoxy(10,14);	printf("  ¡ö¡ö¡ö¡ö¡ö  ");
-    gotoxy(10,15);	printf("  ¡ö          ");
-    gotoxy(10,16);	printf("  ¡ö           ");
-    gotoxy(10,17);	printf("  ¡ö          ");
+    gotoxy(10,11);	printf("  â– â– â– â– â–   ");
+    gotoxy(10,12);	printf("  â–       â–   ");
+    gotoxy(10,13);	printf("  â–       â–   ");
+    gotoxy(10,14);	printf("  â– â– â– â– â–   ");
+    gotoxy(10,15);	printf("  â–           ");
+    gotoxy(10,16);	printf("  â–            ");
+    gotoxy(10,17);	printf("  â–           ");
     gotoxy(10,18);	printf("              ");
-    if ( 32 == getch()) //ÓÃµÈ´ıÊäÈë×Ö·ûÊµÏÖÔİÍ£ 32Îª¿Õ¸ñ
+    if ( 32 == getch()) //ç”¨ç­‰å¾…è¾“å…¥å­—ç¬¦å®ç°æš‚åœ 32ä¸ºç©ºæ ¼
     {
         gotoxy(10,10);	printf("              ");
-        gotoxy(10,11);	printf("  ¡ö¡ö¡ö¡ö¡ö  ");
-        gotoxy(10,12);	printf("          ¡ö  ");
-        gotoxy(10,13);	printf("          ¡ö  ");
-        gotoxy(10,14);	printf("  ¡ö¡ö¡ö¡ö¡ö  ");
-        gotoxy(10,15);	printf("          ¡ö  ");
-        gotoxy(10,16);	printf("          ¡ö  ");
-        gotoxy(10,17);	printf("  ¡ö¡ö¡ö¡ö¡ö  ");
+        gotoxy(10,11);	printf("  â– â– â– â– â–   ");
+        gotoxy(10,12);	printf("          â–   ");
+        gotoxy(10,13);	printf("          â–   ");
+        gotoxy(10,14);	printf("  â– â– â– â– â–   ");
+        gotoxy(10,15);	printf("          â–   ");
+        gotoxy(10,16);	printf("          â–   ");
+        gotoxy(10,17);	printf("  â– â– â– â– â–   ");
         gotoxy(10,18);	printf("              ");
         Sleep(1000);
         gotoxy(10,10);	printf("              ");
-        gotoxy(10,11);	printf("  ¡ö¡ö¡ö¡ö¡ö  ");
-        gotoxy(10,12);	printf("          ¡ö  ");
-        gotoxy(10,13);	printf("          ¡ö  ");
-        gotoxy(10,14);	printf("  ¡ö¡ö¡ö¡ö¡ö  ");
-        gotoxy(10,15);	printf("  ¡ö          ");
-        gotoxy(10,16);	printf("  ¡ö          ");
-        gotoxy(10,17);	printf("  ¡ö¡ö¡ö¡ö¡ö  ");
+        gotoxy(10,11);	printf("  â– â– â– â– â–   ");
+        gotoxy(10,12);	printf("          â–   ");
+        gotoxy(10,13);	printf("          â–   ");
+        gotoxy(10,14);	printf("  â– â– â– â– â–   ");
+        gotoxy(10,15);	printf("  â–           ");
+        gotoxy(10,16);	printf("  â–           ");
+        gotoxy(10,17);	printf("  â– â– â– â– â–   ");
         gotoxy(10,18);	printf("              ");
         Sleep(1000);
         gotoxy(10,10);	printf("              ");
-        gotoxy(10,11);	printf("      ¡ö¡ö    ");
-        gotoxy(10,12);	printf("    ¡ö¡ö¡ö    ");
-        gotoxy(10,13);	printf("      ¡ö¡ö    ");
-        gotoxy(10,14);	printf("      ¡ö¡ö    ");
-        gotoxy(10,15);	printf("      ¡ö¡ö    ");
-        gotoxy(10,16);	printf("      ¡ö¡ö    ");
-        gotoxy(10,17);	printf("    ¡ö¡ö¡ö¡ö  ");
+        gotoxy(10,11);	printf("      â– â–     ");
+        gotoxy(10,12);	printf("    â– â– â–     ");
+        gotoxy(10,13);	printf("      â– â–     ");
+        gotoxy(10,14);	printf("      â– â–     ");
+        gotoxy(10,15);	printf("      â– â–     ");
+        gotoxy(10,16);	printf("      â– â–     ");
+        gotoxy(10,17);	printf("    â– â– â– â–   ");
         gotoxy(10,18);	printf("              ");
         Sleep(1000);
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_INTENSITY);
-        for(int i = 0 ; i < 9 ; i++)//½«ÔİÍ£ÑÚ¸ÇµÄ·½¿éÔÙ´ÎÏÔÊ¾³öÀ´
+        for(int i = 0 ; i < 9 ; i++)//å°†æš‚åœæ©ç›–çš„æ–¹å—å†æ¬¡æ˜¾ç¤ºå‡ºæ¥
         {
             gotoxy(10  , 10 + i );
             for(int j = 0 ; j < 7 ; j++ )
             {
                 if (1 == scope[5 + j][10 + i])
                 {
-                    printf("¡ö");
+                    printf("â– ");
                 }
                 else
                 {
@@ -393,7 +393,7 @@ void my_stop()
         }
     }
 }
-//Ïû³ı
+//æ¶ˆé™¤
 void clear()
 {
     int i , j , k , m = 0;
@@ -418,7 +418,7 @@ void clear()
                     gotoxy(j*2 , k );
                     if (1 == scope[j][k])
                     {
-                        printf("¡ö");
+                        printf("â– ");
                     }
                     else
                     {
@@ -433,7 +433,7 @@ void clear()
             i++;
         }
     }
-    switch(m) {//ÅĞ¶ÏÒ»´ÎÏû³ıÁË¼¸ĞĞ£¬À´ÉèÖÃµÃ·ÖÊı
+    switch(m) {//åˆ¤æ–­ä¸€æ¬¡æ¶ˆé™¤äº†å‡ è¡Œï¼Œæ¥è®¾ç½®å¾—åˆ†æ•°
         case 1: fen+=100;
                 break;
         case 2: fen+=230;
@@ -445,26 +445,26 @@ void clear()
         default: ;
     }
     hang += m ;
-    if( hang > 10 )//Ã¿10ĞĞÉıÒ»¹Ø
+    if( hang > 10 )//æ¯10è¡Œå‡ä¸€å…³
     {
         hang = 0 ;
         pass++;
     }
-    max_fen = max_fen>fen?max_fen:fen;//¸üĞÂ×î¸ß·Ö
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN | FOREGROUND_RED |FOREGROUND_INTENSITY);//ºÚµ×ÁÁ»ÆÉ«×Ö¡£
+    max_fen = max_fen>fen?max_fen:fen;//æ›´æ–°æœ€é«˜åˆ†
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN | FOREGROUND_RED |FOREGROUND_INTENSITY);//é»‘åº•äº®é»„è‰²å­—ã€‚
     gotoxy(40,2);
-    printf("¹Ø  ¿¨£º %d",pass);
+    printf("å…³  å¡ï¼š %d",pass);
     gotoxy(40,3);
-    printf("·Ö  Êı£º %d",fen);
+    printf("åˆ†  æ•°ï¼š %d",fen);
     gotoxy(40,4);
-    printf("×î¸ß·Ö£º %d",max_fen);
+    printf("æœ€é«˜åˆ†ï¼š %d",max_fen);
     for( j = 7 ; j < 11 ; j++ )
     {
         if(1 == scope[j][4])
             gameover();
     }
 }
-//Ëæ»ú³öÏÖ·½¿é
+//éšæœºå‡ºç°æ–¹å—
 void my_randout()
 {
     int i,j;
@@ -507,11 +507,11 @@ void my_randout()
             tem[i][j] = block[i][j];
         }
     }
-    switch( rand()%4 )//ÔÙÉèÖÃËæ»úĞı×ªµÄ·½Ïò
+    switch( rand()%4 )//å†è®¾ç½®éšæœºæ—‹è½¬çš„æ–¹å‘
     {
         case 0 :
             break;
-        case 1 : for( i=0 ; i < 4 ; i++)//Ë³Ê±Õë90¶È
+        case 1 : for( i=0 ; i < 4 ; i++)//é¡ºæ—¶é’ˆ90åº¦
                  {
                      for( j = 0 ; j < 4 ; j++)
                      {
@@ -519,7 +519,7 @@ void my_randout()
                      }
                  }
                  break;
-        case 2 : for( i=0 ; i < 4 ; i++)//Ë³180¶È
+        case 2 : for( i=0 ; i < 4 ; i++)//é¡º180åº¦
                  {
                      for( j = 0 ; j < 4 ; j++)
                      {
@@ -527,7 +527,7 @@ void my_randout()
                      }
                  }
                  break;
-        case 3 : for( i=0 ; i < 4 ; i++)//Ë³270¶È
+        case 3 : for( i=0 ; i < 4 ; i++)//é¡º270åº¦
                  {
                      for( j = 0 ; j < 4 ; j++)
                      {
@@ -537,8 +537,8 @@ void my_randout()
                  break;
         default: ;
     }
-    //´òÓ¡ÌáÊ¾ÇøµÄ·½¿é
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_INTENSITY);//ºÚµ×ÁÁºì×Ö¡£
+    //æ‰“å°æç¤ºåŒºçš„æ–¹å—
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_INTENSITY);//é»‘åº•äº®çº¢å­—ã€‚
     for( i=0 ; i < 4 ; i++)
     {
         gotoxy(44 , 8 + i);
@@ -546,7 +546,7 @@ void my_randout()
         {
             if(1 == block[i][j])
             {
-                printf("¡ö");
+                printf("â– ");
             }
             else
             {
@@ -554,10 +554,10 @@ void my_randout()
             }
         }
     }
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE);//ºÚµ×°××Ö
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE);//é»‘åº•ç™½å­—
 }
 
-//ÏÔÊ¾·½¸ñ
+//æ˜¾ç¤ºæ–¹æ ¼
 void my_printblock()
 {
     int  i , j ;
@@ -571,13 +571,13 @@ void my_printblock()
                 {
                     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_INTENSITY);
                     gotoxy(point_x + j*2 , point_y + i);
-                    printf("¡ö");
+                    printf("â– ");
                 }
                 else if (1 == BLOCK[i][j])
                 {
                     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE);
                     gotoxy(point_x + j*2 , point_y + i);
-                    printf("¡ö");
+                    printf("â– ");
                 }
             }
         }
@@ -587,20 +587,20 @@ void gameover()
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_RED);
     gotoxy(4,10);	printf("                                                        ");
-    gotoxy(4,11);	printf("    ¡ö¡ö¡ö      ¡ö      ¡ö      ¡ö¡ö¡ö¡ö      ¡ö¡ö¡ö¡ö  ");
-    gotoxy(4,12);	printf("  ¡ö      ¡ö    ¡ö      ¡ö      ¡ö            ¡ö    ¡ö  ");
-    gotoxy(4,13);	printf("  ¡ö      ¡ö      ¡ö  ¡ö        ¡ö¡ö¡ö¡ö      ¡ö¡ö¡ö¡ö  ");
-    gotoxy(4,14);	printf("  ¡ö      ¡ö      ¡ö  ¡ö        ¡ö            ¡ö¡ö      ");
-    gotoxy(4,15);	printf("    ¡ö¡ö¡ö          ¡ö          ¡ö¡ö¡ö¡ö      ¡ö  ¡ö    ");
+    gotoxy(4,11);	printf("    â– â– â–       â–       â–       â– â– â– â–       â– â– â– â–   ");
+    gotoxy(4,12);	printf("  â–       â–     â–       â–       â–             â–     â–   ");
+    gotoxy(4,13);	printf("  â–       â–       â–   â–         â– â– â– â–       â– â– â– â–   ");
+    gotoxy(4,14);	printf("  â–       â–       â–   â–         â–             â– â–       ");
+    gotoxy(4,15);	printf("    â– â– â–           â–           â– â– â– â–       â–   â–     ");
     gotoxy(4,16);	printf("                                                        ");
-    gotoxy(32,17);	printf("¿Õ¸ñ¼ü£ºÖØÀ´\tEsc£ºÍË³ö");
+    gotoxy(32,17);	printf("ç©ºæ ¼é”®ï¼šé‡æ¥\tEscï¼šé€€å‡º");
     switch( getch() )
     {
-        case 32: system("cls");//ÇåÆÁ
+        case 32: system("cls");//æ¸…å±
                  console();
-                 my_print();//Êä³ö½çÃæ
+                 my_print();//è¾“å‡ºç•Œé¢
                  my_randout();
-                 memset(scope, 0, sizeof(int) * 25 * 34);//Êı×éÇåÁã
+                 memset(scope, 0, sizeof(int) * 25 * 34);//æ•°ç»„æ¸…é›¶
                  fen = 0;
                  hang = 0;
                  pass = 1;
@@ -610,7 +610,7 @@ void gameover()
         default:;
     }
 }
-void my_exit()//ÍË³öÇ°±£´æ×î¸ß·Ö
+void my_exit()//é€€å‡ºå‰ä¿å­˜æœ€é«˜åˆ†
 {
     fp = fopen("test.txt","w");
     fprintf(fp, "%d\n", max_fen);

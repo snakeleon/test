@@ -1,18 +1,18 @@
 /************************************************************/
-/*¡¡¡¡chess.c Îå×ÓÆåÖ®ÈË»ú¶ÔÕ½¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡*/
-/*¡¡¡¡2004.11  ver 1.0¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡*/
+/*ã€€ã€€chess.c äº”å­æ£‹ä¹‹äººæœºå¯¹æˆ˜ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€*/
+/*ã€€ã€€2004.11  ver 1.0ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€*/
 /*    Creater By Rock.yu                                    */
 /************************************************************/
 
 /*************************************************************/
-/********¡¡¡¡¡¡¡¡¡¡¡¡¡¡º¯Êı¿âµ÷ÓÃÄ£¿é¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡********/
+/********ã€€ã€€ã€€ã€€ã€€ã€€ã€€å‡½æ•°åº“è°ƒç”¨æ¨¡å—ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€********/
 
 #include <conio.h>
-#include <libbcc.h>        /*     Í¼ĞÎº¯Êı¿â ¡¡  */
-#include <dos.h>          /*  DOS ¹¦ÄÜº¯Êı¿â    */
-#include <string.h>      /*  ×Ö·û´¦Àíº¯Êı¿â    */
-#include <stdlib.h>     /*  Êı¾İÀàĞÍ×ª»»º¯Êı  */
-#include <stdio.h>     /*¡¡ÊäÈëÊä³öº¯Êı¿â¡¡¡¡*/
+#include <libbcc.h>        /*     å›¾å½¢å‡½æ•°åº“ ã€€  */
+#include <dos.h>          /*  DOS åŠŸèƒ½å‡½æ•°åº“    */
+#include <string.h>      /*  å­—ç¬¦å¤„ç†å‡½æ•°åº“    */
+#include <stdlib.h>     /*  æ•°æ®ç±»å‹è½¬æ¢å‡½æ•°  */
+#include <stdio.h>     /*ã€€è¾“å…¥è¾“å‡ºå‡½æ•°åº“ã€€ã€€*/
 #include <windows.h>
 
 
@@ -24,41 +24,41 @@ struct Chess_unit
     int flag;
 };
 /**************************************************************/
-/********¡¡¡¡¡¡¡¡¡¡¡¡¡¡È«¾Ö±äÁ¿ÉùÃ÷¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡********/
+/********ã€€ã€€ã€€ã€€ã€€ã€€ã€€å…¨å±€å˜é‡å£°æ˜ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€********/
 
-void far *image,*next_image,*image_null;     /* image -- Æå×Ó¹ıºóµÄÍ¼Ïó£¬ next_image -- Æå×ÓÒªÏÂµÄÎ»ÖÃ  image_null -- ×î³õ±£´æµÄ¿ÕÍ¼ÏñÖ»ÓĞÆåÅÌ */
-int Mg_top=70,limit_flag=0;                   /* Mg_top  Message ÇøÓòµÄµ±Ç°Êä³öÎ»ÖÃ */
+void far *image,*next_image,*image_null;     /* image -- æ£‹å­è¿‡åçš„å›¾è±¡ï¼Œ next_image -- æ£‹å­è¦ä¸‹çš„ä½ç½®  image_null -- æœ€åˆä¿å­˜çš„ç©ºå›¾åƒåªæœ‰æ£‹ç›˜ */
+int Mg_top=70,limit_flag=0;                   /* Mg_top  Message åŒºåŸŸçš„å½“å‰è¾“å‡ºä½ç½® */
 int Coording[16][16]= {};
-FILE *fp_out=NULL;      /* ±£´æÏÂ×ÓµÄÎ»ÖÃ¼°¶ÔÏóµÄÎÄ¼şÖ¸Õë ÔÚINIT()ÖĞ´ò¿ª ÔÚ END() ÖĞ¹Ø±Õ¸ÃÎÄ¼ş */
+FILE *fp_out=NULL;      /* ä¿å­˜ä¸‹å­çš„ä½ç½®åŠå¯¹è±¡çš„æ–‡ä»¶æŒ‡é’ˆ åœ¨INIT()ä¸­æ‰“å¼€ åœ¨ END() ä¸­å…³é—­è¯¥æ–‡ä»¶ */
 
 /**************************************************************/
-/********¡¡¡¡¡¡¡¡¡¡¡¡¡¡×Ô¶¨Òåº¯ÊıÉùÃ÷¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡********/
+/********ã€€ã€€ã€€ã€€ã€€ã€€ã€€è‡ªå®šä¹‰å‡½æ•°å£°æ˜ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€********/
 
-void Init(void);                      /*¡¡½çÃæ³õÊ¼»¯º¯Êı¡¡*/
-int *Think(int x,int y);               /* AI ²¿·Ö        */
-void Computer(int column,int row);    /*¡¡µçÄÔ×ßÆåº¯Êı¡¡¡¡*/
-void Message(char *string);           /*¡¡¡¡µ¯³öÊ½ÏûÏ¢¿ò¡¡¡¡*/
-int  Getkey(void);                    /*¡¡È¡µÃ¼üÅÌ AICSS Âë¡¡*/
-void UP(int column,int row);          /*¡¡Æå×ÓÏòÉÏÒÆ¶¯¡¡¡¡*/
-void DOWN(int column,int row);        /*¡¡Æå×ÓÏòÏÂÒÆ¶¯¡¡¡¡*/
-void LIFT(int column,int row);        /*¡¡Æå×ÓÏò×óÒÆ¶¯¡¡¡¡*/
-void RIGHT(int column,int row);       /*¡¡Æå×ÓÏòÓÒÒÆ¶¯¡¡¡¡¡¡*/
-void Trace(int flag,int data);        /*¡¡Æå×Ó¹ì¼£¸ú×Ù¡¡*/
-void Move_chessman(void);             /*¡¡×ßÆå´óÑ­»·¡¡¡¡*/
-int  SAVE(int column,int row,int flag);/*¡¡±£´æÆå¾Ö¡¡¡¡*/
-int  Limit(int flag,int data);        /*¡¡Æå×ÓÎ»ÖÃ¼«ÏŞ·ÖÎö¡¡*/
-int  Victory(int LandForm[8][6]);  /* ÅĞ¶ÏÊÇ·ñ»ñÊ¤*/
-void END();                           /*¡¡½áÊøÓÎÏ·¡¡*/
+void Init(void);                      /*ã€€ç•Œé¢åˆå§‹åŒ–å‡½æ•°ã€€*/
+int *Think(int x,int y);               /* AI éƒ¨åˆ†        */
+void Computer(int column,int row);    /*ã€€ç”µè„‘èµ°æ£‹å‡½æ•°ã€€ã€€*/
+void Message(char *string);           /*ã€€ã€€å¼¹å‡ºå¼æ¶ˆæ¯æ¡†ã€€ã€€*/
+int  Getkey(void);                    /*ã€€å–å¾—é”®ç›˜ AICSS ç ã€€*/
+void UP(int column,int row);          /*ã€€æ£‹å­å‘ä¸Šç§»åŠ¨ã€€ã€€*/
+void DOWN(int column,int row);        /*ã€€æ£‹å­å‘ä¸‹ç§»åŠ¨ã€€ã€€*/
+void LIFT(int column,int row);        /*ã€€æ£‹å­å‘å·¦ç§»åŠ¨ã€€ã€€*/
+void RIGHT(int column,int row);       /*ã€€æ£‹å­å‘å³ç§»åŠ¨ã€€ã€€ã€€*/
+void Trace(int flag,int data);        /*ã€€æ£‹å­è½¨è¿¹è·Ÿè¸ªã€€*/
+void Move_chessman(void);             /*ã€€èµ°æ£‹å¤§å¾ªç¯ã€€ã€€*/
+int  SAVE(int column,int row,int flag);/*ã€€ä¿å­˜æ£‹å±€ã€€ã€€*/
+int  Limit(int flag,int data);        /*ã€€æ£‹å­ä½ç½®æé™åˆ†æã€€*/
+int  Victory(int LandForm[8][6]);  /* åˆ¤æ–­æ˜¯å¦è·èƒœ*/
+void END();                           /*ã€€ç»“æŸæ¸¸æˆã€€*/
 
 
 /*****************************************/
-/*  ½çÃæ³õÊ¼»¯º¯Êı                       */
+/*  ç•Œé¢åˆå§‹åŒ–å‡½æ•°                       */
 
 void Init(void)
 {
     int Driver=VGA,Mode=VGAHI,count,size=0;
     char letter[16]= {"ABCDEFGHIJKLMNO"};
-    fp_out=fopen("d:/database.txt","a+");    /*¡¡ÒÔ×·¼ÓµÄ·½Ê½´ò¿ªÎÄ¼ş¡¡*/
+    fp_out=fopen("d:/database.txt","a+");    /*ã€€ä»¥è¿½åŠ çš„æ–¹å¼æ‰“å¼€æ–‡ä»¶ã€€*/
     if(fp_out==NULL)
     {
         printf("Load File Error!");
@@ -67,12 +67,12 @@ void Init(void)
     }
     initgraph(&Driver,&Mode,"");
     setcolor(RED);
-    line(0,0,640,0);                  /* »­´óµÄ±ß¿ò*/
+    line(0,0,640,0);                  /* ç”»å¤§çš„è¾¹æ¡†*/
     line(0,0,0,480);
     line(0,480,640,480);
     line(640,0,640,480);
     setcolor(7);
-    line(5,5,635,5);                   /* »­Ğ¡µÄ±ß¿ò*/
+    line(5,5,635,5);                   /* ç”»å°çš„è¾¹æ¡†*/
     line(5,5,5,480);
     line(5,479,635,479);
     line(635,5,635,480);
@@ -81,19 +81,19 @@ void Init(void)
     line(563,395,563,480);
     line(490,65,635,65);
 
-    setfillstyle(SOLID_FILL,DARKGRAY);  /* ÉèÖÃµ×É«ÎªÇà»ÒÉ«*/
+    setfillstyle(SOLID_FILL,DARKGRAY);  /* è®¾ç½®åº•è‰²ä¸ºé’ç°è‰²*/
     setcolor(CYAN);
     bar(20,20,470,470);
-    rectangle(19,19,471,471);           /* ÆåÅÌ±ß¿ò*/
+    rectangle(19,19,471,471);           /* æ£‹ç›˜è¾¹æ¡†*/
     setcolor(CYAN);
-    for(count=0; count<17; count++)     /* »­ÆåÅÌ*/
+    for(count=0; count<17; count++)     /* ç”»æ£‹ç›˜*/
     {
         line(count*30+5,0+20,count*30+5,470);
         line(0+20,count*30+5,470,count*30+5);
     }
 
 
-    settextstyle(SMALL_FONT,0,6);    /* ³õÊ¼»¯ÆåÅÌ 1~15 µÄĞĞºÅ ¼È Y ×ø±ê */
+    settextstyle(SMALL_FONT,0,6);    /* åˆå§‹åŒ–æ£‹ç›˜ 1~15 çš„è¡Œå· æ—¢ Y åæ ‡ */
     setcolor(CYAN);
     outtextxy(10,27,"1");
     outtextxy(8,57,"2");
@@ -104,7 +104,7 @@ void Init(void)
     outtextxy(8,207,"7");
     outtextxy(8,237,"8");
     outtextxy(8,267,"9");
-    settextstyle(SMALL_FONT,0,4);    /* ÒòÒÔÏÂÊı×ÖÕ¼2¸öÎ»ÖÃ£¬ËùÒÔÓÃ4ºÅ×Ö ( 8*10 ) */
+    settextstyle(SMALL_FONT,0,4);    /* å› ä»¥ä¸‹æ•°å­—å 2ä¸ªä½ç½®ï¼Œæ‰€ä»¥ç”¨4å·å­— ( 8*10 ) */
     outtextxy(8,300,"10");
     outtextxy(8,330,"11");
     outtextxy(8,360,"12");
@@ -112,7 +112,7 @@ void Init(void)
     outtextxy(8,420,"14");
     outtextxy(8,450,"15");
 
-    settextstyle(SMALL_FONT,0,6);    /* ³õÊ¼»¯ÆåÅÌ A~O µÄÁĞºÅ ¼È X ×ø±ê */
+    settextstyle(SMALL_FONT,0,6);    /* åˆå§‹åŒ–æ£‹ç›˜ A~O çš„åˆ—å· æ—¢ X åæ ‡ */
     outtextxy(32,4,"A");
     outtextxy(62,4,"B");
     outtextxy(92,4,"C");
@@ -129,18 +129,18 @@ void Init(void)
     outtextxy(422,4,"N");
     outtextxy(452,4,"O");
 
-    settextstyle(SMALL_FONT,0,4);       /* Êä³ö°æ±¾ĞÅÏ¢*/
+    settextstyle(SMALL_FONT,0,4);       /* è¾“å‡ºç‰ˆæœ¬ä¿¡æ¯*/
     setcolor(LIGHTGREEN);
     outtextxy(500,10,"Welcome User System");
     outtextxy(500,25,"Copyright Rock.yu");
 
-    size=imagesize(20,20,50,50);          /* ²âÊÔÒª±£´æÍ¼ÏóµÄ´óĞ¡ */
+    size=imagesize(20,20,50,50);          /* æµ‹è¯•è¦ä¿å­˜å›¾è±¡çš„å¤§å° */
 
-    /*  °´ÕÕ SIZE+100 µÄ´óĞ¡·ÖÅäÄÚ´æ Èç¹û²»Ê¹ÓÃ´Îº¯Êı¾Í»á³öÏÖÄÚ´æ²»×ãµÄ´íÎóĞÅÏ¢ */
+    /*  æŒ‰ç…§ SIZE+100 çš„å¤§å°åˆ†é…å†…å­˜ å¦‚æœä¸ä½¿ç”¨æ¬¡å‡½æ•°å°±ä¼šå‡ºç°å†…å­˜ä¸è¶³çš„é”™è¯¯ä¿¡æ¯ */
     image=(void far *)malloc(size+100);
     next_image=(void far *)malloc(size+100);
 
-    /* Init Trace() ³õÊ¼»¯¹ì¼£ÏÔÊ¾º¯Êı */
+    /* Init Trace() åˆå§‹åŒ–è½¨è¿¹æ˜¾ç¤ºå‡½æ•° */
     settextstyle(SMALL_FONT,0,5);
     setcolor(BROWN);
 
@@ -164,7 +164,7 @@ void Init(void)
 
 /***********************************************/
 
-int SAVE(int column,int row,int flag)     /* ±£´æµ±Ç°µÄÆå×Ó×ø±ê¼°ÑÕÉ« 1--µçÄÔ  2--ÈË*/
+int SAVE(int column,int row,int flag)     /* ä¿å­˜å½“å‰çš„æ£‹å­åæ ‡åŠé¢œè‰² 1--ç”µè„‘  2--äºº*/
 {
     int x,y;
     x=64+(column-5)/30;
@@ -175,14 +175,14 @@ int SAVE(int column,int row,int flag)     /* ±£´æµ±Ç°µÄÆå×Ó×ø±ê¼°ÑÕÉ« 1--µçÄÔ  2
 
 
 /****************************************************/
-/* ÅĞ¶ÏÊÇ·ñÓ®ÆåµÄº¯Êı   ´ıÍê³É */
-/* ¾ßÌåµÄ·½·¨ÊÇ £º ·ÖºÚ°×Á½´ÎÍê³É£¬ Óöµ½Æå×Ó¼Ó 1  £¬Óöµ½¿Õ¸ñÇå0 £¬Ö±µ½³öÏÖ 5ÔòÎªÊ¤ */
+/* åˆ¤æ–­æ˜¯å¦èµ¢æ£‹çš„å‡½æ•°   å¾…å®Œæˆ */
+/* å…·ä½“çš„æ–¹æ³•æ˜¯ ï¼š åˆ†é»‘ç™½ä¸¤æ¬¡å®Œæˆï¼Œ é‡åˆ°æ£‹å­åŠ  1  ï¼Œé‡åˆ°ç©ºæ ¼æ¸…0 ï¼Œç›´åˆ°å‡ºç° 5åˆ™ä¸ºèƒœ */
 
 
 int Victory(int LandForm[8][6])
 {
     int x,y,count1=0,count2=0,Temp[4][9]= {};
-    for(x=1; x<5; x++)          /* ±¾Ñ­»·ÓÃÀ´°Ñ´«À´µÄ8¸ö·½ÏòµÄÊı×é×ª»¯Îª4¸ö·½Ïò*/
+    for(x=1; x<5; x++)          /* æœ¬å¾ªç¯ç”¨æ¥æŠŠä¼ æ¥çš„8ä¸ªæ–¹å‘çš„æ•°ç»„è½¬åŒ–ä¸º4ä¸ªæ–¹å‘*/
         for(y=0; y<4; y++)
         {
             Temp[x-1][y]=LandForm[x*2-2][5-y];
@@ -209,19 +209,19 @@ int Victory(int LandForm[8][6])
 }
 
 /****************************************************/
-/*  ±¾º¯ÊıÓÃÀ´Íê³ÉÓÎÏ·µÄ AI  ²¿·Ö£¬ ÎªÓÎÏ·µÄºËĞÄ²¿·Ö*/
-/*  ÒÔÈËÏÂ×ÓµÄµØ·½ÎªÖĞĞÄ£¬É¨Ãè°Ë¸ö·½Î»5²½Ö®ÄÚµÄÆåĞÍ
-    ²¢½«½á¹û´æÈë  LandForm[][] Êı×é¡£                   */
+/*  æœ¬å‡½æ•°ç”¨æ¥å®Œæˆæ¸¸æˆçš„ AI  éƒ¨åˆ†ï¼Œ ä¸ºæ¸¸æˆçš„æ ¸å¿ƒéƒ¨åˆ†*/
+/*  ä»¥äººä¸‹å­çš„åœ°æ–¹ä¸ºä¸­å¿ƒï¼Œæ‰«æå…«ä¸ªæ–¹ä½5æ­¥ä¹‹å†…çš„æ£‹å‹
+    å¹¶å°†ç»“æœå­˜å…¥  LandForm[][] æ•°ç»„ã€‚                   */
 
 int *Think(int x,int y)
 {
     int Coor[2]= {},LandForm[8][6]= {},m=0,n=0,t=0;
     struct Chess_unit *TK_unit,Current;
 
-    Current.x=x;                             /* ½«µ±Ç°µÄÆå×Ó×ø±ê´æµ½ current ½á¹¹ÌåÖĞ */
+    Current.x=x;                             /* å°†å½“å‰çš„æ£‹å­åæ ‡å­˜åˆ° current ç»“æ„ä½“ä¸­ */
     Current.y=y;
 
-    for(m=y; m>y-5; m--)                     /* ÏòÉÏÉ¨Ãè */
+    for(m=y; m>y-5; m--)                     /* å‘ä¸Šæ‰«æ */
     {
         n++;
         if(m<0)  break;
@@ -230,7 +230,7 @@ int *Think(int x,int y)
     }
     fprintf(fp_out,"\n");
     n=0;
-    for(m=y; m<y+5; m++)                    /* ÏòÏÂÉ¨Ãè */
+    for(m=y; m<y+5; m++)                    /* å‘ä¸‹æ‰«æ */
     {
         n++;
         if(m>15) break;
@@ -239,7 +239,7 @@ int *Think(int x,int y)
     }
     fprintf(fp_out,"\n");
     n=0;
-    for(m=x; m>x-5; m--)                    /* Ïò×óÉ¨Ãè */
+    for(m=x; m>x-5; m--)                    /* å‘å·¦æ‰«æ */
     {
         n++;
         if(m<0) break;
@@ -248,7 +248,7 @@ int *Think(int x,int y)
     }
     fprintf(fp_out,"\n");
     n=0;
-    for(m=x; m<x+5; m++)                   /* ÏòÓÒÉ¨Ãè */
+    for(m=x; m<x+5; m++)                   /* å‘å³æ‰«æ */
     {
         n++;
         if(m>15)  break;
@@ -257,7 +257,7 @@ int *Think(int x,int y)
     }
     fprintf(fp_out,"\n");
     n=0;
-    for(m=x,t=y; m>x-5; m--,t--)           /* Ïò×óÉÏÉ¨Ãè */
+    for(m=x,t=y; m>x-5; m--,t--)           /* å‘å·¦ä¸Šæ‰«æ */
     {
         n++;
         if(m<0||t<0) break;
@@ -266,7 +266,7 @@ int *Think(int x,int y)
     }
     fprintf(fp_out,"\n");
     n=0;
-    for(m=x,t=y; m<x+5; m++,t++)           /* ÏòÓÒÏÂÉ¨Ãè */
+    for(m=x,t=y; m<x+5; m++,t++)           /* å‘å³ä¸‹æ‰«æ */
     {
         n++;
         if(m>15||t>15)  break;
@@ -275,7 +275,7 @@ int *Think(int x,int y)
     }
     fprintf(fp_out,"\n");
     n=0;
-    for(m=x,t=y; m<x+5; m++,t--)           /* ÏòÓÒÉÏÉ¨Ãè */
+    for(m=x,t=y; m<x+5; m++,t--)           /* å‘å³ä¸Šæ‰«æ */
     {
         n++;
         if(m>15||t<0)  break;
@@ -284,7 +284,7 @@ int *Think(int x,int y)
     }
     fprintf(fp_out,"\n");
     n=0;
-    for(m=x,t=y; m>x-5; m--,t++)           /* Ïò×óÏÂÉ¨Ãè */
+    for(m=x,t=y; m>x-5; m--,t++)           /* å‘å·¦ä¸‹æ‰«æ */
     {
         n++;
         if(m<0||t>15)  break;
@@ -293,7 +293,7 @@ int *Think(int x,int y)
     }
     fprintf(fp_out,"\n");
 
-    Victory(LandForm);   /* µ÷ÓÃ±¾º¯ÊıÅĞ¶ÏÊÇ·ñÓ®Æå */
+    Victory(LandForm);   /* è°ƒç”¨æœ¬å‡½æ•°åˆ¤æ–­æ˜¯å¦èµ¢æ£‹ */
 
 
 
@@ -308,12 +308,12 @@ void Computer(int column,int row)
 {
     int flag=2,C_row,C_col,*Coorp;
     int x,y/*,color=WHITE*/;
-    SAVE(column,row,2);  /* °Ñµ±Ç°Íæ¼ÒµÄÆå×Ó×ø±êºÍÏÂÆå·½´æµ½ÎÄ¼ş  1--µçÄÔ  2--ÈË */
+    SAVE(column,row,2);  /* æŠŠå½“å‰ç©å®¶çš„æ£‹å­åæ ‡å’Œä¸‹æ£‹æ–¹å­˜åˆ°æ–‡ä»¶  1--ç”µè„‘  2--äºº */
     C_col=(column-5)/30;
     C_row=(row-5)/30;
     Coording[C_col][C_row]=flag;
 
-    Coorp=Think(C_col,C_row);    /* ·ÖÎöÆå¾ÖµÄº¯Êı   ÓÃÊı×é´«»Ø x y ×ø±ê*/
+    Coorp=Think(C_col,C_row);    /* åˆ†ææ£‹å±€çš„å‡½æ•°   ç”¨æ•°ç»„ä¼ å› x y åæ ‡*/
 
     flag=1;
     /* x=rand()%5;
@@ -345,7 +345,7 @@ void Computer(int column,int row)
 }
 
 /***********************************************/
-/*    Çå³ı MESSAGE µÄÄÚÈİ MESSAGE µÄ×ø±êÎª {(490,65) (635,395)} */
+/*    æ¸…é™¤ MESSAGE çš„å†…å®¹ MESSAGE çš„åæ ‡ä¸º {(490,65) (635,395)} */
 
 void Clear_Mg(void)
 {
@@ -359,14 +359,14 @@ void Clear_Mg(void)
     setfillstyle(SOLID_FILL,WHITE);
 }
 /***********************************************/
-/*  ĞÅÏ¢ÏÔÊ¾º¯Êı ×ø±ê£º(490,65)  (635,395)     */
+/*  ä¿¡æ¯æ˜¾ç¤ºå‡½æ•° åæ ‡ï¼š(490,65)  (635,395)     */
 
 void Message(char *string)
 {
     setcolor(LIGHTGREEN);
     settextstyle(SMALL_FONT,0,4);
     outtextxy(500,Mg_top,string);
-    Mg_top+=15;                   /* Ã¿ĞĞĞÅÏ¢ÏÔÊ¾ÍêºóĞĞÊı¼Ó 15 Mg_top ÊÇµ±Ç°µÄĞÅÏ¢×ø±ê */
+    Mg_top+=15;                   /* æ¯è¡Œä¿¡æ¯æ˜¾ç¤ºå®Œåè¡Œæ•°åŠ  15 Mg_top æ˜¯å½“å‰çš„ä¿¡æ¯åæ ‡ */
     if(Mg_top>380)
 
         Clear_Mg();
@@ -378,7 +378,7 @@ void Message(char *string)
 
 
 /***********************************************/
-/*      µÃµ½µ±Ç°µÄ°´¼ü ASCII Âë                   */
+/*      å¾—åˆ°å½“å‰çš„æŒ‰é”® ASCII ç                    */
 
 int Getkey(void)
 {
@@ -482,11 +482,11 @@ void RIGHT(int column,int row)
 }
 
 /*************************************************/
-/*     ±¾º¯Êı¼ì²éÆå×Ó×ø±êÊÇ·ñ³¬³öÆåÅÌ            */
-/* º¯ÊıÖĞÊ¹ÓÃÁË char * itoa(int value,char *string,int radix) º¯Êı */
-/* °Ñ int Êı¾İ×ª»¯Îª×Ö·û´® value -- Òª×ª»¯µÄÊı¾İ   */
-/*                         *string -- ×ª»¯ºóµÄ´®µÄ´æ·ÅÊı×éÃû  */
-/*                          radix -- °´ÄÄ¸ö½øÖÆ×ª»¯ 2=¶ş½øÖÆ 10=Ê®½øÖÆ */
+/*     æœ¬å‡½æ•°æ£€æŸ¥æ£‹å­åæ ‡æ˜¯å¦è¶…å‡ºæ£‹ç›˜            */
+/* å‡½æ•°ä¸­ä½¿ç”¨äº† char * itoa(int value,char *string,int radix) å‡½æ•° */
+/* æŠŠ int æ•°æ®è½¬åŒ–ä¸ºå­—ç¬¦ä¸² value -- è¦è½¬åŒ–çš„æ•°æ®   */
+/*                         *string -- è½¬åŒ–åçš„ä¸²çš„å­˜æ”¾æ•°ç»„å  */
+/*                          radix -- æŒ‰å“ªä¸ªè¿›åˆ¶è½¬åŒ– 2=äºŒè¿›åˆ¶ 10=åè¿›åˆ¶ */
 
 
 int Limit(int flag,int data)
@@ -530,7 +530,7 @@ int Limit(int flag,int data)
 }
 
 /*************************************************/
-/*   ±¾º¯ÊıÏÔÊ¾µ±Ç°ÏÂÆåÕßÆå×ÓµÄ×ø±ê              */
+/*   æœ¬å‡½æ•°æ˜¾ç¤ºå½“å‰ä¸‹æ£‹è€…æ£‹å­çš„åæ ‡              */
 
 void Trace(int flag,int data)
 {
@@ -562,14 +562,14 @@ void Trace(int flag,int data)
         setcolor(color);
     }
 
-    setcolor(WHITE);                     /* »Ö¸´°×Æå²Ù×÷ÑÕÉ« £¨ÈË£© */
+    setcolor(WHITE);                     /* æ¢å¤ç™½æ£‹æ“ä½œé¢œè‰² ï¼ˆäººï¼‰ */
     setfillstyle(SOLID_FILL,WHITE);
     return ;
 
 }
 
 /*************************************************/
-/*   ±¾º¯ÊıÓÃÀ´Íê³ÉÏÂÆåÕßµÄÆå×ÓÒÆ¶¯²Ù×÷          */
+/*   æœ¬å‡½æ•°ç”¨æ¥å®Œæˆä¸‹æ£‹è€…çš„æ£‹å­ç§»åŠ¨æ“ä½œ          */
 
 void Move_chessman(void)
 {
@@ -644,7 +644,7 @@ void END()
     exit(0);
 }
 /************************************************/
-/*                 Ö÷º¯Êı²¿·Ö                   */
+/*                 ä¸»å‡½æ•°éƒ¨åˆ†                   */
 
 int main()
 {
