@@ -9,7 +9,12 @@
 #      History :
 ==========================================================================*/
 
-#include <ncursesw/ncurses.h>
+#ifdef __MSVCRT__
+    #include <ncursesw/ncurses.h>
+#elif defined __linux
+    #include <ncurses.h>
+#endif
+
 #include <stdlib.h>
 
 
