@@ -1,3 +1,13 @@
+/*==========================================================================
+#     FileName :	SDL_test.cpp
+#  Description :	CLOCK
+#       Author :	SiFe
+#       E-Mail :	snakeleon@sina.com
+#	  HomePage :	https://github.com/snakeleon
+#      Version :	0.0.1
+#   LastChange :	2016-07-17 13:31:56
+#      History :
+==========================================================================*/
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
