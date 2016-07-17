@@ -2,10 +2,10 @@
 #     FileName :	SDL_test.cpp
 #  Description :	CLOCK
 #       Author :	SiFe
-#       E-Mail :	snakeleon@sina.com
+#       E-Mail :	snakeleon@gmail.com
 #	  HomePage :	https://github.com/snakeleon
 #      Version :	0.0.1
-#   LastChange :	2016-07-17 13:31:56
+#   LastChange :	2016-07-17 13:37:14
 #      History :
 ==========================================================================*/
 #include <iostream>
