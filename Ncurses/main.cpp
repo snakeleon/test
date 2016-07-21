@@ -2,10 +2,10 @@
 #     FileName :	main.cpp
 #  Description :
 #       Author :	SiFe
-#       E-Mail :	snakeleon@sina.com
+#       E-Mail :	snakeleon@gmail.com
 #	  HomePage :	https://github.com/snakeleon
-#      Version :	0.0.1
-#   LastChange :	2015-09-01 13:24:21
+#      Version :	0.0.2
+#   LastChange :	2016-07-17 23:27:34
 #      History :
 ==========================================================================*/
 
