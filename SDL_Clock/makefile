@@ -3,35 +3,37 @@
 # Compiler Type:  GCC 5
 # Makefile created by SiFe on 2009-08-02 19:46
 
-OS       := $(shell uname -o)
-IS_LINUX := $(shell echo $(OS) | grep -i Linux)
-IS_MSYS  := $(shell echo $(OS) | grep -i Msys)
+OS      	:= $(shell uname -o)
+IS_LINUX 	:= $(shell echo $(OS) | grep -i Linux)
+IS_MSYS  	:= $(shell echo $(OS) | grep -i Msys)
 
-CPP       = g++
-CC        = gcc
-WINDRES   = windres
-OBJ       = SDL_test.o
-LINKOBJ   = SDL_test.o
-SOURSE    = SDL_test.cpp
-DEPENDENT = SDL2_gfx SDL2_ttf sdl2
-LIBS      = `pkg-config --libs $(DEPENDENT)`
-INCS      = `pkg-config --cflags-only-I $(DEPENDENT)`
-CXXINCS   = `pkg-config --cflags-only-I $(DEPENDENT)`
-WHITHER		= build
+CPP       	= g++
+CC        	= gcc
+WINDRES   	= windres
+OBJ       	= SDL_test.o
+LINKOBJ   	= SDL_test.o
+SOURSE    	= SDL_test.cpp
+DEPENDENT 	= SDL2_gfx SDL2_ttf sdl2
+LIBS      	= `pkg-config --libs $(DEPENDENT)`
+INCS      	= `pkg-config --cflags-only-I $(DEPENDENT)`
+CXXINCS   	= `pkg-config --cflags-only-I $(DEPENDENT)`
+WHITHER 	= build
 
 ifdef IS_LINUX
-LC_OS			= "Current OS is Linux"
-BIN       = SDL_test
+LC_OS	= "Current OS is Linux"
+BIN 	= SDL_test
 else
 ifdef IS_MSYS
-LC_OS 		= "Current OS is MSYS"
-BIN				= SDL_test.exe
+LC_OS 	= "Current OS is MSYS"
+BIN		= SDL_test.exe
 endif
 endif
 
 DEFINES   =
-CXXFLAGS  = $(CXXINCS) $(DEFINES) -O2 -Wall -Wextra -std=c++11
-CFLAGS    = $(INCS) $(DEFINES)	-O2 -Wall -Wextra
+CXXFLAGS  = $(CXXINCS) 	$(DEFINES) 	-O2 -Wall -Wextra -fexceptions \
+                                    -Wfloat-equal -std=c++14
+CFLAGS    = $(INCS) 	$(DEFINES) 	-O2 -Wall -Wextra -fexceptions \
+                                    -Wfloat-equal
 GPROF     = gprof
 RM        = rm  -rf
 LINK      = g++
