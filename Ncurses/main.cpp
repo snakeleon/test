@@ -314,17 +314,17 @@ int main()
     int yy=0,mm=0,dd=0;
     printf("Please input YEAR,MONTH,DAY:");
     if (scanf("%d %d %d",&yy, &mm, &dd)!=3)
-        {
-            printf("Value format error!\nExample: 2015 2 27\n");
-            exit(1);
-        }
+    {
+        printf("Value format error!\nExample: 2015 2 27\n");
+        exit(1);
+    }
 
     initscr();
     nocbreak();
-//    printw("Please input YEAR,MONTH,DAY:");
-//    refresh();
-//    scanw("%d %d %d",&yy,&mm,&dd);
-//
+    //    printw("Please input YEAR,MONTH,DAY:");
+    //    refresh();
+    //    scanw("%d %d %d",&yy,&mm,&dd);
+    //
     Date mydate;
     mydate.SetDate(yy,mm,dd);
 
