@@ -116,27 +116,27 @@ int main ( int argc, char *argv[] )
 {
     if ( SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
-        std::cout << "SDL_Init Error: " << SDL_GetError() << '\n';
+        std::endl(std::cout << "SDL_Init Error: " << SDL_GetError());
         return 2;
     }
 
     if(TTF_Init() == -1)
     {
-        std::cout << "TTF_Init: " << TTF_GetError() << '\n';
+        std::endl(std::cout << "TTF_Init: " << TTF_GetError());
         return 7;
     }
 
     SDL_Window *window = SDL_CreateWindow("SDL_TEST", 80, 80, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
     if (window == NULL)
     {
-        std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << '\n';
+        std::endl(std::cout << "SDL_CreateWindow Error: " << SDL_GetError());
         return 3;
     }
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if(renderer == NULL)
     {
-        std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << '\n';
+        std::endl(std::cout << "SDL_CreateRenderer Error: " << SDL_GetError());
         return 4;
     }
     SDL_RenderClear(renderer);
@@ -184,7 +184,7 @@ int main ( int argc, char *argv[] )
 
         if (!DayFont)
         {
-            std::cout << "ERROR for Open TTF_Font" << '\n';
+            std::endl(std::cout << "ERROR for Open TTF_Font");
             return 21;
         }
 
@@ -203,7 +203,7 @@ int main ( int argc, char *argv[] )
 
         if (!NumFont)
         {
-            std::cout << "ERROR for Open TTF_Font" << '\n';
+            std::endl(std::cout << "ERROR for Open TTF_Font");
             return 22;
         }
 
@@ -222,7 +222,7 @@ int main ( int argc, char *argv[] )
 
         if (!LogoFont)
         {
-            std::cout << "ERROR for Open TTF_Font" << '\n';
+            std::endl(std::cout << "ERROR for Open TTF_Font");
             return 23;
         }
 
@@ -272,7 +272,6 @@ int main ( int argc, char *argv[] )
 #endif
 
         SDL_RenderPresent(renderer);
-
         SDL_DestroyTexture(TextureLogo);
         SDL_DestroyTexture(TexturePlate);
         TTF_CloseFont(NumFont);
