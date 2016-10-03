@@ -116,27 +116,27 @@ int main ( int argc, char *argv[] )
 {
     if ( SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
-        std::endl(std::cout << "SDL_Init Error: " << SDL_GetError());
+        std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
         return 2;
     }
 
     if(TTF_Init() == -1)
     {
-        std::endl(std::cout << "TTF_Init: " << TTF_GetError());
+        std::cout << "TTF_Init: " << TTF_GetError() << std::endl;
         return 7;
     }
 
     SDL_Window *window = SDL_CreateWindow("SDL_TEST", 80, 80, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
     if (window == NULL)
     {
-        std::endl(std::cout << "SDL_CreateWindow Error: " << SDL_GetError());
+        std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
         return 3;
     }
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if(renderer == NULL)
     {
-        std::endl(std::cout << "SDL_CreateRenderer Error: " << SDL_GetError());
+        std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
         return 4;
     }
     SDL_RenderClear(renderer);
@@ -184,7 +184,7 @@ int main ( int argc, char *argv[] )
 
         if (!DayFont)
         {
-            std::endl(std::cout << "ERROR for Open TTF_Font");
+            std::cout << "ERROR for Open TTF_Font" << std::endl;
             return 21;
         }
 
@@ -203,7 +203,7 @@ int main ( int argc, char *argv[] )
 
         if (!NumFont)
         {
-            std::endl(std::cout << "ERROR for Open TTF_Font");
+            std::cout << "ERROR for Open TTF_Font" << std::endl;
             return 22;
         }
 
@@ -222,7 +222,7 @@ int main ( int argc, char *argv[] )
 
         if (!LogoFont)
         {
-            std::endl(std::cout << "ERROR for Open TTF_Font");
+            std::cout << "ERROR for Open TTF_Font" << std::endl;
             return 23;
         }
 
