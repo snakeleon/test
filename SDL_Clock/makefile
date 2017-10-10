@@ -6,26 +6,27 @@
 OS      	:= $(shell uname -o)
 IS_LINUX 	:= $(shell echo $(OS) | grep -i Linux)
 IS_MSYS  	:= $(shell echo $(OS) | grep -i Msys)
+WHITHER 	= build
 
 CPP       	= g++
 CC        	= gcc
 WINDRES   	= windres
-OBJ       	= SDL_test.o
-LINKOBJ   	= SDL_test.o
+OBJ       	= $(WHITHER)/SDL_test.o
+LINKOBJ   	= $(WHITHER)/SDL_test.o
 SOURSE    	= SDL_test.cpp
 DEPENDENT 	= SDL2_gfx SDL2_ttf sdl2
 LIBS      	= `pkg-config --libs $(DEPENDENT)`
 INCS      	= `pkg-config --cflags-only-I $(DEPENDENT)`
 CXXINCS   	= `pkg-config --cflags-only-I $(DEPENDENT)`
-WHITHER 	= build
+
 
 ifdef IS_LINUX
 LC_OS	= "Current OS is Linux"
-BIN 	= SDL_test
+BIN 	= $(WHITHER)/SDL_test
 else
 ifdef IS_MSYS
 LC_OS 	= "Current OS is MSYS"
-BIN		= SDL_test.exe
+BIN		= $(WHITHER)/SDL_test.exe
 endif
 endif
 
@@ -45,12 +46,12 @@ checkos:
 	echo $(LC_OS)
 
 clean: clean-custom
-	$(RM) $(WHITHER)/$(OBJ) $(WHITHER)/$(BIN)
+	$(RM) $(OBJ) $(BIN)
 
 
 $(BIN): $(LINKOBJ)
-	$(LINK) $(WHITHER)/$(LINKOBJ) -o $(WHITHER)/$(BIN) $(LIBS)
+	$(LINK) $(LINKOBJ) -o $(BIN) $(LIBS)
 
 $(LINKOBJ): $(SOURSE)
 	$(shell test -d $(WHITHER) || mkdir $(WHITHER))
-	$(CPP) -c $(SOURSE) -o $(WHITHER)/$(OBJ) $(CXXFLAGS)
+	$(CPP) -c $(SOURSE) -o $(OBJ) $(CXXFLAGS)
