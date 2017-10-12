@@ -1,5 +1,5 @@
-# Project: 	SDL_test
-# Compiler: Default MinGW compiler
+# Project:        SDL_test
+# Compiler:       Default MinGW compiler
 # Compiler Type:  GCC 5
 # Makefile created by SiFe on 2009-08-02 19:46
 
