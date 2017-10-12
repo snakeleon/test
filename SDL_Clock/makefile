@@ -8,7 +8,7 @@ IS_LINUX 	:= $(shell echo $(OS) | grep -i Linux)
 IS_MSYS  	:= $(shell echo $(OS) | grep -i Msys)
 WHITHER 	= build
 
-CPP       	= g++
+CXX       	= g++
 CC        	= gcc
 WINDRES   	= windres
 OBJ       	= $(WHITHER)/SDL_test.o
@@ -54,4 +54,4 @@ $(BIN): $(LINKOBJ)
 
 $(LINKOBJ): $(SOURSE)
 	$(shell test -d $(WHITHER) || mkdir $(WHITHER))
-	$(CPP) -c $(SOURSE) -o $(OBJ) $(CXXFLAGS)
+	$(CXX) -c $(SOURSE) -o $(OBJ) $(CXXFLAGS)
