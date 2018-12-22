@@ -5,6 +5,7 @@
 *.[oa]
 *.jpg
 *.bmp
+desktop.ini
 SDL_Clock/build
 Ncurses/build
 gvimfullscreen/
