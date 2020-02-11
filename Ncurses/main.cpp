@@ -1,11 +1,11 @@
 /*==========================================================================
 #     FileName :	main.cpp
-#  Description :
+#  Description :    Calendar
 #       Author :	SiFe
 #       E-Mail :	snakeleon@gmail.com
 #	  HomePage :	https://github.com/snakeleon
 #      Version :	0.0.2
-#   LastChange :	2016-07-17 23:27:34
+#   LastChange :	2020-02-11 19:41:34
 #      History :
 ==========================================================================*/
 
@@ -38,7 +38,7 @@ void Date::SetDate(int yy,int mm,int dd)
     month=mm;
     if(year<1)
     {
-        printw("Year value error!\n");
+        printf("Year value error!\nERROR CODE: 1\n");
         refresh();
         getch();
         endwin();
@@ -46,11 +46,9 @@ void Date::SetDate(int yy,int mm,int dd)
     }
     if(month<1||month>12)
     {
-        printw("Month value error!\n");
-        refresh();
+        printf("Month value error!\r\nERROR CODE: 2\n");
         getch();
-        endwin();
-        exit(1);
+        exit(2);
     }
     switch(month)
     {
@@ -62,11 +60,9 @@ void Date::SetDate(int yy,int mm,int dd)
                 if(dd>=1&&dd<=30)   day=dd;
                 else
                 {
-                    printw("Day value error!\n");
-                    refresh();
+                    printf("Day value error!\r\nERROR CODE: 3\n");
                     getch();
-                    endwin();
-                    exit(1);
+                    exit(2);
                 }
             }
             break;
@@ -77,11 +73,9 @@ void Date::SetDate(int yy,int mm,int dd)
                     if(dd>=1&&dd<=29)       day=dd;
                     else
                     {
-                        printw("Day value error!\n");
-                        refresh();
+                        printf("Day value error!\r\nERROR CODE: 3\n");
                         getch();
-                        endwin();
-                        exit(1);
+                        exit(3);
                     }
                 }
                 else
@@ -89,11 +83,9 @@ void Date::SetDate(int yy,int mm,int dd)
                     if(dd>=1&&dd<=28)       day=dd;
                     else
                     {
-                        printw("Day value error!\n");
-                        refresh();
+                        printf("Day value error!\r\nERROR CODE: 3\n");
                         getch();
-                        endwin();
-                        exit(1);
+                        exit(3);
                     }
                 }
             }
@@ -104,10 +96,9 @@ void Date::SetDate(int yy,int mm,int dd)
                 if(dd>=1&&dd<=31)       day=dd;
                 else
                 {
-                    printw("Day value error!\n");
-                    refresh();
+                    printf("Day value error!\r\nERROR CODE: 3\n");
                     getch();
-                    exit(1);
+                    exit(3);
                 }
             }
     }
@@ -126,22 +117,21 @@ void Date::ShowDate()
 
 int Date::getdays(int year,int month,int day)
 {
-    int i,sum=0;
-    for(i=1; i<year; i++)
+    int sum=0;
+    for(int i=1; i<year; i++)
     {
         if(IsLeap(i))       sum+=366;
         else sum+=365;
     }
     if(IsLeap(year))        dayofmonth[2]=29;
-    for(i=1; i<month; i++)  sum+=dayofmonth[i];
+    for(int i=1; i<month; i++)  sum+=dayofmonth[i];
     sum+=day;
     return sum;
 }
 
 void Date::showweek()
 {
-    int s;
-    s=getdays(year,month,day)%7;
+    int s = getdays(year,month,day)%7;
     switch(s)
     {
         case 0:
@@ -171,9 +161,9 @@ void Date::showweek()
 void Date::printyear(void)
 {
     WINDOW *monthtab[11];
-    for(int y=0,start_y=0,start_x=0; y<12; y++,start_x+=22)
+    for(int y=0,start_y=0,start_x=0; y<9 ; y++,start_x+=22)
     {
-        if(start_x>70)
+        if(start_x>60)
         {
             start_y+=8;
             start_x=0;
@@ -184,7 +174,7 @@ void Date::printyear(void)
             printw("Create Window Error!");
             exit(1);
         }
-        getch();
+//        getch();
         start_color();
         init_pair(1,COLOR_RED,COLOR_BLACK);
         wprintw(monthtab[y],"%11d  %d\n",year,y+1);
@@ -220,7 +210,6 @@ void Date::printyear(void)
         wprintw(monthtab[y],"\n");
 
 
-
         for(int i=8-s,j=1; i<=yue; i++,j++)
         {
             if(j==1)
@@ -242,9 +231,8 @@ void Date::printyear(void)
         }
         wrefresh(monthtab[y]);
         delwin(monthtab[y]);
-        getch();
-
     }
+
 }
 
 void Date::printmonth()
@@ -309,7 +297,7 @@ void Date::printmonth()
 
 
 
-int main()
+int main(void)
 {
     int yy=0,mm=0,dd=0;
     printf("Please input YEAR,MONTH,DAY:");
@@ -319,8 +307,7 @@ int main()
         exit(1);
     }
 
-    initscr();
-    nocbreak();
+
     //    printw("Please input YEAR,MONTH,DAY:");
     //    refresh();
     //    scanw("%d %d %d",&yy,&mm,&dd);
@@ -328,21 +315,26 @@ int main()
     Date mydate;
     mydate.SetDate(yy,mm,dd);
 
+    initscr();
+    nocbreak();
+
     mydate.ShowDate();
     mydate.showweek();
     mydate.printmonth();
     printw("Do you want print %d's calendar? [Y/N] ",yy);
     refresh();
     int choice=getch();
-    endwin();
+//    endwin();
 
-    initscr();
-    clear();
+//    initscr();
+//    clear();
     if(choice=='y'||choice=='Y')
         mydate.printyear();
 
-    refresh();
     getch();
+    getch();
+
     endwin();
+
     return 0;
 }

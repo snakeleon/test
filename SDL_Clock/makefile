@@ -1,4 +1,4 @@
-# Project:        SDL_test
+# Project:        SDL_Calendar
 # Compiler:       Default MinGW compiler
 # Compiler Type:  GCC 5
 # Makefile created by SiFe on 2009-08-02 19:46
@@ -11,22 +11,21 @@ WHITHER 	= build
 CXX       	= g++
 CC        	= gcc
 WINDRES   	= windres
-OBJ       	= $(WHITHER)/SDL_test.o
-LINKOBJ   	= $(WHITHER)/SDL_test.o
-SOURSE    	= SDL_test.cpp
+OBJ       	= $(WHITHER)/SDL_Calendar.o
+LINKOBJ   	= $(WHITHER)/SDL_Calendar.o
+SOURSE    	= SDL_Calendar.cpp
 DEPENDENT 	= SDL2_gfx SDL2_ttf sdl2
 LIBS      	= `pkg-config --libs $(DEPENDENT)`
 INCS      	= `pkg-config --cflags-only-I $(DEPENDENT)`
 CXXINCS   	= `pkg-config --cflags-only-I $(DEPENDENT)`
 
-
 ifdef IS_LINUX
-LC_OS	= "Current OS is Linux"
-BIN 	= $(WHITHER)/SDL_test
+	LC_OS	= "Current OS is \"Linux\""
+	BIN 	= $(WHITHER)/SDL_Calendar
 else
 ifdef IS_MSYS
-LC_OS 	= "Current OS is MSYS"
-BIN		= $(WHITHER)/SDL_test.exe
+	LC_OS 	= "Current OS is \"MSYS\""
+	BIN 	= $(WHITHER)/SDL_Calendar.exe
 endif
 endif
 
@@ -43,7 +42,7 @@ LINK      = g++
 all: all-before $(BIN) all-after
 
 checkos:
-	echo $(LC_OS)
+	@echo $(LC_OS)
 
 clean: clean-custom
 	$(RM) $(OBJ) $(BIN)

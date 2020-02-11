@@ -8,10 +8,10 @@
 #   LastChange :	2015-03-11 14:02:44
 #      History :
 ==========================================================================*/
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <SDL2/SDL_ttf.h>
-#include <iostream>
 #include <math.h>
 #include <conio.h>
 #include <windows.h>

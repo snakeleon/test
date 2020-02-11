@@ -1,11 +1,11 @@
 /*==========================================================================
-#     FileName :	SDL_test.cpp
+#     FileName :	SDL_Calendar.cpp
 #  Description :	CLOCK
 #       Author :	SiFe
 #       E-Mail :	snakeleon@gmail.com
 #	  HomePage :	https://github.com/snakeleon
 #      Version :	0.0.1
-#   LastChange :	2016-07-17 13:37:14
+#   LastChange :	2020-02-11 19:40:39
 #      History :
 ==========================================================================*/
 #include <iostream>
@@ -209,7 +209,7 @@ int main ( int argc, char *argv[] )
 
         SDL_Surface *NumClock = NULL;
         SDL_Texture *TextureNum = NULL;
-        char Num[8];
+        char Num[9];
 
         SDL_Color LogoColor = { 255, 0, 0, 255 };
         SDL_Rect LogoXY = { WIDTH/2-80, 70, 160, 40 };

@@ -8,9 +8,10 @@
 #   LastChange :	2015-03-10 14:21:41
 #      History :
 ==========================================================================*/
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
-#include <iostream>
+
 
 
 #define WIDTH	14
