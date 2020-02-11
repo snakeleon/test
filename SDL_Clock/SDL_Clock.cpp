@@ -28,11 +28,11 @@
 
 void DrawHand(SDL_Renderer *renderer, int hour, int minute, int second)
 {
-    double a_hour, a_min, a_sec, a_sec1;
-    int    x_hour, y_hour,
-           x_min,  y_min,
-           x_sec,  y_sec,
-           x1_sec, y1_sec;
+    double a_hour,  a_min,   a_sec,  a_sec1;
+    int    x_hour,  y_hour,
+           x_min,   y_min,
+           x_sec,   y_sec,
+           x1_sec,  y1_sec;
     a_sec  = second  * 2 * M_PI / 60;
     a_sec1 = (second > 30 ? second-30 : second+30) * 2 * M_PI / 60;
     a_min  = minute  * 2 * M_PI / 60 + a_sec / 60;
@@ -74,10 +74,10 @@ void DrawPlate(SDL_Renderer *renderer)
             w=2*I_ZOOM;
             l=10*I_ZOOM;
         }
-        x1=HEIGHT/2*sin(i*6*M_PI/180)+WIDTH/2;
-        y1=HEIGHT/2*cos(i*6*M_PI/180)+HEIGHT/2;
-        x2=(HEIGHT/2-l)*sin(i*6*M_PI/180)+WIDTH/2;
-        y2=(HEIGHT/2-l)*cos(i*6*M_PI/180)+HEIGHT/2;
+        x1 = HEIGHT/2*sin(i*6*M_PI/180)+WIDTH/2;
+        y1 = HEIGHT/2*cos(i*6*M_PI/180)+HEIGHT/2;
+        x2 = (HEIGHT/2-l)*sin(i*6*M_PI/180)+WIDTH/2;
+        y2 = (HEIGHT/2-l)*cos(i*6*M_PI/180)+HEIGHT/2;
         thickLineRGBA(renderer, x1, y1, x2, y2, w, 111, 123, 75, 255);
     }
 }
@@ -166,7 +166,7 @@ int main ( int argc, char *argv[] )
                 default:
                     break;
             }
-        SDL_Surface *ClockPlate = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0, 0, 0, 0);
+        SDL_Surface *ClockPlate   = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0, 0, 0, 0);
         SDL_Renderer *PlateRender = SDL_CreateSoftwareRenderer(ClockPlate);
         DrawPlate(PlateRender);
         SDL_Texture *TexturePlate = SDL_CreateTextureFromSurface(renderer, ClockPlate);
@@ -193,7 +193,7 @@ int main ( int argc, char *argv[] )
         char Day[6];
 
         SDL_Color NumColor = { 0, 255, 255, 255 };
-        SDL_Rect NumXY = { WIDTH/2-50, 280, 100, 40 };
+        SDL_Rect NumXY     = { WIDTH/2-50, 280, 100, 40 };
 
 #ifdef _WIN32
         TTF_Font *NumFont = TTF_OpenFont("C:/Windows/Fonts/DIGITAL-Regular.ttf", 30);
@@ -207,12 +207,12 @@ int main ( int argc, char *argv[] )
             return 22;
         }
 
-        SDL_Surface *NumClock = NULL;
+        SDL_Surface *NumClock   = NULL;
         SDL_Texture *TextureNum = NULL;
         char Num[9];
 
         SDL_Color LogoColor = { 255, 0, 0, 255 };
-        SDL_Rect LogoXY = { WIDTH/2-80, 70, 160, 40 };
+        SDL_Rect LogoXY     = { WIDTH/2-80, 70, 160, 40 };
 
 #ifdef _WIN32
         TTF_Font *LogoFont = TTF_OpenFont("C:/Windows/Fonts/KhmerUIb.ttf", 30);
@@ -259,7 +259,7 @@ int main ( int argc, char *argv[] )
         sprintf(Num, "%.2d:%.2d:%.2d", t->tm_hour, t->tm_min, t->tm_sec);
 #endif
 
-        NumClock = TTF_RenderUTF8_Blended(NumFont, Num, NumColor);
+        NumClock   = TTF_RenderUTF8_Blended(NumFont, Num, NumColor);
         TextureNum = SDL_CreateTextureFromSurface(renderer, NumClock);
         SDL_FreeSurface(NumClock);
         SDL_RenderCopy(renderer, TextureNum, NULL, &NumXY);
