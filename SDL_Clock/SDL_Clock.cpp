@@ -1,11 +1,11 @@
 /*==========================================================================
-#     FileName :	SDL_Calendar.cpp
+#     FileName :	SDL_Clock.cpp
 #  Description :	CLOCK
 #       Author :	SiFe
 #       E-Mail :	snakeleon@gmail.com
 #	  HomePage :	https://github.com/snakeleon
 #      Version :	0.0.1
-#   LastChange :	2020-02-11 19:40:39
+#   LastChange :	2020-02-11 19:49:39
 #      History :
 ==========================================================================*/
 #include <iostream>
