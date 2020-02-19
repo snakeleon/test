@@ -66,13 +66,13 @@ void DrawPlate(SDL_Renderer *renderer)
     {
         if(i%5==0)
         {
-            w=4*I_ZOOM;
-            l=15*I_ZOOM;
+            w = 4*I_ZOOM;
+            l = 15*I_ZOOM;
         }
         else
         {
-            w=2*I_ZOOM;
-            l=10*I_ZOOM;
+            w = 2*I_ZOOM;
+            l = 10*I_ZOOM;
         }
         x1 = HEIGHT/2*sin(i*6*M_PI/180)+WIDTH/2;
         y1 = HEIGHT/2*cos(i*6*M_PI/180)+HEIGHT/2;

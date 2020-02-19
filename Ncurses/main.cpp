@@ -18,9 +18,9 @@ int dayofmonth[13]= {0,31,28,31,30,31,30,31,31,30,31,30,31};
 class Date
 {
     private:
-        int     year=0;
-        int     month=0;
-        int     day=0;
+        int     year  = 0;
+        int     month = 0;
+        int     day   = 0;
     public:
         void    SetDate(int yy,int mm,int dd);
         bool    IsLeap(int year);
@@ -34,8 +34,8 @@ class Date
 
 void Date::SetDate(int yy,int mm,int dd)
 {
-    year=yy;
-    month=mm;
+    year  = yy;
+    month = mm;
     if(year<1)
     {
         printf("Year value error!\nERROR CODE: 1\n");
@@ -160,16 +160,16 @@ void Date::showweek()
 
 void Date::printyear(void)
 {
-    WINDOW *monthtab[11];
-    for(int y=0,start_y=0,start_x=0; y<9 ; y++,start_x+=22)
+    WINDOW *w_monthtab[11];
+    for(int y=0,start_y=0,start_x=0; y<10; y++,start_x+=22)
     {
         if(start_x>60)
         {
-            start_y+=8;
-            start_x=0;
+            start_y += 8;
+            start_x  = 0;
         }
-        monthtab[y]=newwin(8,22,start_y,start_x);
-        if(monthtab[y]==NULL)
+        w_monthtab[y]=newwin(8,22,start_y,start_x);
+        if(w_monthtab[y]==NULL)
         {
             printw("Create Window Error!");
             exit(1);
@@ -177,60 +177,61 @@ void Date::printyear(void)
 //        getch();
         start_color();
         init_pair(1,COLOR_RED,COLOR_BLACK);
-        wprintw(monthtab[y],"%11d  %d\n",year,y+1);
-        wattron(monthtab[y],COLOR_PAIR(1)|A_BOLD);
-        wprintw(monthtab[y]," S ");
-        wattroff(monthtab[y],COLOR_PAIR(1)|A_BOLD);
-        wprintw(monthtab[y]," M  T  W  T  F ");
-        wattron(monthtab[y],COLOR_PAIR(1)|A_BOLD);
-        wprintw(monthtab[y]," S \n");
-        wattroff(monthtab[y],COLOR_PAIR(1)|A_BOLD);
+        wprintw(w_monthtab[y],"%11d  %d\n",year,y+1);
+        wattron(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
+        wprintw(w_monthtab[y]," S ");
+        wattroff(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
+        wprintw(w_monthtab[y]," M  T  W  T  F ");
+        wattron(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
+        wprintw(w_monthtab[y]," S \n");
+        wattroff(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
         int s=getdays(year,y+1,1);
         s=s%7;
-        for(int m=0; m<s; m++)      wprintw(monthtab[y],"   ");
+        for(int m=0; m<s; m++)      wprintw(w_monthtab[y],"   ");
         if(s==0||s==6)
         {
-            wattron(monthtab[y],COLOR_PAIR(1)|A_BOLD);
-            wprintw(monthtab[y]," 1 ");
-            wattroff(monthtab[y],COLOR_PAIR(1)|A_BOLD);
+            wattron(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
+            wprintw(w_monthtab[y]," 1 ");
+            wattroff(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
         }
-        else wprintw(monthtab[y]," 1 ");
+        else wprintw(w_monthtab[y]," 1 ");
         if(IsLeap(year))            dayofmonth[2]=29;
-        int yue=dayofmonth[y+1];
+        int MM=dayofmonth[y+1];
         for(int i=2; i<=7-s; i++)
         {
             if(i%7==0||i==(7-s))
             {
-                wattron(monthtab[y],COLOR_PAIR(1)|A_BOLD);
-                wprintw(monthtab[y],"%2d ",i);
-                wattroff(monthtab[y],COLOR_PAIR(1)|A_BOLD);
+                wattron(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
+                wprintw(w_monthtab[y],"%2d ",i);
+                wattroff(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
             }
-            else wprintw(monthtab[y],"%2d ",i);
+            else wprintw(w_monthtab[y],"%2d ",i);
         }
-        wprintw(monthtab[y],"\n");
+        wprintw(w_monthtab[y],"\n");
 
 
-        for(int i=8-s,j=1; i<=yue; i++,j++)
+        for(int i=8-s,j=1; i<=MM; i++,j++)
         {
             if(j==1)
             {
-                wattron(monthtab[y],COLOR_PAIR(1)|A_BOLD);
-                wprintw(monthtab[y],"%2d ",i);
-                wattroff(monthtab[y],COLOR_PAIR(1)|A_BOLD);
+                wattron(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
+                wprintw(w_monthtab[y],"%2d ",i);
+                wattroff(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
             }
             else if(j%7==0)
             {
                 j++;
-                wattron(monthtab[y],COLOR_PAIR(1)|A_BOLD);
-                wprintw(monthtab[y],"%2d \n",i++);
-                if(i<=yue)	wprintw(monthtab[y],"%2d ",i);
-                wattroff(monthtab[y],COLOR_PAIR(1)|A_BOLD);
+                wattron(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
+                wprintw(w_monthtab[y],"%2d \n",i++);
+                if(i<=MM)	wprintw(w_monthtab[y],"%2d ",i);
+                wattroff(w_monthtab[y],COLOR_PAIR(1)|A_BOLD);
             }
-            else wprintw(monthtab[y],"%2d ",i);
+            else wprintw(w_monthtab[y],"%2d ",i);
 
         }
-        wrefresh(monthtab[y]);
-        delwin(monthtab[y]);
+        wrefresh(w_monthtab[y]);
+        if(w_monthtab[y])
+            delwin(w_monthtab[y]);
     }
 
 }
@@ -258,7 +259,7 @@ void Date::printmonth()
     }
     else printw(" 1  ");
     if(IsLeap(year))            dayofmonth[2]=29;
-    int yue=dayofmonth[month];
+    int MM = dayofmonth[month];
     for(int i=2; i<=7-s; i++)
     {
         if(i%7==0||i==(7-s))
@@ -272,7 +273,7 @@ void Date::printmonth()
     printw("\n");
 
 
-    for(int i=8-s,j=1; i<=yue; i++,j++)
+    for(int i=8-s,j=1; i<=MM; i++,j++)
     {
         if(j==1)
         {
@@ -285,7 +286,7 @@ void Date::printmonth()
             j++;
             attron(COLOR_PAIR(1)|A_BOLD);
             printw("%2d \n",i++);
-            if(i<=yue) 	printw("%2d  ",i);
+            if(i<=MM) 	printw("%2d  ",i);
             attroff(COLOR_PAIR(1)|A_BOLD);
         }
         else printw("%2d  ",i);
@@ -299,7 +300,7 @@ void Date::printmonth()
 
 int main(void)
 {
-    int yy=0,mm=0,dd=0;
+    int yy = 0, mm = 0, dd = 0;
     printf("Please input YEAR,MONTH,DAY:");
     if (scanf("%d %d %d",&yy, &mm, &dd)!=3)
     {
@@ -317,6 +318,7 @@ int main(void)
 
     initscr();
     nocbreak();
+    scrollok(stdscr,TRUE);
 
     mydate.ShowDate();
     mydate.showweek();
