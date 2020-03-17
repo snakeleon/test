@@ -243,7 +243,7 @@ void Date::printmonth()
     printw("%13d  %d\n",year,month);
     attron(COLOR_PAIR(1)|A_BOLD);
     printw("Su  ");
-    attroff(COLOR_PAIR(1)|A_BOLD);
+    attroff(COLOR_PAIR(2)|A_BOLD);
     printw("Mo  Tu  We  Th  Fr  ");
     attron(COLOR_PAIR(1)|A_BOLD);
     printw("Sa  \n");

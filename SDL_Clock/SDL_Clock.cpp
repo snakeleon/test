@@ -59,7 +59,7 @@ void DrawHand(SDL_Renderer *renderer, int hour, int minute, int second)
 
 void DrawPlate(SDL_Renderer *renderer)
 {
-    int w, l, x1, x2, y1, y2;
+    int w, l;
     filledCircleRGBA(renderer, WIDTH/2, HEIGHT/2, HEIGHT/2, 255, 154, 69, 255);
     filledCircleRGBA(renderer, WIDTH/2, HEIGHT/2, HEIGHT/2-I_ZOOM*10, 0, 0, 0, 255);
     for(int i=0; i<60; i++)
@@ -74,10 +74,10 @@ void DrawPlate(SDL_Renderer *renderer)
             w = 2*I_ZOOM;
             l = 10*I_ZOOM;
         }
-        x1 = HEIGHT/2*sin(i*6*M_PI/180)+WIDTH/2;
-        y1 = HEIGHT/2*cos(i*6*M_PI/180)+HEIGHT/2;
-        x2 = (HEIGHT/2-l)*sin(i*6*M_PI/180)+WIDTH/2;
-        y2 = (HEIGHT/2-l)*cos(i*6*M_PI/180)+HEIGHT/2;
+        int x1 = HEIGHT/2*sin(i*6*M_PI/180)+WIDTH/2;
+        int y1 = HEIGHT/2*cos(i*6*M_PI/180)+HEIGHT/2;
+        int x2 = (HEIGHT/2-l)*sin(i*6*M_PI/180)+WIDTH/2;
+        int y2 = (HEIGHT/2-l)*cos(i*6*M_PI/180)+HEIGHT/2;
         thickLineRGBA(renderer, x1, y1, x2, y2, w, 111, 123, 75, 255);
     }
 }
