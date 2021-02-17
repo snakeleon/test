@@ -9,7 +9,7 @@ desktop.ini
 SDL_Clock/build
 Ncurses/build
 gvimfullscreen/
-Tetris/
+SDL_Tetris/build
 MapleGame/
 ege_test/
 Calendar_NC/
