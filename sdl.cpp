@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sdl2/sdl.h>
-#include <sdl2/sdl_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #undef main
 
