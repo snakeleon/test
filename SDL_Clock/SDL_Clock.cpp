@@ -23,8 +23,23 @@
 
 #define WIDTH   400
 #define HEIGHT  400
+#define Dia int(WIDTH/2)
 
 #define I_ZOOM  HEIGHT/360
+
+const int center[2] = { WIDTH / 2 , HEIGHT / 2 };
+
+int getCenterX(int width)
+{
+    return width/2;
+}
+
+int GetCenterY(int height)
+{
+    return height/2;
+}
+
+int lenSecond = WIDTH / 2 ;
 
 void DrawHand(SDL_Renderer *renderer, int hour, int minute, int second)
 {
@@ -47,11 +62,11 @@ void DrawHand(SDL_Renderer *renderer, int hour, int minute, int second)
     x_hour = WIDTH/2  + (int)(HEIGHT/2 * 0.65 * sin(a_hour));
     y_hour = HEIGHT/2 - (int)(HEIGHT/2 * 0.65 * cos(a_hour));
 
-    thickLineRGBA(renderer, WIDTH/2, HEIGHT/2, x_hour, y_hour, I_ZOOM*5,
+    aalineRGBA(renderer, WIDTH/2, HEIGHT/2, x_hour, y_hour,
                   0, 0, 255, 255);
-    thickLineRGBA(renderer, WIDTH/2, HEIGHT/2, x_min, y_min, I_ZOOM*4,
+    aalineRGBA(renderer, WIDTH/2, HEIGHT/2, x_min, y_min,
                   0, 255, 0, 255);
-    thickLineRGBA(renderer, x1_sec, y1_sec, x_sec, y_sec, I_ZOOM*1,
+    aalineRGBA(renderer, x1_sec, y1_sec, x_sec, y_sec,
                   255, 0, 0, 255);
 
     filledCircleRGBA(renderer, WIDTH/2, HEIGHT/2, I_ZOOM*8, 255, 160, 255, 240);
@@ -59,27 +74,30 @@ void DrawHand(SDL_Renderer *renderer, int hour, int minute, int second)
 
 void DrawPlate(SDL_Renderer *renderer)
 {
-    int w, l;
-    filledCircleRGBA(renderer, WIDTH/2, HEIGHT/2, HEIGHT/2, 255, 154, 69, 255);
-    filledCircleRGBA(renderer, WIDTH/2, HEIGHT/2, HEIGHT/2-I_ZOOM*10, 0, 0, 0, 255);
-    for(int i=0; i<60; i++)
+    int w=5, l=8;
+    for (int i=0; i<8; i++)
     {
-        if(i%5==0)
-        {
-            w = 4*I_ZOOM;
-            l = 15*I_ZOOM;
-        }
-        else
-        {
-            w = 2*I_ZOOM;
-            l = 10*I_ZOOM;
-        }
-        int x1 = HEIGHT/2*sin(i*6*M_PI/180)+WIDTH/2;
-        int y1 = HEIGHT/2*cos(i*6*M_PI/180)+HEIGHT/2;
-        int x2 = (HEIGHT/2-l)*sin(i*6*M_PI/180)+WIDTH/2;
-        int y2 = (HEIGHT/2-l)*cos(i*6*M_PI/180)+HEIGHT/2;
-        thickLineRGBA(renderer, x1, y1, x2, y2, w, 111, 123, 75, 255);
+        aacircleRGBA(renderer, WIDTH/2, HEIGHT/2, HEIGHT/2-i, 255, 154, 69, 255);
     }
+
+    for (int i = 0 ; i < 60 ; i++ )
+    {
+        int x1 = int(WIDTH/2) + int(Dia * cos( i * 6 * M_PI/180 )) ;
+        int y1 = int(HEIGHT/2) + int(Dia * sin( i * 6 * M_PI/180 )) ;
+        int x2 = int(WIDTH/2) +  int((Dia-l) * cos( i * 6 * M_PI/180 )) ;
+        int y2 = int(HEIGHT/2) + int((Dia-l) * sin( i * 6 * M_PI/180 )) ;
+//        for (int j=-2 ; j<2 ; j++)
+//        {
+//            int o_x1 = j+ x1;
+//            int o_y1 = j+ y1;
+//            int o_x2 = j+ x2;
+//            int o_y2 = j+ y2;
+//            aalineRGBA(renderer, o_x1, o_y1, o_x2, o_y2, 111, 123, 75, 255);
+//
+//        }
+        aalineRGBA(renderer, x1, y1, x2, y2, 111, 123, 75, 255);
+     }
+
 }
 
 char *Week(int n_week)
@@ -177,14 +195,14 @@ int main ( int argc, char *argv[] )
         SDL_Rect DayXY = { WIDTH/2+75, HEIGHT/2-18, 80, 36 };
 
 #ifdef _WIN32
-        TTF_Font *DayFont = TTF_OpenFont("C:/Windows/Fonts/DIGITAL-Regular.ttf", 60);
+        TTF_Font *DayFont = TTF_OpenFont("Digital-Regular.ttf", 60);
 #elif defined __linux
         TTF_Font *DayFont = TTF_OpenFont("/home/snakeleon/.local/share/fonts/DIGITAL-Regular.ttf", 60);
 #endif
 
         if (!DayFont)
         {
-            std::cout << "ERROR for Open TTF_Font" << std::endl;
+            std::cout << "ERROR for Open TTF_Font : " << "DayFont" << std::endl;
             return 21;
         }
 
@@ -196,14 +214,14 @@ int main ( int argc, char *argv[] )
         SDL_Rect NumXY     = { WIDTH/2-50, 280, 100, 40 };
 
 #ifdef _WIN32
-        TTF_Font *NumFont = TTF_OpenFont("C:/Windows/Fonts/DIGITAL-Regular.ttf", 30);
+        TTF_Font *NumFont = TTF_OpenFont("Digital-Regular.ttf", 30);
 #elif defined __linux
-        TTF_Font *NumFont = TTF_OpenFont("/home/snakeleon/.local/share/fonts/DIGITAL-Regular.ttf", 30);
+        TTF_Font *NumFont = TTF_OpenFont("/home/snakeleon/.local/share/fonts/Digital-Regular.ttf", 30);
 #endif
 
         if (!NumFont)
         {
-            std::cout << "ERROR for Open TTF_Font" << std::endl;
+            std::cout << "ERROR for Open TTF_Font : " << NumFont << std::endl;
             return 22;
         }
 
@@ -215,14 +233,14 @@ int main ( int argc, char *argv[] )
         SDL_Rect LogoXY     = { WIDTH/2-80, 70, 160, 40 };
 
 #ifdef _WIN32
-        TTF_Font *LogoFont = TTF_OpenFont("C:/Windows/Fonts/KhmerUIb.ttf", 30);
+        TTF_Font *LogoFont = TTF_OpenFont("KhmerUIb.ttf", 30);
 #elif defined __linux
         TTF_Font *LogoFont = TTF_OpenFont("/home/snakeleon/.local/share/fonts/Hack-Regular.ttf", 30);
 #endif
 
         if (!LogoFont)
         {
-            std::cout << "ERROR for Open TTF_Font" << std::endl;
+            std::cout << "ERROR for Open TTF_Font : "<< LogoFont << std::endl;
             return 23;
         }
 
