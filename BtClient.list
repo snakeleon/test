@@ -1,5 +1,6 @@
 # 内容：BT download for linux
-# 数量：4条
+# 数量：5条
+DOMAIN-KEYWORD,announce
 PROCESS-NAME,tixati
 PROCESS-NAME,bitcomet
 PROCESS-NAME,qbittorrent
