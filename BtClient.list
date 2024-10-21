@@ -4,5 +4,5 @@ PROCESS-NAME,tixati
 PROCESS-NAME,bitcomet
 PROCESS-NAME,qbittorrent
 PROCESS-NAME,utorrent
-URL-REGEX,announce
+DOMAIN-REGEX,.*\/announce
 
