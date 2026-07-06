@@ -1,4 +1,3 @@
-DOMAIN, # 屏蔽Corel激活服务器：
 DOMAIN, apps.corel.com
 DOMAIN, mc.corel.com
 DOMAIN, origin-mc.corel.com
@@ -8,7 +7,6 @@ DOMAIN, ipp.corel.com
 DOMAIN, idp.corel.com
 DOMAIN, content.corel.com
 DOMAIN, secure.ipp.corel.com
-DOMAIN, # 屏蔽Adobe激活服务器：
 DOMAIN, activate.adobe.com
 DOMAIN, practivate.adobe.com
 DOMAIN, ereg.adobe.com
@@ -26,7 +24,6 @@ DOMAIN, activate-sjc0.adobe.com
 DOMAIN, 65.52.240.48
 DOMAIN, activation.cloud.techsmith.com
 DOMAIN, lmlicenses.wip4.adobe.com
-DOMAIN, # 屏蔽迅雷：
 DOMAIN, hub5btmain.sandai.net
 DOMAIN, hub5emu.sandai.net
 DOMAIN, upgrade.xl9.xunlei.com
