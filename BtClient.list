@@ -1,8 +1,0 @@
-# 内容：BT download for linux
-# 数量：5条
-PROCESS-NAME,tixati
-PROCESS-NAME,bitcomet
-PROCESS-NAME,qbittorrent
-PROCESS-NAME,utorrent
-DOMAIN-REGEX,.*\/announce
-
