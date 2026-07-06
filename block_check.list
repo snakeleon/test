@@ -1,37 +1,37 @@
-# 屏蔽Corel激活服务器：
-apps.corel.com
-mc.corel.com
-origin-mc.corel.com
-iws.corel.com
-ipm.corel.com
-ipp.corel.com
-idp.corel.com
-content.corel.com
-secure.ipp.corel.com
-# 屏蔽Adobe激活服务器：
-activate.adobe.com
-practivate.adobe.com
-ereg.adobe.com
-activate.wip3.adobe.com
-wip3.adobe.com
-3dns-3.adobe.com
-3dns-2.adobe.com
-adobe-dns.adobe.com
-adobe-dns-2.adobe.com
-adobe-dns-3.adobe.com
-ereg.wip3.adobe.com
-activate-sea.adobe.com
-wwis-dubc1-vip60.adobe.com
-activate-sjc0.adobe.com
-65.52.240.48
-activation.cloud.techsmith.com
-lmlicenses.wip4.adobe.com
-# 屏蔽迅雷：
-hub5btmain.sandai.net
-hub5emu.sandai.net
-upgrade.xl9.xunlei.com
-potplayertv.daum.net
-play.kakao.com
-t1.daumcdn.net
-p1-play.edge4k.com
-p2-play.edge4k.com
+DOMAIN, # 屏蔽Corel激活服务器：
+DOMAIN, apps.corel.com
+DOMAIN, mc.corel.com
+DOMAIN, origin-mc.corel.com
+DOMAIN, iws.corel.com
+DOMAIN, ipm.corel.com
+DOMAIN, ipp.corel.com
+DOMAIN, idp.corel.com
+DOMAIN, content.corel.com
+DOMAIN, secure.ipp.corel.com
+DOMAIN, # 屏蔽Adobe激活服务器：
+DOMAIN, activate.adobe.com
+DOMAIN, practivate.adobe.com
+DOMAIN, ereg.adobe.com
+DOMAIN, activate.wip3.adobe.com
+DOMAIN, wip3.adobe.com
+DOMAIN, 3dns-3.adobe.com
+DOMAIN, 3dns-2.adobe.com
+DOMAIN, adobe-dns.adobe.com
+DOMAIN, adobe-dns-2.adobe.com
+DOMAIN, adobe-dns-3.adobe.com
+DOMAIN, ereg.wip3.adobe.com
+DOMAIN, activate-sea.adobe.com
+DOMAIN, wwis-dubc1-vip60.adobe.com
+DOMAIN, activate-sjc0.adobe.com
+DOMAIN, 65.52.240.48
+DOMAIN, activation.cloud.techsmith.com
+DOMAIN, lmlicenses.wip4.adobe.com
+DOMAIN, # 屏蔽迅雷：
+DOMAIN, hub5btmain.sandai.net
+DOMAIN, hub5emu.sandai.net
+DOMAIN, upgrade.xl9.xunlei.com
+DOMAIN, potplayertv.daum.net
+DOMAIN, play.kakao.com
+DOMAIN, t1.daumcdn.net
+DOMAIN, p1-play.edge4k.com
+DOMAIN, p2-play.edge4k.com
